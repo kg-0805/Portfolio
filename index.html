@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kartik Gupta | Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .dark-mode {
+      --tw-bg-opacity: 1;
+      background-color: rgba(17, 24, 39, var(--tw-bg-opacity));
+      color: white;
+    }
+    .light-mode {
+      --tw-bg-opacity: 1;
+      background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+      color: black;
+    }
+    .header, .footer {
+      transition: background-color 0.3s ease;
+    }
+    .light-mode .header, .light-mode .footer {
+      background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
+      color: black;
+    }
+    .dark-mode .header, .dark-mode .footer {
+      background-color: rgba(31, 41, 55, var(--tw-bg-opacity));
+      color: white;
+    }
+    a {
+      transition: color 0.3s;
+    }
+    .light-mode a {
+      color: #2563eb;
+    }
+    .dark-mode a {
+      color: #60a5fa;
+    }
+    .light-mode a:hover, .dark-mode a:hover {
+      text-decoration: underline;
+    }
+    .cta-button {
+      background-color: #2563eb; /* blue-600 */
+      color: white;
+    }
+    .cta-button:hover {
+      background-color: #1d4ed8; /* blue-700 */
+    }
+  </style>
+</head>
+<body id="root" class="light-mode text-gray-900 flex flex-col min-h-screen transition-colors duration-300">
+
+  <!-- Header -->
+  <header class="header w-full shadow p-4">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <img src="assets/images/logo.png" alt="Logo" class="h-12 w-12 rounded-full object-cover" />
+        <h1 class="text-xl font-bold">Kartik Gupta</h1>
+      </div>
+      <nav>
+        <a href="about.html" class="mx-2">About</a>
+        <a href="projects.html" class="mx-2">Projects</a>
+        <a href="contact.html" class="mx-2">Contact</a>
+        <button onclick="toggleDarkMode()" id="toggleBtn" class="ml-4 px-3 py-1 rounded text-sm transition-colors bg-gray-200 text-black">
+          Toggle Light/Dark Mode
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow max-w-6xl mx-auto py-20 px-4">
+    <div class="text-center mb-10">
+      <img src="assets/images/profile.jpg" alt="Kartik Gupta" class="mx-auto h-36 w-36 rounded-full object-cover shadow" />
+    </div>
+    <h2 class="text-4xl font-bold mb-6">Welcome to My Portfolio</h2>
+    <p class="text-lg leading-relaxed mb-6">
+      Hello! I’m <strong>Kartik Gupta</strong>, a passionate backend developer and technology enthusiast. My core strengths include building efficient APIs, scalable cloud infrastructure, and developing secure payment systems. I specialize in AWS cloud deployments, DynamoDB optimization, and RESTful architecture.
+    </p>
+    <p class="text-lg leading-relaxed mb-6">
+      I have worked with government-backed platforms like <strong>Poshan Tracker</strong>, optimized data pipelines, and integrated modern authentication mechanisms. I’m always exploring new technologies and striving to create impactful digital solutions.
+    </p>
+    <p class="text-lg leading-relaxed mb-6">
+      Feel free to explore my <a href="projects.html">projects</a>, read more <a href="about.html">about me</a>, or <a href="contact.html">get in touch</a>.
+    </p>
+    
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer text-center p-4 mt-auto">
+    <div class="flex justify-center gap-4 mb-2 text-gray-600">
+      <a href="https://github.com/kg-0805" target="_blank" aria-label="GitHub">
+        <i data-lucide="github" class="w-5 h-5"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/kg-0805/" target="_blank" aria-label="LinkedIn">
+        <i data-lucide="linkedin" class="w-5 h-5"></i>
+      </a>
+    </div>
+    <p id="year-text">&copy; <span id="year"></span> Kartik Gupta</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    document.getElementById("year-text").querySelector("span").textContent = new Date().getFullYear();
+    lucide.createIcons();
+
+    function toggleDarkMode() {
+      const root = document.getElementById("root");
+      const btn = document.getElementById("toggleBtn");
+      if (root.classList.contains("light-mode")) {
+        root.classList.remove("light-mode");
+        root.classList.add("dark-mode");
+        btn.classList.remove("bg-gray-200", "text-black");
+        btn.classList.add("bg-gray-700", "text-white");
+      } else {
+        root.classList.remove("dark-mode");
+        root.classList.add("light-mode");
+        btn.classList.remove("bg-gray-700", "text-white");
+        btn.classList.add("bg-gray-200", "text-black");
+      }
+    }
+
+    document.getElementById("toggleBtn").classList.add("bg-gray-200", "text-black");
+  </script>
+
+</body>
+</html>
