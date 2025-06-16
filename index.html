@@ -53,7 +53,7 @@
 <body id="root" class="light-mode text-gray-900 flex flex-col min-h-screen transition-colors duration-300">
 
   <!-- Header -->
-  <header class="header w-full shadow p-4">
+  <header class="header w-full shadow p-4 sticky top-0 z-50">
     <div class="max-w-6xl mx-auto flex justify-between items-center">
       <div class="flex items-center gap-3">
         <img src="assets/images/logo.png" alt="Logo" class="h-12 w-12 rounded-full object-cover" />
@@ -63,8 +63,8 @@
         <a href="about.html" class="mx-2">About</a>
         <a href="projects.html" class="mx-2">Projects</a>
         <a href="contact.html" class="mx-2">Contact</a>
-        <button onclick="toggleDarkMode()" id="toggleBtn" class="ml-4 px-3 py-1 rounded text-sm transition-colors bg-gray-200 text-black">
-          Toggle Light/Dark Mode
+        <button onclick="toggleDarkMode()" id="toggleBtn" class="ml-4 p-2 rounded-full transition-colors bg-gray-200 text-black">
+            <i data-lucide="moon" id="theme-icon" class="w-5 h-5"></i>
         </button>
       </nav>
     </div>
@@ -77,13 +77,13 @@
     </div>
     <h2 class="text-4xl font-bold mb-6">Welcome to My Portfolio</h2>
     <p class="text-lg leading-relaxed mb-6">
-      Hello! I’m <strong>Kartik Gupta</strong>, a passionate backend developer and technology enthusiast. My core strengths include building efficient APIs, scalable cloud infrastructure, and developing secure payment systems. I specialize in AWS cloud deployments, DynamoDB optimization, and RESTful architecture.
+        I’m <strong>Kartik Gupta</strong>, a backend developer with hands-on experience in architecting and delivering scalable, secure, and high-performance systems. My core expertise lies in API development, cloud-native deployments, and optimizing backend infrastructure for production-critical applications.
     </p>
     <p class="text-lg leading-relaxed mb-6">
-      I have worked with government-backed platforms like <strong>Poshan Tracker</strong>, optimized data pipelines, and integrated modern authentication mechanisms. I’m always exploring new technologies and striving to create impactful digital solutions.
+        I have contributed to large-scale platforms, particularly in the public sector, where I worked on data-heavy modules, cloud infrastructure (AWS), and security-sensitive workflows. My technology stack includes PHP (Laravel Lumen), Python, Redis, DynamoDB, S3, and other AWS services, with a strong emphasis on performance, availability, and maintainability.
     </p>
     <p class="text-lg leading-relaxed mb-6">
-      Feel free to explore my <a href="projects.html">projects</a>, read more <a href="about.html">about me</a>, or <a href="contact.html">get in touch</a>.
+        This site showcases a curated selection of my work. You can explore my <a href="projects.html" class="underline text-blue-600 dark:text-blue-400">projects</a>, know more <a href="about.html" class="underline text-blue-600 dark:text-blue-400">about me</a>, or <a href="contact.html" class="underline text-blue-600 dark:text-blue-400">reach out</a> for opportunities or collaborations.
     </p>
     
   </main>
@@ -124,6 +124,35 @@
 
     document.getElementById("toggleBtn").classList.add("bg-gray-200", "text-black");
   </script>
+    <script>
+  lucide.createIcons();
+
+  document.getElementById("year-text").querySelector("span").textContent = new Date().getFullYear();
+
+  function toggleDarkMode() {
+    const root = document.getElementById("root");
+    const btn = document.getElementById("toggleBtn");
+    const icon = document.getElementById("theme-icon");
+
+    const isLight = root.classList.contains("light-mode");
+
+    root.classList.toggle("light-mode", !isLight);
+    root.classList.toggle("dark-mode", isLight);
+
+    btn.classList.toggle("bg-gray-200", !isLight);
+    btn.classList.toggle("text-black", !isLight);
+    btn.classList.toggle("bg-gray-700", isLight);
+    btn.classList.toggle("text-white", isLight);
+
+    // Toggle icon
+    icon.setAttribute("data-lucide", isLight ? "sun" : "moon");
+    lucide.createIcons(); // Re-render icon
+  }
+
+  // Set initial styles
+  document.getElementById("toggleBtn").classList.add("bg-gray-200", "text-black");
+</script>
+
 
 </body>
 </html>
