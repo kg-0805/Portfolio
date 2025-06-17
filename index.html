@@ -53,22 +53,60 @@
 <body id="root" class="light-mode text-gray-900 flex flex-col min-h-screen transition-colors duration-300">
 
   <!-- Header -->
-  <header class="header w-full shadow p-4 sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto flex justify-between items-center">
-      <div class="flex items-center gap-3">
-        <img src="assets/images/logo.png" alt="Logo" class="h-12 w-12 rounded-full object-cover" />
-        <h1 class="text-xl font-bold">Kartik Gupta</h1>
-      </div>
-      <nav>
-        <a href="about.html" class="mx-2">About</a>
-        <a href="projects.html" class="mx-2">Projects</a>
-        <a href="contact.html" class="mx-2">Contact</a>
-        <button onclick="toggleDarkMode()" id="toggleBtn" class="ml-4 p-2 rounded-full transition-colors bg-gray-200 text-black">
-            <i data-lucide="moon" id="theme-icon" class="w-5 h-5"></i>
-        </button>
-      </nav>
+  <header id="main-header" class="w-full sticky top-0 z-50 shadow transition-colors duration-300">
+  <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-4 px-4 py-3">
+
+    <!-- Logo and Name -->
+    <div class="flex items-center gap-3">
+      <img src="assets/images/logo.png" alt="Logo" class="h-10 w-10 rounded-full object-cover" />
+      <h1 class="text-xl font-bold whitespace-nowrap">Kartik Gupta</h1>
     </div>
-  </header>
+
+    <!-- Navigation + Toggle -->
+    <div class="flex flex-wrap items-center justify-center sm:justify-end gap-4 w-full sm:w-auto">
+      <nav class="flex gap-4 text-base">
+        <a href="about.html" class="nav-link">About</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <button onclick="toggleDarkMode()" id="toggleBtn" class="p-2 rounded-full transition-colors">
+        <i data-lucide="moon" id="theme-icon" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<style>
+  #main-header {
+    background-color: white;
+    color: black;
+  }
+  .dark-mode #main-header {
+    background-color: #1f2937; /* gray-800 */
+    color: white;
+  }
+  .nav-link {
+    color: #2563eb; /* blue-600 */
+    transition: color 0.3s;
+  }
+  .dark-mode .nav-link {
+    color: #60a5fa; /* blue-400 */
+  }
+  .dark-mode .nav-link:hover,
+  .nav-link:hover {
+    text-decoration: underline;
+  }
+  .dark-mode #toggleBtn {
+    background-color: #374151; /* gray-700 */
+    color: white;
+  }
+  #toggleBtn {
+    background-color: #e5e7eb; /* gray-200 */
+    color: black;
+  }
+</style>
+
 
   <!-- Main Content -->
   <main class="flex-grow max-w-6xl mx-auto py-20 px-4">
@@ -89,17 +127,24 @@
   </main>
 
   <!-- Footer -->
-  <footer class="footer text-center p-4 mt-auto">
-    <div class="flex justify-center gap-4 mb-2 text-gray-600">
-      <a href="https://github.com/kg-0805" target="_blank" aria-label="GitHub">
-        <i data-lucide="github" class="w-5 h-5"></i>
-      </a>
-      <a href="https://www.linkedin.com/in/kg-0805/" target="_blank" aria-label="LinkedIn">
-        <i data-lucide="linkedin" class="w-5 h-5"></i>
-      </a>
+    <footer class="footer w-full text-center py-4 mt-auto border-t border-gray-200 dark:border-gray-700">
+    <div class="flex justify-center items-center gap-6 text-gray-600 dark:text-gray-400 mb-2">
+        <a href="https://github.com/kg-0805" target="_blank" aria-label="GitHub">
+        <i data-lucide="github" class="w-5 h-5 hover:text-black dark:hover:text-white transition-colors"></i>
+        </a>
+        <a href="https://linkedin.com/in/kg-0805" target="_blank" aria-label="LinkedIn">
+        <i data-lucide="linkedin" class="w-5 h-5 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"></i>
+        </a>
+        <a href="https://github.com/kg-0805/Portfolio" target="_blank" class="text-sm underline hover:text-blue-500 dark:hover:text-blue-400">
+        Source Code
+        </a>
     </div>
-    <p id="year-text">&copy; <span id="year"></span> Kartik Gupta</p>
-  </footer>
+    <p class="text-sm text-gray-500 dark:text-gray-400">
+        &copy; <span id="year"></span> Kartik Gupta. All rights reserved.
+    </p>
+    </footer>
+
+
 
   <!-- Scripts -->
   <script>
