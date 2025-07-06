@@ -147,32 +147,10 @@
 
 
   <!-- Scripts -->
-  <script>
-    document.getElementById("year-text").querySelector("span").textContent = new Date().getFullYear();
-    lucide.createIcons();
-
-    function toggleDarkMode() {
-      const root = document.getElementById("root");
-      const btn = document.getElementById("toggleBtn");
-      if (root.classList.contains("light-mode")) {
-        root.classList.remove("light-mode");
-        root.classList.add("dark-mode");
-        btn.classList.remove("bg-gray-200", "text-black");
-        btn.classList.add("bg-gray-700", "text-white");
-      } else {
-        root.classList.remove("dark-mode");
-        root.classList.add("light-mode");
-        btn.classList.remove("bg-gray-700", "text-white");
-        btn.classList.add("bg-gray-200", "text-black");
-      }
-    }
-
-    document.getElementById("toggleBtn").classList.add("bg-gray-200", "text-black");
-  </script>
     <script>
   lucide.createIcons();
 
-  document.getElementById("year-text").querySelector("span").textContent = new Date().getFullYear();
+  document.getElementById("year").textContent = new Date().getFullYear();
 
   function toggleDarkMode() {
     const root = document.getElementById("root");
