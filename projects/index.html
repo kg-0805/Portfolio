@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Projects by Kartik Gupta - Backend development and cloud architecture solutions" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+  <title>Projects | Kartik Gupta</title>
+  <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .dark-mode {
+      background-color: #111827;
+      color: white;
+    }
+    .light-mode {
+      background-color: white;
+      color: black;
+    }
+    .header, .footer {
+      transition: background-color 0.3s ease;
+    }
+    .light-mode .header, .light-mode .footer {
+      background-color: #f3f4f6;
+      color: black;
+    }
+    .dark-mode .header, .dark-mode .footer {
+      background-color: #1f2937;
+      color: white;
+    }
+    a {
+      transition: color 0.3s;
+    }
+    .light-mode a {
+      color: #2563eb;
+    }
+    .dark-mode a {
+      color: #60a5fa;
+    }
+    .light-mode a:hover, .dark-mode a:hover {
+      text-decoration: underline;
+    }
+    .project-card {
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .project-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    .dark-mode .project-card:hover {
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body id="root" class="light-mode text-gray-900 flex flex-col min-h-screen transition-colors duration-300">
+
+  <!-- Header -->
+  <header id="main-header" class="w-full sticky top-0 z-50 shadow transition-colors duration-300">
+    <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-4 px-4 py-3">
+      <div class="flex items-center gap-3">
+        <img src="../assets/images/logo.png" alt="Logo" class="h-10 w-10 rounded-full object-cover" />
+        <h1 class="text-xl font-bold whitespace-nowrap"><a href="../index.html" class="no-underline">Kartik Gupta</a></h1>
+      </div>
+      <div class="flex flex-wrap items-center justify-center sm:justify-end gap-4 w-full sm:w-auto">
+        <nav class="flex gap-4 text-base">
+          <a href="../index.html" class="nav-link">Home</a>
+          <a href="../about/index.html" class="nav-link">About</a>
+          <a href="index.html" class="nav-link font-semibold">Projects</a>
+          <a href="../contact/index.html" class="nav-link">Contact</a>
+        </nav>
+        <button onclick="toggleDarkMode()" id="toggleBtn" class="p-2 rounded-full transition-colors">
+          <i data-lucide="moon" id="theme-icon" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <style>
+    #main-header {
+      background-color: white;
+      color: black;
+    }
+    .dark-mode #main-header {
+      background-color: #1f2937;
+      color: white;
+    }
+    .nav-link {
+      color: #2563eb;
+      transition: color 0.3s;
+    }
+    .dark-mode .nav-link {
+      color: #60a5fa;
+    }
+    .dark-mode .nav-link:hover,
+    .nav-link:hover {
+      text-decoration: underline;
+    }
+    .dark-mode #toggleBtn {
+      background-color: #374151;
+      color: white;
+    }
+    #toggleBtn {
+      background-color: #e5e7eb;
+      color: black;
+    }
+    .no-underline {
+      text-decoration: none !important;
+    }
+    .no-underline:hover {
+      text-decoration: none !important;
+    }
+    .dark-mode .project-card {
+      background-color: #1f2937;
+      border-color: #374151;
+    }
+  </style>
+
+  <!-- Main Content -->
+  <main class="flex-grow max-w-6xl mx-auto py-12 px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4">My Projects</h2>
+      <p class="text-xl text-gray-600 dark:text-gray-300">A showcase of my backend development and cloud architecture work</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Project 1 -->
+      <div class="project-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+        <div class="flex items-center mb-4">
+          <i data-lucide="cloud" class="w-8 h-8 text-blue-600 dark:text-blue-400 mr-3"></i>
+          <h3 class="text-xl font-semibold">Portfolio Website</h3>
+        </div>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">
+          A responsive portfolio website built with modern web technologies and deployed on AWS with automated CI/CD.
+        </p>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded">HTML5</span>
+          <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded">Tailwind CSS</span>
+          <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded">AWS S3</span>
+          <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded">CloudFront</span>
+        </div>
+        <div class="flex gap-3">
+          <a href="https://github.com/kg-0805/Portfolio" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 text-sm hover:underline">
+            <i data-lucide="github" class="w-4 h-4"></i>
+            Code
+          </a>
+          <a href="https://kartikgupta.in" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 text-sm hover:underline">
+            <i data-lucide="external-link" class="w-4 h-4"></i>
+            Live Demo
+          </a>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+        <div class="flex items-center mb-4">
+          <i data-lucide="server" class="w-8 h-8 text-green-600 dark:text-green-400 mr-3"></i>
+          <h3 class="text-xl font-semibold">Scalable API Platform</h3>
+        </div>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">
+          High-performance REST API built with Laravel Lumen, serving millions of requests with Redis caching and DynamoDB.
+        </p>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs rounded">PHP</span>
+          <span class="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs rounded">Laravel Lumen</span>
+          <span class="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs rounded">Redis</span>
+          <span class="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs rounded">DynamoDB</span>
+        </div>
+        <div class="flex gap-3">
+          <span class="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
+            <i data-lucide="lock" class="w-4 h-4"></i>
+            Private
+          </span>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+        <div class="flex items-center mb-4">
+          <i data-lucide="database" class="w-8 h-8 text-purple-600 dark:text-purple-400 mr-3"></i>
+          <h3 class="text-xl font-semibold">Data Processing Pipeline</h3>
+        </div>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">
+          Automated data processing system handling large-scale data ingestion, transformation, and analytics for public sector applications.
+        </p>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs rounded">Python</span>
+          <span class="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs rounded">AWS Lambda</span>
+          <span class="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs rounded">S3</span>
+          <span class="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs rounded">ETL</span>
+        </div>
+        <div class="flex gap-3">
+          <span class="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
+            <i data-lucide="lock" class="w-4 h-4"></i>
+            Confidential
+          </span>
+        </div>
+      </div>
+
+      <!-- Project 4 -->
+      <div class="project-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+        <div class="flex items-center mb-4">
+          <i data-lucide="shield" class="w-8 h-8 text-red-600 dark:text-red-400 mr-3"></i>
+          <h3 class="text-xl font-semibold">Security Framework</h3>
+        </div>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">
+          Comprehensive security framework implementing authentication, authorization, and audit logging for enterprise applications.
+        </p>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="px-2 py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 text-xs rounded">PHP</span>
+          <span class="px-2 py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 text-xs rounded">JWT</span>
+          <span class="px-2 py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 text-xs rounded">OAuth 2.0</span>
+          <span class="px-2 py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 text-xs rounded">RBAC</span>
+        </div>
+        <div class="flex gap-3">
+          <span class="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
+            <i data-lucide="lock" class="w-4 h-4"></i>
+            Enterprise
+          </span>
+        </div>
+      </div>
+
+      <!-- Project 5 -->
+      <div class="project-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+        <div class="flex items-center mb-4">
+          <i data-lucide="activity" class="w-8 h-8 text-yellow-600 dark:text-yellow-400 mr-3"></i>
+          <h3 class="text-xl font-semibold">Monitoring Dashboard</h3>
+        </div>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">
+          Real-time monitoring and alerting system for tracking application performance, system health, and business metrics.
+        </p>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="px-2 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 text-xs rounded">Node.js</span>
+          <span class="px-2 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 text-xs rounded">WebSocket</span>
+          <span class="px-2 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 text-xs rounded">Redis</span>
+          <span class="px-2 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 text-xs rounded">Charts.js</span>
+        </div>
+        <div class="flex gap-3">
+          <span class="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
+            <i data-lucide="lock" class="w-4 h-4"></i>
+            Internal Tool
+          </span>
+        </div>
+      </div>
+
+      <!-- Project 6 -->
+      <div class="project-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+        <div class="flex items-center mb-4">
+          <i data-lucide="git-branch" class="w-8 h-8 text-indigo-600 dark:text-indigo-400 mr-3"></i>
+          <h3 class="text-xl font-semibold">CI/CD Pipeline</h3>
+        </div>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">
+          Automated deployment pipeline with testing, security scanning, and multi-environment deployment for production applications.
+        </p>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="px-2 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 text-xs rounded">GitHub Actions</span>
+          <span class="px-2 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 text-xs rounded">Docker</span>
+          <span class="px-2 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 text-xs rounded">AWS</span>
+          <span class="px-2 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 text-xs rounded">Terraform</span>
+        </div>
+        <div class="flex gap-3">
+          <span class="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
+            <i data-lucide="lock" class="w-4 h-4"></i>
+            DevOps
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-12">
+      <p class="text-gray-600 dark:text-gray-300 mb-4">
+        Interested in collaborating or learning more about these projects?
+      </p>
+      <a href="../contact/index.html" class="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors">
+        Get In Touch
+      </a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer w-full text-center py-4 mt-auto border-t border-gray-200 dark:border-gray-700">
+    <div class="flex justify-center items-center gap-6 text-gray-600 dark:text-gray-400 mb-2">
+      <a href="https://github.com/kg-0805" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <i data-lucide="github" class="w-5 h-5 hover:text-black dark:hover:text-white transition-colors"></i>
+      </a>
+      <a href="https://linkedin.com/in/kg-0805" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <i data-lucide="linkedin" class="w-5 h-5 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"></i>
+      </a>
+      <a href="https://github.com/kg-0805/Portfolio" target="_blank" rel="noopener noreferrer" class="text-sm underline hover:text-blue-500 dark:hover:text-blue-400">
+        Source Code
+      </a>
+    </div>
+    <p class="text-sm text-gray-500 dark:text-gray-400">
+      &copy; <span id="year"></span> Kartik Gupta. All rights reserved.
+    </p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    lucide.createIcons();
+
+    function toggleDarkMode() {
+      const root = document.getElementById("root");
+      const btn = document.getElementById("toggleBtn");
+      const icon = document.getElementById("theme-icon");
+
+      const isLight = root.classList.contains("light-mode");
+
+      root.classList.toggle("light-mode", !isLight);
+      root.classList.toggle("dark-mode", isLight);
+
+      btn.classList.toggle("bg-gray-200", !isLight);
+      btn.classList.toggle("text-black", !isLight);
+      btn.classList.toggle("bg-gray-700", isLight);
+      btn.classList.toggle("text-white", isLight);
+
+      icon.setAttribute("data-lucide", isLight ? "sun" : "moon");
+      lucide.createIcons();
+    }
+
+    document.getElementById("toggleBtn").classList.add("bg-gray-200", "text-black");
+  </script>
+</body>
+</html>

@@ -3,6 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Kartik Gupta - Backend Developer specializing in scalable systems, cloud architecture, and high-performance APIs" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
   <title>Kartik Gupta | Portfolio</title>
   <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon" />
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -65,9 +70,9 @@
     <!-- Navigation + Toggle -->
     <div class="flex flex-wrap items-center justify-center sm:justify-end gap-4 w-full sm:w-auto">
       <nav class="flex gap-4 text-base">
-        <a href="about.html" class="nav-link">About</a>
-        <a href="projects.html" class="nav-link">Projects</a>
-        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="about/index.html" class="nav-link">About</a>
+        <a href="projects/index.html" class="nav-link">Projects</a>
+        <a href="contact/index.html" class="nav-link">Contact</a>
       </nav>
       <button onclick="toggleDarkMode()" id="toggleBtn" class="p-2 rounded-full transition-colors">
         <i data-lucide="moon" id="theme-icon" class="w-5 h-5"></i>
@@ -105,6 +110,12 @@
     background-color: #e5e7eb; /* gray-200 */
     color: black;
   }
+  .no-underline {
+    text-decoration: none !important;
+  }
+  .no-underline:hover {
+    text-decoration: none !important;
+  }
 </style>
 
 
@@ -121,7 +132,7 @@
         I have contributed to large-scale platforms, particularly in the public sector, where I worked on data-heavy modules, cloud infrastructure (AWS), and security-sensitive workflows. My technology stack includes PHP (Laravel Lumen), Python, Redis, DynamoDB, S3, and other AWS services, with a strong emphasis on performance, availability, and maintainability.
     </p>
     <p class="text-lg leading-relaxed mb-6">
-        This site showcases a curated selection of my work. You can explore my <a href="projects.html" class="underline text-blue-600 dark:text-blue-400">projects</a>, know more <a href="about.html" class="underline text-blue-600 dark:text-blue-400">about me</a>, or <a href="contact.html" class="underline text-blue-600 dark:text-blue-400">reach out</a> for opportunities or collaborations.
+        This site showcases a curated selection of my work. You can explore my <a href="projects/index.html" class="underline text-blue-600 dark:text-blue-400">projects</a>, know more <a href="about/index.html" class="underline text-blue-600 dark:text-blue-400">about me</a>, or <a href="contact/index.html" class="underline text-blue-600 dark:text-blue-400">reach out</a> for opportunities or collaborations.
     </p>
     
   </main>
@@ -129,13 +140,13 @@
   <!-- Footer -->
     <footer class="footer w-full text-center py-4 mt-auto border-t border-gray-200 dark:border-gray-700">
     <div class="flex justify-center items-center gap-6 text-gray-600 dark:text-gray-400 mb-2">
-        <a href="https://github.com/kg-0805" target="_blank" aria-label="GitHub">
+        <a href="https://github.com/kg-0805" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
         <i data-lucide="github" class="w-5 h-5 hover:text-black dark:hover:text-white transition-colors"></i>
         </a>
-        <a href="https://linkedin.com/in/kg-0805" target="_blank" aria-label="LinkedIn">
+        <a href="https://linkedin.com/in/kg-0805" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
         <i data-lucide="linkedin" class="w-5 h-5 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"></i>
         </a>
-        <a href="https://github.com/kg-0805/Portfolio" target="_blank" class="text-sm underline hover:text-blue-500 dark:hover:text-blue-400">
+        <a href="https://github.com/kg-0805/Portfolio" target="_blank" rel="noopener noreferrer" class="text-sm underline hover:text-blue-500 dark:hover:text-blue-400">
         Source Code
         </a>
     </div>
@@ -148,55 +159,30 @@
 
   <!-- Scripts -->
   <script>
-    document.getElementById("year-text").querySelector("span").textContent = new Date().getFullYear();
+    document.getElementById("year").textContent = new Date().getFullYear();
     lucide.createIcons();
 
     function toggleDarkMode() {
       const root = document.getElementById("root");
       const btn = document.getElementById("toggleBtn");
-      if (root.classList.contains("light-mode")) {
-        root.classList.remove("light-mode");
-        root.classList.add("dark-mode");
-        btn.classList.remove("bg-gray-200", "text-black");
-        btn.classList.add("bg-gray-700", "text-white");
-      } else {
-        root.classList.remove("dark-mode");
-        root.classList.add("light-mode");
-        btn.classList.remove("bg-gray-700", "text-white");
-        btn.classList.add("bg-gray-200", "text-black");
-      }
+      const icon = document.getElementById("theme-icon");
+
+      const isLight = root.classList.contains("light-mode");
+
+      root.classList.toggle("light-mode", !isLight);
+      root.classList.toggle("dark-mode", isLight);
+
+      btn.classList.toggle("bg-gray-200", !isLight);
+      btn.classList.toggle("text-black", !isLight);
+      btn.classList.toggle("bg-gray-700", isLight);
+      btn.classList.toggle("text-white", isLight);
+
+      icon.setAttribute("data-lucide", isLight ? "sun" : "moon");
+      lucide.createIcons();
     }
 
     document.getElementById("toggleBtn").classList.add("bg-gray-200", "text-black");
   </script>
-    <script>
-  lucide.createIcons();
-
-  document.getElementById("year-text").querySelector("span").textContent = new Date().getFullYear();
-
-  function toggleDarkMode() {
-    const root = document.getElementById("root");
-    const btn = document.getElementById("toggleBtn");
-    const icon = document.getElementById("theme-icon");
-
-    const isLight = root.classList.contains("light-mode");
-
-    root.classList.toggle("light-mode", !isLight);
-    root.classList.toggle("dark-mode", isLight);
-
-    btn.classList.toggle("bg-gray-200", !isLight);
-    btn.classList.toggle("text-black", !isLight);
-    btn.classList.toggle("bg-gray-700", isLight);
-    btn.classList.toggle("text-white", isLight);
-
-    // Toggle icon
-    icon.setAttribute("data-lucide", isLight ? "sun" : "moon");
-    lucide.createIcons(); // Re-render icon
-  }
-
-  // Set initial styles
-  document.getElementById("toggleBtn").classList.add("bg-gray-200", "text-black");
-</script>
 
 
 </body>

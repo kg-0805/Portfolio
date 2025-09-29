@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Contact Kartik Gupta - Get in touch for collaboration opportunities" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+  <title>Contact | Kartik Gupta</title>
+  <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .dark-mode {
+      background-color: #111827;
+      color: white;
+    }
+    .light-mode {
+      background-color: white;
+      color: black;
+    }
+    .header, .footer {
+      transition: background-color 0.3s ease;
+    }
+    .light-mode .header, .light-mode .footer {
+      background-color: #f3f4f6;
+      color: black;
+    }
+    .dark-mode .header, .dark-mode .footer {
+      background-color: #1f2937;
+      color: white;
+    }
+    a {
+      transition: color 0.3s;
+    }
+    .light-mode a {
+      color: #2563eb;
+    }
+    .dark-mode a {
+      color: #60a5fa;
+    }
+    .light-mode a:hover, .dark-mode a:hover {
+      text-decoration: underline;
+    }
+    .contact-card {
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .contact-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    .dark-mode .contact-card:hover {
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body id="root" class="light-mode text-gray-900 flex flex-col min-h-screen transition-colors duration-300">
+
+  <!-- Header -->
+  <header id="main-header" class="w-full sticky top-0 z-50 shadow transition-colors duration-300">
+    <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-4 px-4 py-3">
+      <div class="flex items-center gap-3">
+        <img src="../assets/images/logo.png" alt="Logo" class="h-10 w-10 rounded-full object-cover" />
+        <h1 class="text-xl font-bold whitespace-nowrap"><a href="../index.html" class="no-underline">Kartik Gupta</a></h1>
+      </div>
+      <div class="flex flex-wrap items-center justify-center sm:justify-end gap-4 w-full sm:w-auto">
+        <nav class="flex gap-4 text-base">
+          <a href="../index.html" class="nav-link">Home</a>
+          <a href="../about/index.html" class="nav-link">About</a>
+          <a href="../projects/index.html" class="nav-link">Projects</a>
+          <a href="index.html" class="nav-link font-semibold">Contact</a>
+        </nav>
+        <button onclick="toggleDarkMode()" id="toggleBtn" class="p-2 rounded-full transition-colors">
+          <i data-lucide="moon" id="theme-icon" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <style>
+    #main-header {
+      background-color: white;
+      color: black;
+    }
+    .dark-mode #main-header {
+      background-color: #1f2937;
+      color: white;
+    }
+    .nav-link {
+      color: #2563eb;
+      transition: color 0.3s;
+    }
+    .dark-mode .nav-link {
+      color: #60a5fa;
+    }
+    .dark-mode .nav-link:hover,
+    .nav-link:hover {
+      text-decoration: underline;
+    }
+    .dark-mode #toggleBtn {
+      background-color: #374151;
+      color: white;
+    }
+    #toggleBtn {
+      background-color: #e5e7eb;
+      color: black;
+    }
+    .no-underline {
+      text-decoration: none !important;
+    }
+    .no-underline:hover {
+      text-decoration: none !important;
+    }
+    .dark-mode .contact-card {
+      background-color: #1f2937;
+      border-color: #374151;
+    }
+    .dark-mode input, .dark-mode textarea {
+      background-color: #374151;
+      border-color: #4b5563;
+      color: white;
+    }
+    .dark-mode input:focus, .dark-mode textarea:focus {
+      border-color: #3b82f6;
+    }
+  </style>
+
+  <!-- Main Content -->
+  <main class="flex-grow max-w-4xl mx-auto py-12 px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4">Get In Touch</h2>
+      <p class="text-xl text-gray-600 dark:text-gray-300">Let's discuss opportunities, collaborations, or just connect</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 mb-12">
+      <!-- Contact Methods -->
+      <div class="space-y-6">
+        <div class="contact-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+          <div class="flex items-center mb-4">
+            <i data-lucide="mail" class="w-8 h-8 text-blue-600 dark:text-blue-400 mr-4"></i>
+            <div>
+              <h3 class="text-lg font-semibold">Email</h3>
+              <p class="text-gray-600 dark:text-gray-300">Best for detailed discussions</p>
+            </div>
+          </div>
+          <a href="mailto:contact@kartikgupta.in" class="text-blue-600 dark:text-blue-400 hover:underline">
+            contact@kartikgupta.in
+          </a>
+        </div>
+
+        <div class="contact-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+          <div class="flex items-center mb-4">
+            <i data-lucide="linkedin" class="w-8 h-8 text-blue-600 dark:text-blue-400 mr-4"></i>
+            <div>
+              <h3 class="text-lg font-semibold">LinkedIn</h3>
+              <p class="text-gray-600 dark:text-gray-300">Professional networking</p>
+            </div>
+          </div>
+          <a href="https://linkedin.com/in/kg-0805" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">
+            linkedin.com/in/kg-0805
+          </a>
+        </div>
+
+        <div class="contact-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+          <div class="flex items-center mb-4">
+            <i data-lucide="github" class="w-8 h-8 text-blue-600 dark:text-blue-400 mr-4"></i>
+            <div>
+              <h3 class="text-lg font-semibold">GitHub</h3>
+              <p class="text-gray-600 dark:text-gray-300">Code collaboration</p>
+            </div>
+          </div>
+          <a href="https://github.com/kg-0805" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">
+            github.com/kg-0805
+          </a>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+        <h3 class="text-xl font-semibold mb-6">Send a Message</h3>
+        <form id="contactForm" class="space-y-4">
+          <div>
+            <label for="name" class="block text-sm font-medium mb-2">Name</label>
+            <input 
+              type="text" 
+              id="name" 
+              name="name" 
+              required 
+              class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+              placeholder="Your name"
+            />
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-medium mb-2">Email</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              required 
+              class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+              placeholder="your.email@example.com"
+            />
+          </div>
+          <div>
+            <label for="subject" class="block text-sm font-medium mb-2">Subject</label>
+            <input 
+              type="text" 
+              id="subject" 
+              name="subject" 
+              required 
+              class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+              placeholder="What's this about?"
+            />
+          </div>
+          <div>
+            <label for="message" class="block text-sm font-medium mb-2">Message</label>
+            <textarea 
+              id="message" 
+              name="message" 
+              rows="4" 
+              required 
+              class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+              placeholder="Your message..."
+            ></textarea>
+          </div>
+          <button 
+            type="submit" 
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition-colors"
+          >
+            Send Message
+          </button>
+        </form>
+        <div id="formMessage" class="mt-4 text-center hidden"></div>
+      </div>
+    </div>
+
+    <!-- Additional Info -->
+    <div class="text-center bg-gray-50 dark:bg-gray-800 rounded-lg p-8">
+      <h3 class="text-xl font-semibold mb-4">Let's Build Something Great Together</h3>
+      <p class="text-gray-600 dark:text-gray-300 mb-4">
+        I'm always interested in discussing new opportunities, whether it's a full-time role, 
+        consulting project, or collaboration on open-source initiatives.
+      </p>
+      <div class="flex justify-center gap-6 text-sm text-gray-500 dark:text-gray-400">
+        <span>• Backend Development</span>
+        <span>• Cloud Architecture</span>
+        <span>• API Design</span>
+        <span>• Performance Optimization</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer w-full text-center py-4 mt-auto border-t border-gray-200 dark:border-gray-700">
+    <div class="flex justify-center items-center gap-6 text-gray-600 dark:text-gray-400 mb-2">
+      <a href="https://github.com/kg-0805" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <i data-lucide="github" class="w-5 h-5 hover:text-black dark:hover:text-white transition-colors"></i>
+      </a>
+      <a href="https://linkedin.com/in/kg-0805" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <i data-lucide="linkedin" class="w-5 h-5 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"></i>
+      </a>
+      <a href="https://github.com/kg-0805/Portfolio" target="_blank" rel="noopener noreferrer" class="text-sm underline hover:text-blue-500 dark:hover:text-blue-400">
+        Source Code
+      </a>
+    </div>
+    <p class="text-sm text-gray-500 dark:text-gray-400">
+      &copy; <span id="year"></span> Kartik Gupta. All rights reserved.
+    </p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    lucide.createIcons();
+
+    function toggleDarkMode() {
+      const root = document.getElementById("root");
+      const btn = document.getElementById("toggleBtn");
+      const icon = document.getElementById("theme-icon");
+
+      const isLight = root.classList.contains("light-mode");
+
+      root.classList.toggle("light-mode", !isLight);
+      root.classList.toggle("dark-mode", isLight);
+
+      btn.classList.toggle("bg-gray-200", !isLight);
+      btn.classList.toggle("text-black", !isLight);
+      btn.classList.toggle("bg-gray-700", isLight);
+      btn.classList.toggle("text-white", isLight);
+
+      icon.setAttribute("data-lucide", isLight ? "sun" : "moon");
+      lucide.createIcons();
+    }
+
+    document.getElementById("toggleBtn").classList.add("bg-gray-200", "text-black");
+
+    // Contact form handling
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(this);
+      const name = formData.get("name");
+      const email = formData.get("email");
+      const subject = formData.get("subject");
+      const message = formData.get("message");
+      
+      // Create mailto link
+      const mailtoLink = `mailto:contact@kartikgupta.in?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+      
+      // Open email client
+      window.location.href = mailtoLink;
+      
+      // Show success message
+      const messageDiv = document.getElementById("formMessage");
+      messageDiv.className = "mt-4 text-center text-green-600 dark:text-green-400";
+      messageDiv.textContent = "Opening your email client...";
+      messageDiv.classList.remove("hidden");
+      
+      // Reset form
+      this.reset();
+      
+      // Hide message after 3 seconds
+      setTimeout(() => {
+        messageDiv.classList.add("hidden");
+      }, 3000);
+    });
+  </script>
+</body>
+</html>

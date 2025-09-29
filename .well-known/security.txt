@@ -1,0 +1,8 @@
+Contact: mailto:contact@kartikgupta.in
+Expires: 2025-12-31T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://kartikgupta.in/.well-known/security.txt
+
+# Security Policy
+# If you discover a security vulnerability, please report it responsibly.
+# Thank you for helping keep this site secure.

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="About Kartik Gupta - Backend Developer specializing in scalable systems and cloud architecture" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+  <title>About | Kartik Gupta</title>
+  <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .dark-mode {
+      background-color: #111827;
+      color: white;
+    }
+    .light-mode {
+      background-color: white;
+      color: black;
+    }
+    .header, .footer {
+      transition: background-color 0.3s ease;
+    }
+    .light-mode .header, .light-mode .footer {
+      background-color: #f3f4f6;
+      color: black;
+    }
+    .dark-mode .header, .dark-mode .footer {
+      background-color: #1f2937;
+      color: white;
+    }
+    a {
+      transition: color 0.3s;
+    }
+    .light-mode a {
+      color: #2563eb;
+    }
+    .dark-mode a {
+      color: #60a5fa;
+    }
+    .light-mode a:hover, .dark-mode a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body id="root" class="light-mode text-gray-900 flex flex-col min-h-screen transition-colors duration-300">
+
+  <!-- Header -->
+  <header id="main-header" class="w-full sticky top-0 z-50 shadow transition-colors duration-300">
+    <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-4 px-4 py-3">
+      <div class="flex items-center gap-3">
+        <img src="../assets/images/logo.png" alt="Logo" class="h-10 w-10 rounded-full object-cover" />
+        <h1 class="text-xl font-bold whitespace-nowrap"><a href="../index.html" class="no-underline">Kartik Gupta</a></h1>
+      </div>
+      <div class="flex flex-wrap items-center justify-center sm:justify-end gap-4 w-full sm:w-auto">
+        <nav class="flex gap-4 text-base">
+          <a href="../index.html" class="nav-link">Home</a>
+          <a href="index.html" class="nav-link font-semibold">About</a>
+          <a href="../projects/index.html" class="nav-link">Projects</a>
+          <a href="../contact/index.html" class="nav-link">Contact</a>
+        </nav>
+        <button onclick="toggleDarkMode()" id="toggleBtn" class="p-2 rounded-full transition-colors">
+          <i data-lucide="moon" id="theme-icon" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <style>
+    #main-header {
+      background-color: white;
+      color: black;
+    }
+    .dark-mode #main-header {
+      background-color: #1f2937;
+      color: white;
+    }
+    .nav-link {
+      color: #2563eb;
+      transition: color 0.3s;
+    }
+    .dark-mode .nav-link {
+      color: #60a5fa;
+    }
+    .dark-mode .nav-link:hover,
+    .nav-link:hover {
+      text-decoration: underline;
+    }
+    .dark-mode #toggleBtn {
+      background-color: #374151;
+      color: white;
+    }
+    #toggleBtn {
+      background-color: #e5e7eb;
+      color: black;
+    }
+    .no-underline {
+      text-decoration: none !important;
+    }
+    .no-underline:hover {
+      text-decoration: none !important;
+    }
+    .dark-mode .project-card {
+      background-color: #1f2937;
+      border-color: #374151;
+    }
+    .dark-mode .contact-card {
+      background-color: #1f2937;
+      border-color: #374151;
+    }
+  </style>
+
+  <!-- Main Content -->
+  <main class="flex-grow max-w-4xl mx-auto py-12 px-4">
+    <div class="text-center mb-12">
+      <img src="../assets/images/profile.jpg" alt="Kartik Gupta" class="mx-auto h-32 w-32 rounded-full object-cover shadow-lg mb-6" />
+      <h2 class="text-4xl font-bold mb-4">About Me</h2>
+      <p class="text-xl text-gray-600 dark:text-gray-300">Backend Developer & Cloud Architect</p>
+    </div>
+
+    <div class="space-y-8">
+      <section>
+        <h3 class="text-2xl font-semibold mb-4">Professional Background</h3>
+        <p class="text-lg leading-relaxed mb-4">
+          I'm a backend developer with extensive experience in building scalable, secure, and high-performance systems. My expertise spans across API development, cloud-native architectures, and production-critical infrastructure optimization.
+        </p>
+        <p class="text-lg leading-relaxed">
+          I have contributed to large-scale platforms, particularly in the public sector, where I've worked on data-intensive modules, cloud infrastructure (AWS), and security-sensitive workflows that serve millions of users.
+        </p>
+      </section>
+
+      <section>
+        <h3 class="text-2xl font-semibold mb-4">Technical Expertise</h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <h4 class="text-lg font-medium mb-3">Backend Technologies</h4>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+              <li>• PHP (Laravel, Lumen)</li>
+              <li>• Python</li>
+              <li>• Node.js</li>
+              <li>• RESTful APIs</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-medium mb-3">Cloud & Infrastructure</h4>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+              <li>• AWS (S3, DynamoDB, Lambda, CloudFront)</li>
+              <li>• Redis</li>
+              <li>• Docker</li>
+              <li>• CI/CD Pipelines</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h3 class="text-2xl font-semibold mb-4">Core Values</h3>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="text-center p-4">
+            <i data-lucide="shield-check" class="w-12 h-12 mx-auto mb-3 text-blue-600 dark:text-blue-400"></i>
+            <h4 class="font-medium mb-2">Security First</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Building secure systems with best practices and compliance standards</p>
+          </div>
+          <div class="text-center p-4">
+            <i data-lucide="zap" class="w-12 h-12 mx-auto mb-3 text-blue-600 dark:text-blue-400"></i>
+            <h4 class="font-medium mb-2">Performance</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Optimizing for speed, scalability, and resource efficiency</p>
+          </div>
+          <div class="text-center p-4">
+            <i data-lucide="users" class="w-12 h-12 mx-auto mb-3 text-blue-600 dark:text-blue-400"></i>
+            <h4 class="font-medium mb-2">Collaboration</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Working effectively in cross-functional teams</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer w-full text-center py-4 mt-auto border-t border-gray-200 dark:border-gray-700">
+    <div class="flex justify-center items-center gap-6 text-gray-600 dark:text-gray-400 mb-2">
+      <a href="https://github.com/kg-0805" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <i data-lucide="github" class="w-5 h-5 hover:text-black dark:hover:text-white transition-colors"></i>
+      </a>
+      <a href="https://linkedin.com/in/kg-0805" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <i data-lucide="linkedin" class="w-5 h-5 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"></i>
+      </a>
+      <a href="https://github.com/kg-0805/Portfolio" target="_blank" rel="noopener noreferrer" class="text-sm underline hover:text-blue-500 dark:hover:text-blue-400">
+        Source Code
+      </a>
+    </div>
+    <p class="text-sm text-gray-500 dark:text-gray-400">
+      &copy; <span id="year"></span> Kartik Gupta. All rights reserved.
+    </p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    lucide.createIcons();
+
+    function toggleDarkMode() {
+      const root = document.getElementById("root");
+      const btn = document.getElementById("toggleBtn");
+      const icon = document.getElementById("theme-icon");
+
+      const isLight = root.classList.contains("light-mode");
+
+      root.classList.toggle("light-mode", !isLight);
+      root.classList.toggle("dark-mode", isLight);
+
+      btn.classList.toggle("bg-gray-200", !isLight);
+      btn.classList.toggle("text-black", !isLight);
+      btn.classList.toggle("bg-gray-700", isLight);
+      btn.classList.toggle("text-white", isLight);
+
+      icon.setAttribute("data-lucide", isLight ? "sun" : "moon");
+      lucide.createIcons();
+    }
+
+    document.getElementById("toggleBtn").classList.add("bg-gray-200", "text-black");
+  </script>
+</body>
+</html>
