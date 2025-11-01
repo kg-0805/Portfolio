@@ -303,11 +303,24 @@
     document.getElementById("year").textContent = new Date().getFullYear();
     lucide.createIcons();
 
-    function toggleDarkMode() {
-      const root = document.getElementById("root");
-      const btn = document.getElementById("toggleBtn");
-      const icon = document.getElementById("theme-icon");
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    const root = document.getElementById("root");
+    const btn = document.getElementById("toggleBtn");
+    const icon = document.getElementById("theme-icon");
+    
+    if (savedTheme === 'dark') {
+      root.classList.remove('light-mode');
+      root.classList.add('dark-mode');
+      btn.classList.remove('bg-gray-200', 'text-black');
+      btn.classList.add('bg-gray-700', 'text-white');
+      icon.setAttribute('data-lucide', 'sun');
+    } else {
+      btn.classList.add('bg-gray-200', 'text-black');
+    }
+    lucide.createIcons();
 
+    function toggleDarkMode() {
       const isLight = root.classList.contains("light-mode");
 
       root.classList.toggle("light-mode", !isLight);
@@ -320,9 +333,10 @@
 
       icon.setAttribute("data-lucide", isLight ? "sun" : "moon");
       lucide.createIcons();
+      
+      // Save theme preference
+      localStorage.setItem('theme', isLight ? 'dark' : 'light');
     }
-
-    document.getElementById("toggleBtn").classList.add("bg-gray-200", "text-black");
   </script>
 </body>
 </html>

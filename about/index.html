@@ -53,7 +53,7 @@
     <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-4 px-4 py-3">
       <div class="flex items-center gap-3">
         <img src="../assets/images/logo.png" alt="Logo" class="h-10 w-10 rounded-full object-cover" />
-        <h1 class="text-xl font-bold whitespace-nowrap"><a href="../index.html" class="no-underline">Kartik Gupta</a></h1>
+        <h1 class="text-xl font-bold whitespace-nowrap">Kartik Gupta</h1>
       </div>
       <div class="flex flex-wrap items-center justify-center sm:justify-end gap-4 w-full sm:w-auto">
         <nav class="flex gap-4 text-base">
@@ -111,6 +111,21 @@
       background-color: #1f2937;
       border-color: #374151;
     }
+    .dark-mode ul li {
+      color: white !important;
+    }
+    .dark-mode h2, .dark-mode h3, .dark-mode h4 {
+      color: #ffe8db !important;
+    }
+    .dark-mode .bg-white {
+      background-color: #1f2937 !important;
+    }
+    .dark-mode .border-gray-200 {
+      border-color: #374151 !important;
+    }
+    .dark-mode .text-gray-600 {
+      color: #d1d5db !important;
+    }
   </style>
 
   <!-- Main Content -->
@@ -133,46 +148,52 @@
       </section>
 
       <section>
-        <h3 class="text-2xl font-semibold mb-4">Technical Expertise</h3>
-        <div class="grid md:grid-cols-2 gap-6">
-          <div>
-            <h4 class="text-lg font-medium mb-3">Backend Technologies</h4>
-            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
-              <li>• PHP (Laravel, Lumen)</li>
-              <li>• Python</li>
-              <li>• Node.js</li>
-              <li>• RESTful APIs</li>
+        <h3 class="text-2xl font-semibold mb-6">Technical Expertise</h3>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md border border-gray-200 dark:border-gray-700">
+            <div class="flex items-center mb-4">
+              <i data-lucide="code" class="w-6 h-6 text-blue-600 dark:text-blue-400 mr-3"></i>
+              <h4 class="text-lg font-semibold">Backend Technologies</h4>
+            </div>
+            <ul class="space-y-3 text-gray-700 dark:text-white">
+              <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>PHP (Laravel, Lumen)</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>Python</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>Node.js</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>RESTful APIs</li>
             </ul>
           </div>
-          <div>
-            <h4 class="text-lg font-medium mb-3">Cloud & Infrastructure</h4>
-            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
-              <li>• AWS (S3, DynamoDB, Lambda, CloudFront)</li>
-              <li>• Redis</li>
-              <li>• Docker</li>
-              <li>• CI/CD Pipelines</li>
+          <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md border border-gray-200 dark:border-gray-700">
+            <div class="flex items-center mb-4">
+              <i data-lucide="cloud" class="w-6 h-6 text-green-600 dark:text-green-400 mr-3"></i>
+              <h4 class="text-lg font-semibold">Cloud & Infrastructure</h4>
+            </div>
+            <ul class="space-y-3 text-gray-700 dark:text-white">
+              <li class="flex items-center"><span class="w-2 h-2 bg-green-500 rounded-full mr-3"></span>AWS (S3, DynamoDB, Lambda, CloudFront)</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-green-500 rounded-full mr-3"></span>Redis</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-green-500 rounded-full mr-3"></span>Docker</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-green-500 rounded-full mr-3"></span>CI/CD Pipelines</li>
             </ul>
           </div>
         </div>
       </section>
 
       <section>
-        <h3 class="text-2xl font-semibold mb-4">Core Values</h3>
+        <h3 class="text-2xl font-semibold mb-6">Core Values</h3>
         <div class="grid md:grid-cols-3 gap-6">
-          <div class="text-center p-4">
-            <i data-lucide="shield-check" class="w-12 h-12 mx-auto mb-3 text-blue-600 dark:text-blue-400"></i>
-            <h4 class="font-medium mb-2">Security First</h4>
-            <p class="text-sm text-gray-600 dark:text-gray-400">Building secure systems with best practices and compliance standards</p>
+          <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md border border-gray-200 dark:border-gray-700 text-center">
+            <i data-lucide="shield-check" class="w-12 h-12 mx-auto mb-4 text-blue-600 dark:text-blue-400"></i>
+            <h4 class="font-semibold mb-3 text-gray-900 dark:text-white">Security First</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-300">Building secure systems with best practices and compliance standards</p>
           </div>
-          <div class="text-center p-4">
-            <i data-lucide="zap" class="w-12 h-12 mx-auto mb-3 text-blue-600 dark:text-blue-400"></i>
-            <h4 class="font-medium mb-2">Performance</h4>
-            <p class="text-sm text-gray-600 dark:text-gray-400">Optimizing for speed, scalability, and resource efficiency</p>
+          <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md border border-gray-200 dark:border-gray-700 text-center">
+            <i data-lucide="zap" class="w-12 h-12 mx-auto mb-4 text-green-600 dark:text-green-400"></i>
+            <h4 class="font-semibold mb-3 text-gray-900 dark:text-white">Performance</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-300">Optimizing for speed, scalability, and resource efficiency</p>
           </div>
-          <div class="text-center p-4">
-            <i data-lucide="users" class="w-12 h-12 mx-auto mb-3 text-blue-600 dark:text-blue-400"></i>
-            <h4 class="font-medium mb-2">Collaboration</h4>
-            <p class="text-sm text-gray-600 dark:text-gray-400">Working effectively in cross-functional teams</p>
+          <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md border border-gray-200 dark:border-gray-700 text-center">
+            <i data-lucide="users" class="w-12 h-12 mx-auto mb-4 text-purple-600 dark:text-purple-400"></i>
+            <h4 class="font-semibold mb-3 text-gray-900 dark:text-white">Collaboration</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-300">Working effectively in cross-functional teams</p>
           </div>
         </div>
       </section>
@@ -202,11 +223,24 @@
     document.getElementById("year").textContent = new Date().getFullYear();
     lucide.createIcons();
 
-    function toggleDarkMode() {
-      const root = document.getElementById("root");
-      const btn = document.getElementById("toggleBtn");
-      const icon = document.getElementById("theme-icon");
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    const root = document.getElementById("root");
+    const btn = document.getElementById("toggleBtn");
+    const icon = document.getElementById("theme-icon");
+    
+    if (savedTheme === 'dark') {
+      root.classList.remove('light-mode');
+      root.classList.add('dark-mode');
+      btn.classList.remove('bg-gray-200', 'text-black');
+      btn.classList.add('bg-gray-700', 'text-white');
+      icon.setAttribute('data-lucide', 'sun');
+    } else {
+      btn.classList.add('bg-gray-200', 'text-black');
+    }
+    lucide.createIcons();
 
+    function toggleDarkMode() {
       const isLight = root.classList.contains("light-mode");
 
       root.classList.toggle("light-mode", !isLight);
@@ -219,9 +253,10 @@
 
       icon.setAttribute("data-lucide", isLight ? "sun" : "moon");
       lucide.createIcons();
+      
+      // Save theme preference
+      localStorage.setItem('theme', isLight ? 'dark' : 'light');
     }
-
-    document.getElementById("toggleBtn").classList.add("bg-gray-200", "text-black");
   </script>
 </body>
 </html>
