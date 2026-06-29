@@ -2,10 +2,10 @@
   {
     "id": "portfolio-website",
     "title": "Portfolio Website",
-    "description": "A responsive portfolio website built with modern web technologies and deployed on AWS with automated CI/CD.",
-    "fullDescription": "A responsive portfolio website built with modern web technologies, featuring dark/light mode support, smooth navigation, and a clean design. Deployed on AWS using S3 for static hosting and CloudFront for global CDN distribution. The site uses GitHub Actions for automated CI/CD, ensuring seamless deployments on every push to the main branch.",
+    "description": "A responsive single-page portfolio in vanilla JS and Tailwind CSS, with JSON-driven content, deployed on AWS with automated CI/CD.",
+    "fullDescription": "A responsive single-page application (SPA) built with vanilla JavaScript (ES6+) and Tailwind CSS, featuring client-side routing, JSON-driven content, dynamic project modals, dark/light theme support, and smooth animations with self-hosted Lucide icons. The contact form is powered by the Web3Forms API, so no backend is required. Deployed on AWS using S3 for static hosting and CloudFront for global CDN distribution, with GitHub Actions handling CI/CD that syncs to S3 and invalidates the CloudFront cache on every push to main.",
     "icon": "cloud",
-    "technologies": ["HTML5", "Tailwind CSS", "JavaScript", "AWS S3", "CloudFront", "GitHub Actions"],
+    "technologies": ["HTML5", "Tailwind CSS", "JavaScript (ES6+)", "Lucide Icons", "AWS S3", "CloudFront", "GitHub Actions", "Web3Forms"],
     "color": "blue",
     "links": {
       "github": "https://github.com/kg-0805/Portfolio",

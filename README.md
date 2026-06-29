@@ -1,128 +1,211 @@
-# 💼 Kartik Gupta – Portfolio Website
+<div align="center">
 
-A modern single-page application (SPA) portfolio built with vanilla HTML, JavaScript, and Tailwind CSS. Features hash-based client-side routing, JSON-driven content, dynamic project modals, dark/light theme support, and smooth animations.
+<img src="assets/images/logo.png" width="100" height="100" alt="Kartik Gupta logo" />
+
+# Kartik Gupta — Portfolio
+
+### Backend Engineer & Cloud Architect
+
+A fast, dependency-free single-page portfolio built with vanilla JavaScript and Tailwind CSS — JSON-driven content, a glassmorphism UI, dark/light theming, and smooth, intentional motion.
+
+<br />
+
+[![Live Site](https://img.shields.io/badge/Live-kartikgupta.in-a855f7?style=for-the-badge&logo=googlechrome&logoColor=white)](https://kartikgupta.in)
+[![License: MIT](https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge)](LICENSE)
+
+<br />
+
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript_ES6+-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
+![Lucide](https://img.shields.io/badge/Lucide_Icons-F56565?style=flat-square&logo=lucide&logoColor=white)
+![Cloudflare](https://img.shields.io/badge/Cloudflare-F38020?style=flat-square&logo=cloudflare&logoColor=white)
+![No Build Step](https://img.shields.io/badge/Build-none-64748b?style=flat-square)
+
+<a href="https://kartikgupta.in"><strong>View the live site →</strong></a>
+
+</div>
 
 ---
 
-## 🌐 Live Website
+## Table of Contents
 
-[https://kartikgupta.in](https://kartikgupta.in)
-
----
-
-## 🚀 Tech Stack
-
-- **Frontend**: HTML5, JavaScript (ES6+), Tailwind CSS v3.4.17 (self-hosted)
-- **Icons**: Lucide Icons (self-hosted)
-- **Architecture**: Single-Page Application with hash-based routing
-- **Data**: JSON-driven content (projects, skills, experience, stats)
-- **Contact Form**: Web3Forms API
-- **Hosting**: AWS S3 + CloudFront CDN
-- **CI/CD**: GitHub Actions (S3 sync + CloudFront cache invalidation)
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [How It Works](#how-it-works)
+- [Getting Started](#getting-started)
+- [Deployment](#deployment)
+- [Updating Content](#updating-content)
+- [Accessibility &amp; SEO](#accessibility--seo)
+- [Contact](#contact)
+- [License](#license)
 
 ---
 
-## 📁 Project Structure
+## Overview
 
-```
+This is a hand-built, framework-free portfolio SPA. There is **no build step and no runtime dependency on a third-party CDN** — Tailwind and Lucide are self-hosted, and all content is rendered client-side from JSON. The result is a site that loads fast, deploys as plain static files, and stays trivially easy to maintain.
+
+> Update a JSON file, refresh the page — the UI re-renders itself. No HTML edits, no rebuild.
+
+---
+
+## Features
+
+| | |
+|---|---|
+| ⚡ **SPA, zero reloads** | Hash-based routing with scroll-spy keeps the nav in sync as you move through sections. |
+| 📦 **JSON-driven content** | Projects, skills, experience, and stats all come from `data/*.json`. |
+| 🌗 **Dark / light theme** | One-tap toggle with `localStorage` persistence, OS-preference fallback, and no flash on load. |
+| 🎴 **Project modals** | Accessible detail dialogs with focus trapping, background scroll-lock, and Escape / backdrop close. |
+| 🧭 **Morphing pill nav** | A floating pill that smoothly widens into a docked header as you scroll. |
+| ✨ **Motion, done right** | Scroll-reveal, a color-shifting scrollbar, and `prefers-reduced-motion` support. |
+| 🪟 **Glassmorphism UI** | Layered blur, gradient mesh background, and subtle noise texture. |
+| 📨 **Working contact form** | Submissions via the Web3Forms API — no backend required. |
+| ♿ **Accessible** | ARIA roles, keyboard navigation, visible focus states, and screen-reader live regions. |
+| 🔎 **SEO-ready** | Open Graph, Twitter Cards, JSON-LD structured data, sitemap, and `robots.txt`. |
+
+---
+
+## Tech Stack
+
+- **Markup & styling** — HTML5, Tailwind CSS 3.x (self-hosted build), custom CSS for glassmorphism, theming variables, and animations
+- **Scripting** — Vanilla JavaScript (ES6+), organized into small single-responsibility modules
+- **Icons** — Lucide (self-hosted)
+- **Content** — Static JSON files (`/data`)
+- **Contact** — Web3Forms API
+- **Hosting** — Static assets deployed to Cloudflare (configured via `wrangler.jsonc`)
+
+---
+
+## Project Structure
+
+```text
 Portfolio/
-├── index.html              # Single SPA entry point
-├── error.html              # Custom 404 page
+├── index.html              # SPA entry point + embedded data fallback (for file://)
+├── error.html              # Custom error page
 ├── css/
-│   └── styles.css          # Custom styles (glassmorphism, animations)
+│   └── styles.css          # Theme variables, glassmorphism, nav, animations
 ├── js/
-│   ├── app.js              # Main initialization and wiring
-│   ├── router.js           # Hash-based routing and scroll spy
-│   ├── modal.js            # Project modal system
-│   ├── theme.js            # Dark/light theme management
-│   ├── data-manager.js     # Data fetching, caching, validation
-│   ├── renderer.js         # Section rendering (Home, About, Projects, Contact)
-│   ├── tailwind.min.js     # Tailwind CSS v3.4.17 (self-hosted CDN)
-│   └── lucide.min.js       # Lucide Icons (self-hosted)
+│   ├── app.js              # Bootstraps the app and wires everything together
+│   ├── router.js           # Hash routing + scroll-spy
+│   ├── renderer.js         # Builds Home, About, Projects, and Contact sections
+│   ├── modal.js            # Project detail modal (focus trap, scroll lock)
+│   ├── theme.js            # Dark/light theme manager
+│   ├── data-manager.js     # Fetch, validate, and cache JSON content
+│   ├── tailwind.min.js     # Self-hosted Tailwind build
+│   └── lucide.min.js       # Self-hosted Lucide icons
 ├── data/
-│   ├── projects.json       # Project data
-│   ├── skills.json         # Skills and expertise
-│   ├── experience.json     # Work experience
-│   └── stats.json          # Key stats/metrics
+│   ├── projects.json       # Project cards + modal details
+│   ├── skills.json         # Skills grouped by category
+│   ├── experience.json     # Work history timeline
+│   └── stats.json          # Headline metrics
 ├── assets/
 │   └── images/             # Profile photo, logo, favicon
-├── .htaccess               # Security headers, caching, routing, hotlink protection
-├── robots.txt              # Search engine directives
-├── sitemap.xml             # Sitemap for SEO
-└── .github/
-    └── workflows/
-        └── deploy.yml      # CI/CD pipeline
+├── .well-known/
+│   └── security.txt        # Responsible-disclosure contact
+├── .htaccess               # Security headers & caching (Apache hosts)
+├── robots.txt              # Crawler directives
+├── sitemap.xml             # SEO sitemap
+└── wrangler.jsonc          # Cloudflare deployment config
 ```
 
 ---
 
-## ✨ Features
+## How It Works
 
-- ⚡ **SPA Architecture** — No page reloads, instant section navigation
-- 📦 **JSON-Driven Content** — Update projects, skills, and experience without touching HTML
-- 🎨 **Dynamic Modals** — Click any project card for detailed info with animations
-- 🌗 **Dark/Light Mode** — Theme toggle with localStorage persistence
-- � **Fully Responsive** — Mobile-first design with breakpoints at 768px and 1024px
-- ♿ **Accessible** — ARIA labels, keyboard navigation, focus trapping, screen reader support
-- 🔒 **Secured** — CSP headers, directory listing disabled, hotlink protection, image drag prevention
-- 🚀 **Zero External Dependencies** — All assets self-hosted (no CDN failures)
-- � **Working Contact Form** — Submissions via Web3Forms API (no backend needed)
-- 🎯 **SEO Optimized** — Open Graph, Twitter Cards, JSON-LD structured data, sitemap
+The app is intentionally small and modular — each file owns one concern:
 
----
+- **`data-manager.js`** fetches each `data/*.json` file, validates it against a schema, and caches the result. If a fetch fails (for example when the page is opened directly via `file://`), it falls back to a snapshot embedded in `index.html`, so the site still works offline.
+- **`renderer.js`** turns that validated data into DOM — hero, stats, skills, experience timeline, project grid, and contact form — using safe text APIs to avoid XSS.
+- **`router.js`** handles in-page navigation and highlights the active section as you scroll.
+- **`modal.js`** opens project details in an accessible dialog and locks the background from scrolling.
+- **`theme.js`** applies and persists the color theme, keeping the toggle, `<meta name="theme-color">`, and `<html>` class in sync.
+- **`app.js`** ties initialization together once the DOM and icons are ready.
 
-## � Deployment (CI/CD)
-
-Every push to `main` triggers GitHub Actions:
-
-1. Syncs files to the S3 bucket hosting `kartikgupta.in`
-2. Invalidates CloudFront cache to reflect changes immediately
-
-### GitHub Secrets Required
-
-| Secret | Description |
-|--------|-------------|
-| `AWS_ACCESS_KEY_ID` | AWS IAM access key |
-| `AWS_SECRET_ACCESS_KEY` | AWS IAM secret key |
-| `DISTRIBUTION_ID` | CloudFront Distribution ID |
+```text
+data/*.json ──▶ data-manager (fetch → validate → cache) ──▶ renderer ──▶ DOM
+                         │
+                         └─ falls back to embedded snapshot (file://)
+```
 
 ---
 
-## 🛠️ Local Development
+## Getting Started
 
-No build step required. Open `index.html` directly or use a local server:
+No build, no install — it's static files. Serve the folder with any static server:
 
 ```bash
-# Python
+# Python 3
 python -m http.server 8000
 
 # Node.js
 npx serve .
+
+# Cloudflare (mirrors production)
+npx wrangler dev
 ```
 
-Then visit `http://localhost:8000`.
+Then open **http://localhost:8000** (or the port your tool prints).
+
+> Opening `index.html` straight from disk works too, thanks to the embedded data fallback — but a local server is recommended so the live `data/*.json` files are loaded.
 
 ---
 
-## � Updating Content
+## Deployment
 
-Edit the JSON files in `/data/` to update portfolio content:
+The repo is configured for **Cloudflare** static-asset hosting via `wrangler.jsonc`:
 
-- **Projects**: `data/projects.json` — Add/edit project entries
-- **Skills**: `data/skills.json` — Update skills and proficiency levels
-- **Experience**: `data/experience.json` — Add work history
-- **Stats**: `data/stats.json` — Update key metrics
+```bash
+npx wrangler deploy
+```
 
-No code changes needed — the SPA reads and renders from these files automatically.
-
----
-
-## 📬 Contact
-
-[contact@kartikgupta.in](mailto:contact@kartikgupta.in) · [GitHub](https://github.com/kg-0805) · [LinkedIn](https://linkedin.com/in/kg-0805)
+`wrangler.jsonc` serves the project directory as static assets. The included `.htaccess` adds security headers and caching rules for Apache-based hosts.
 
 ---
 
-## 📄 License
+## Updating Content
 
-This project is open-sourced under the [MIT License](LICENSE).
+All content lives in `/data` — edit the JSON and reload:
+
+| File | Controls |
+|------|----------|
+| `data/projects.json` | Project cards and their modal details |
+| `data/skills.json` | Skills, categories, and proficiency |
+| `data/experience.json` | Work-history timeline |
+| `data/stats.json` | Headline metrics on the home page |
+
+> **Heads-up:** `index.html` keeps an inline snapshot of this data as a `file://` fallback. When served over HTTP the live JSON is used, so your edits show immediately. If you rely on `file://`, refresh that inline snapshot after editing the JSON.
+
+---
+
+## Accessibility & SEO
+
+- Semantic landmarks, ARIA labels, and an aria-live region for section changes
+- Full keyboard support, visible focus styles, and modal focus trapping
+- Honors `prefers-reduced-motion`
+- Open Graph + Twitter Card metadata, JSON-LD `Person` schema, `sitemap.xml`, and `robots.txt`
+
+---
+
+## Contact
+
+<div align="center">
+
+[![Email](https://img.shields.io/badge/Email-contact@kartikgupta.in-a855f7?style=for-the-badge&logo=gmail&logoColor=white)](mailto:contact@kartikgupta.in)
+[![GitHub](https://img.shields.io/badge/GitHub-kg--0805-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/kg-0805)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-kg--0805-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/kg-0805)
+
+</div>
+
+---
+
+## License
+
+Released under the [MIT License](LICENSE).
+
+<div align="center">
+<sub>Built with vanilla JS, Tailwind CSS, and a lot of attention to detail.</sub>
+</div>
