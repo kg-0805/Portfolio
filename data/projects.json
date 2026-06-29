@@ -1,0 +1,110 @@
+[
+  {
+    "id": "portfolio-website",
+    "title": "Portfolio Website",
+    "description": "A responsive portfolio website built with modern web technologies and deployed on AWS with automated CI/CD.",
+    "fullDescription": "A responsive portfolio website built with modern web technologies, featuring dark/light mode support, smooth navigation, and a clean design. Deployed on AWS using S3 for static hosting and CloudFront for global CDN distribution. The site uses GitHub Actions for automated CI/CD, ensuring seamless deployments on every push to the main branch.",
+    "icon": "cloud",
+    "technologies": ["HTML5", "Tailwind CSS", "JavaScript", "AWS S3", "CloudFront", "GitHub Actions"],
+    "color": "blue",
+    "links": {
+      "github": "https://github.com/kg-0805/Portfolio",
+      "demo": "https://kartikgupta.in"
+    },
+    "status": "public",
+    "featured": true,
+    "order": 1,
+    "images": [],
+    "metrics": {}
+  },
+  {
+    "id": "scalable-api-platform",
+    "title": "Scalable API Platform",
+    "description": "High-performance REST API built with Laravel Lumen, serving millions of requests with Redis caching and DynamoDB.",
+    "fullDescription": "A high-performance REST API platform built with Laravel Lumen, designed to handle millions of requests in production environments. The system leverages Redis for caching frequently accessed data, DynamoDB for scalable NoSQL storage, and implements rate limiting, request validation, and comprehensive error handling. Built for public sector applications requiring high availability and security compliance.",
+    "icon": "server",
+    "technologies": ["PHP", "Laravel Lumen", "Redis", "DynamoDB", "AWS"],
+    "color": "green",
+    "links": {
+      "github": "https://github.com/kg-0805"
+    },
+    "status": "private",
+    "featured": true,
+    "order": 2,
+    "images": [],
+    "metrics": {
+      "performance": "< 100ms response",
+      "uptime": "99.9%"
+    }
+  },
+  {
+    "id": "data-processing-pipeline",
+    "title": "Data Processing Pipeline",
+    "description": "Automated data processing system handling large-scale data ingestion, transformation, and analytics for public sector applications.",
+    "fullDescription": "An automated data processing pipeline designed for large-scale data ingestion, transformation, and analytics in public sector applications. Built on AWS Lambda for serverless execution, S3 for data storage, and custom ETL workflows for data quality checks and transformations. The system processes millions of records with fault-tolerant execution, automatic retry mechanisms, and comprehensive logging for audit compliance.",
+    "icon": "database",
+    "technologies": ["Python", "AWS Lambda", "S3", "ETL", "CloudWatch"],
+    "color": "purple",
+    "links": {
+      "github": "https://github.com/kg-0805"
+    },
+    "status": "confidential",
+    "featured": true,
+    "order": 3,
+    "images": [],
+    "metrics": {
+      "performance": "2M records/hour"
+    }
+  },
+  {
+    "id": "security-framework",
+    "title": "Security Framework",
+    "description": "Comprehensive security framework implementing authentication, authorization, and audit logging for enterprise applications.",
+    "fullDescription": "A comprehensive security framework providing authentication, authorization, and audit logging for enterprise-grade applications. Implements JWT-based token authentication, OAuth 2.0 flows for third-party integrations, and role-based access control (RBAC) for fine-grained permissions. Includes session management, brute-force protection, and detailed audit trails for compliance requirements.",
+    "icon": "shield",
+    "technologies": ["PHP", "JWT", "OAuth 2.0", "RBAC", "Redis"],
+    "color": "red",
+    "links": {
+      "github": "https://github.com/kg-0805"
+    },
+    "status": "private",
+    "featured": false,
+    "order": 4,
+    "images": [],
+    "metrics": {}
+  },
+  {
+    "id": "monitoring-dashboard",
+    "title": "Monitoring Dashboard",
+    "description": "Real-time monitoring and alerting system for tracking application performance, system health, and business metrics.",
+    "fullDescription": "A real-time monitoring and alerting system built for tracking application performance, system health, and business metrics. Uses WebSocket connections for live data streaming, Redis for pub/sub messaging, and Chart.js for interactive data visualization. Features configurable alert thresholds, historical data analysis, and customizable dashboard layouts for different team roles.",
+    "icon": "activity",
+    "technologies": ["Node.js", "WebSocket", "Redis", "Chart.js"],
+    "color": "indigo",
+    "links": {
+      "github": "https://github.com/kg-0805"
+    },
+    "status": "private",
+    "featured": false,
+    "order": 5,
+    "images": [],
+    "metrics": {}
+  },
+  {
+    "id": "cicd-pipeline",
+    "title": "CI/CD Pipeline",
+    "description": "Automated deployment pipeline with testing, security scanning, and multi-environment deployment for production applications.",
+    "fullDescription": "An automated CI/CD pipeline implementing continuous integration and deployment workflows with comprehensive testing, security scanning, and multi-environment deployment strategies. Built with GitHub Actions for orchestration, Docker for containerization, Terraform for infrastructure-as-code, and AWS for cloud deployment. Supports blue-green deployments, automated rollbacks, and environment-specific configurations.",
+    "icon": "git-branch",
+    "technologies": ["GitHub Actions", "Docker", "AWS", "Terraform"],
+    "color": "gray",
+    "links": {
+      "github": "https://github.com/kg-0805"
+    },
+    "status": "public",
+    "featured": false,
+    "order": 6,
+    "images": [],
+    "metrics": {}
+  }
+]

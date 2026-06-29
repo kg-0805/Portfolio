@@ -1,0 +1,182 @@
+[
+  {
+    "id": "php",
+    "name": "PHP (Laravel, Lumen)",
+    "category": "backend",
+    "proficiency": "expert",
+    "icon": "code",
+    "description": "Backend development with Laravel and Lumen frameworks for scalable, production-grade APIs and services.",
+    "yearsOfExperience": 4
+  },
+  {
+    "id": "python",
+    "name": "Python",
+    "category": "backend",
+    "proficiency": "advanced",
+    "icon": "code",
+    "description": "Backend development, automation, data processing, and scripting for infrastructure tasks.",
+    "yearsOfExperience": 4
+  },
+  {
+    "id": "java",
+    "name": "Java",
+    "category": "backend",
+    "proficiency": "intermediate",
+    "icon": "coffee",
+    "description": "Object-oriented backend development with the Spring framework and Hibernate ORM, built during enterprise engineering training.",
+    "yearsOfExperience": 1
+  },
+  {
+    "id": "spring",
+    "name": "Spring",
+    "category": "backend",
+    "proficiency": "intermediate",
+    "icon": "leaf",
+    "description": "Building Java backend services and REST APIs with the Spring framework, developed during enterprise engineering training.",
+    "yearsOfExperience": 1
+  },
+  {
+    "id": "hibernate",
+    "name": "Hibernate",
+    "category": "backend",
+    "proficiency": "intermediate",
+    "icon": "layers",
+    "description": "Java ORM for mapping relational schemas to application entities and managing data persistence.",
+    "yearsOfExperience": 1
+  },
+  {
+    "id": "nodejs",
+    "name": "Node.js",
+    "category": "backend",
+    "proficiency": "advanced",
+    "icon": "server",
+    "description": "REST APIs, real-time applications, and serverless functions, including high-performance services built with Fastify.",
+    "yearsOfExperience": 3
+  },
+  {
+    "id": "fastify",
+    "name": "Fastify",
+    "category": "backend",
+    "proficiency": "advanced",
+    "icon": "rocket",
+    "description": "Low-overhead Node.js framework for building fast, schema-validated REST APIs and microservices.",
+    "yearsOfExperience": 3
+  },
+  {
+    "id": "restful-apis",
+    "name": "RESTful APIs",
+    "category": "backend",
+    "proficiency": "expert",
+    "icon": "globe",
+    "description": "Designing and building scalable, secure RESTful API architectures for production systems.",
+    "yearsOfExperience": 4
+  },
+  {
+    "id": "rabbitmq",
+    "name": "RabbitMQ",
+    "category": "backend",
+    "proficiency": "advanced",
+    "icon": "inbox",
+    "description": "Message queues for asynchronous, event-driven, decoupled communication between distributed services.",
+    "yearsOfExperience": 4
+  },
+  {
+    "id": "aws",
+    "name": "AWS",
+    "category": "cloud",
+    "proficiency": "expert",
+    "icon": "cloud",
+    "description": "Cloud infrastructure with S3, DynamoDB, Lambda, and CloudFront for production-critical systems.",
+    "yearsOfExperience": 4
+  },
+  {
+    "id": "docker",
+    "name": "Docker",
+    "category": "cloud",
+    "proficiency": "advanced",
+    "icon": "package",
+    "description": "Containerization, multi-stage builds, and Docker Compose workflows for consistent deployments.",
+    "yearsOfExperience": 4
+  },
+  {
+    "id": "cloudfront",
+    "name": "CloudFront",
+    "category": "cloud",
+    "proficiency": "advanced",
+    "icon": "zap",
+    "description": "CDN configuration and optimization for global content delivery and edge caching.",
+    "yearsOfExperience": 3
+  },
+  {
+    "id": "lambda",
+    "name": "AWS Lambda",
+    "category": "cloud",
+    "proficiency": "advanced",
+    "icon": "cpu",
+    "description": "Serverless compute for event-driven architectures and microservices.",
+    "yearsOfExperience": 3
+  },
+  {
+    "id": "dynamodb",
+    "name": "DynamoDB",
+    "category": "database",
+    "proficiency": "advanced",
+    "icon": "database",
+    "description": "NoSQL database design for high-throughput, low-latency data access patterns at scale.",
+    "yearsOfExperience": 3
+  },
+  {
+    "id": "mariadb",
+    "name": "MariaDB",
+    "category": "database",
+    "proficiency": "advanced",
+    "icon": "database",
+    "description": "Relational schema design, query optimization, and management for high-volume transactional workloads.",
+    "yearsOfExperience": 4
+  },
+  {
+    "id": "redis",
+    "name": "Redis",
+    "category": "database",
+    "proficiency": "advanced",
+    "icon": "hard-drive",
+    "description": "In-memory caching, session management, pub/sub messaging, and rate limiting.",
+    "yearsOfExperience": 4
+  },
+  {
+    "id": "s3",
+    "name": "AWS S3",
+    "category": "database",
+    "proficiency": "expert",
+    "icon": "database",
+    "description": "Object storage for data-intensive modules, file management, and static asset hosting.",
+    "yearsOfExperience": 4
+  },
+  {
+    "id": "git",
+    "name": "Git",
+    "category": "tools",
+    "proficiency": "expert",
+    "icon": "git-branch",
+    "description": "Version control, branching strategies, and collaborative development workflows.",
+    "yearsOfExperience": 5
+  },
+  {
+    "id": "cicd",
+    "name": "CI/CD Pipelines",
+    "category": "tools",
+    "proficiency": "advanced",
+    "icon": "refresh-cw",
+    "description": "Automated build, test, and deployment pipelines for continuous integration and delivery.",
+    "yearsOfExperience": 3
+  },
+  {
+    "id": "linux",
+    "name": "Linux",
+    "category": "tools",
+    "proficiency": "advanced",
+    "icon": "terminal",
+    "description": "System administration, shell scripting, and server management for production environments.",
+    "yearsOfExperience": 4
+  }
+]

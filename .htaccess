@@ -1,27 +1,89 @@
+# ==========================================================================
 # Security Headers
+# ==========================================================================
 Header always set X-Content-Type-Options nosniff
 Header always set X-Frame-Options DENY
 Header always set X-XSS-Protection "1; mode=block"
 Header always set Referrer-Policy "strict-origin-when-cross-origin"
 Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
 
 # Content Security Policy
-Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data:; font-src 'self' https://cdn.jsdelivr.net; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self' mailto:;"
+Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com;"
 
-# Clean URLs - Remove .html extension
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^([^\.]+)$ $1.html [NC,L]
+# ==========================================================================
+# Prevent Directory Browsing
+# ==========================================================================
+Options -Indexes
 
-# Redirect .html to clean URLs
-RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
-RewriteRule ^ /%1 [NC,L,R=301]
+# ==========================================================================
+# Block Access to Hidden Files and Sensitive Files
+# ==========================================================================
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
 
+# Block access to .kiro directory, .git, and config files
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Block .kiro, .git, .github, .well-known internal files
+    RewriteRule ^\.kiro(/.*)?$ - [F,L]
+    RewriteRule ^\.git(/.*)?$ - [F,L]
+    RewriteRule ^\.github(/.*)?$ - [F,L]
+
+    # Block access to .htaccess itself
+    RewriteRule ^\.htaccess$ - [F,L]
+
+    # Allow JSON data files needed by the SPA
+    RewriteRule ^data/.*\.json$ - [L]
+
+    # Block access to markdown, config, license, and other sensitive files
+    RewriteRule \.(md|yml|yaml)$ - [F,L]
+    RewriteRule ^robots\.txt$ - [L]
+    RewriteRule ^sitemap\.xml$ - [L]
+    RewriteRule ^LICENSE$ - [F,L]
+</IfModule>
+
+# ==========================================================================
+# Prevent Image Hotlinking (only allow from own domain)
+# ==========================================================================
+<IfModule mod_rewrite.c>
+    RewriteCond %{HTTP_REFERER} !^$
+    RewriteCond %{HTTP_REFERER} !^https?://(www\.)?kartikgupta\.in [NC]
+    RewriteCond %{HTTP_REFERER} !^https?://localhost [NC]
+    RewriteCond %{REQUEST_URI} \.(jpg|jpeg|png|gif|ico|svg|webp)$ [NC]
+    RewriteRule .* - [F,L]
+</IfModule>
+
+# ==========================================================================
+# SPA Routing
+# ==========================================================================
+<IfModule mod_rewrite.c>
+    # Clean URLs - Remove .html extension (skip index.html and SPA routes)
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_URI} !^/index\.html$
+    RewriteCond %{REQUEST_URI} !^/error\.html$
+    RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
+    # Redirect .html to clean URLs (skip index.html and error.html)
+    RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
+    RewriteCond %{REQUEST_URI} !^/index\.html$
+    RewriteCond %{REQUEST_URI} !^/error\.html$
+    RewriteRule ^ /%1 [NC,L,R=301]
+</IfModule>
+
+# ==========================================================================
 # Error Pages
+# ==========================================================================
 ErrorDocument 404 /error.html
+ErrorDocument 403 /error.html
 
+# ==========================================================================
 # Cache Control
+# ==========================================================================
 <IfModule mod_expires.c>
     ExpiresActive On
     ExpiresByType text/css "access plus 1 year"
@@ -30,12 +92,15 @@ ErrorDocument 404 /error.html
     ExpiresByType image/jpg "access plus 1 year"
     ExpiresByType image/jpeg "access plus 1 year"
     ExpiresByType image/gif "access plus 1 year"
-    ExpiresByType image/ico "access plus 1 year"
-    ExpiresByType image/icon "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
     ExpiresByType text/html "access plus 1 hour"
+    ExpiresByType application/json "access plus 1 hour"
 </IfModule>
 
+# ==========================================================================
 # Compression
+# ==========================================================================
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/plain
     AddOutputFilterByType DEFLATE text/html
@@ -46,4 +111,6 @@ ErrorDocument 404 /error.html
     AddOutputFilterByType DEFLATE application/rss+xml
     AddOutputFilterByType DEFLATE application/javascript
     AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE image/svg+xml
 </IfModule>

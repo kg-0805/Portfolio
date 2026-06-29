@@ -1,58 +1,233 @@
 <!DOCTYPE html>
-<html lang="en" class="light-mode">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Page not found - Kartik Gupta Portfolio" />
-  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-  <meta http-equiv="X-Frame-Options" content="DENY" />
-  <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
-  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+  <meta name="robots" content="noindex" />
   <title>404 Not Found | Kartik Gupta</title>
   <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon" />
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="/js/tailwind.min.js"></script>
   <style>
-    .dark-mode {
-      background-color: #111827;
+    :root {
+      --gradient-primary: linear-gradient(135deg, #a855f7, #6366f1, #06b6d4);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Animated gradient background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 30%, rgba(168, 85, 247, 0.15), transparent),
+        radial-gradient(ellipse 60% 50% at 80% 70%, rgba(6, 182, 212, 0.12), transparent),
+        radial-gradient(ellipse 50% 40% at 50% 50%, rgba(99, 102, 241, 0.08), transparent);
+      animation: bgShift 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes bgShift {
+      0% { opacity: 0.7; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.05); }
+    }
+
+    /* Floating orbs */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.4;
+      z-index: -1;
+      animation: float 6s ease-in-out infinite;
+    }
+    .orb-1 { width: 300px; height: 300px; background: #a855f7; top: -80px; left: -80px; animation-delay: 0s; }
+    .orb-2 { width: 250px; height: 250px; background: #06b6d4; bottom: -60px; right: -60px; animation-delay: 2s; }
+    .orb-3 { width: 180px; height: 180px; background: #6366f1; top: 50%; right: 20%; animation-delay: 4s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20px) scale(1.05); }
+    }
+
+    .gradient-text {
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08), 0 0 80px rgba(139, 92, 246, 0.06);
+      border-radius: 2rem;
+      padding: 3.5rem 2.5rem;
+      text-align: center;
+      max-width: 480px;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient-primary);
+      border-radius: 2rem 2rem 0 0;
+    }
+
+    .error-code {
+      font-size: 8rem;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      letter-spacing: -4px;
+    }
+
+    .error-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 0.75rem;
+    }
+
+    .error-desc {
+      color: #6b7280;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      max-width: 340px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-gradient {
+      background: var(--gradient-primary);
       color: white;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.85rem 2rem;
+      border-radius: 0.85rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
     }
-    .light-mode {
-      background-color: white;
-      color: black;
+
+    .btn-gradient:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(99, 102, 241, 0.4);
     }
-    .dark-mode a.text-link {
-      color: #93c5fd;
+
+    .btn-gradient:active {
+      transform: translateY(-1px);
     }
-    .light-mode a.text-link {
-      color: #2563eb;
+
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
     }
-    .light-mode a.text-link:hover, .dark-mode a.text-link:hover {
-      text-decoration: underline;
+
+    .nav-links a {
+      color: #7c3aed;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      padding: 0.25rem 0;
+      position: relative;
     }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient-primary);
+      transition: width 0.3s ease;
+      border-radius: 1px;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-links a:hover {
+      color: #5b21b6;
+    }
+
+    /* Subtle animation on the 404 text */
+    .error-code {
+      animation: pulse404 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse404 {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.85; }
+    }
+
+    @media (max-width: 480px) {
+      .glass-card { padding: 2.5rem 1.5rem; margin: 1rem; border-radius: 1.5rem; }
+      .error-code { font-size: 5.5rem; }
+      .error-title { font-size: 1.25rem; }
+      .nav-links { gap: 1rem; }
+    }
+
+    img { -webkit-user-drag: none; user-select: none; pointer-events: none; }
   </style>
 </head>
-<body id="root" class="light-mode min-h-screen flex items-center justify-center px-4">
-  <div class="text-center space-y-6">
-    <h1 class="text-6xl font-extrabold">404</h1>
-    <p class="text-2xl font-semibold">Page Not Found</p>
-    <p class="text-lg text-gray-600 dark:text-gray-300">
-      Sorry, the page you are looking for does not exist or has been moved.
-    </p>
-    <div class="space-y-4">
-      <a href="/" class="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-lg rounded shadow-md transition duration-300">
-        Go to Homepage
-      </a>
-      <div class="flex justify-center gap-4 text-sm">
-        <a href="/about" class="text-link hover:underline">About</a>
-        <a href="/projects" class="text-link hover:underline">Projects</a>
-        <a href="/contact" class="text-link hover:underline">Contact</a>
-      </div>
-    </div>
-  </div>
+<body class="bg-gray-50 text-gray-900">
 
-  <script>
-    lucide.createIcons();
-  </script>
+  <!-- Floating orbs -->
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
+  <div class="orb orb-3" aria-hidden="true"></div>
+
+  <main class="glass-card" role="main">
+    <h1 class="error-code gradient-text">404</h1>
+    <h2 class="error-title">Lost in the Cloud</h2>
+    <p class="error-desc">
+      The page you're looking for doesn't exist or has drifted away. Let's navigate you back to solid ground.
+    </p>
+
+    <a href="/" class="btn-gradient">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Back to Portfolio
+    </a>
+
+    <nav class="nav-links" aria-label="Quick navigation">
+      <a href="/#about">About</a>
+      <a href="/#projects">Projects</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </main>
+
 </body>
 </html>

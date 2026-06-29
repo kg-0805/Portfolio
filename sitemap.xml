@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!--
+    This is a single-page application. The Home, About, Projects, and Contact
+    sections all live at the canonical root URL and are reached via in-page
+    #fragment navigation. Search engines ignore URL fragments (everything after
+    "#"), so only the canonical page is listed here. Adding #section entries
+    would create duplicate references to the same page with no SEO benefit.
+  -->
   <url>
     <loc>https://kartikgupta.in/</loc>
-    <lastmod>2024-01-01</lastmod>
+    <lastmod>2026-06-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://kartikgupta.in/assets/images/profile.jpg</image:loc>
+    </image:image>
   </url>
-  <url>
-    <loc>https://kartikgupta.in/about</loc>
-    <lastmod>2024-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://kartikgupta.in/projects</loc>
-    <lastmod>2024-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://kartikgupta.in/contact</loc>
-    <lastmod>2024-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
+
 </urlset>

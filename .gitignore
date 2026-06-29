@@ -1,0 +1,32 @@
+# Kiro IDE
+.kiro/
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
+
+# Editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Node modules (if ever added)
+node_modules/
+package-lock.json
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Logs
+*.log
+
+# Temporary files
+tmp/
+temp/

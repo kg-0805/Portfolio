@@ -1,0 +1,1030 @@
+/* ==========================================================================
+   Portfolio SPA - Modern Visual Design
+   Dark-first glassmorphism design with gradient accents
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   CSS Custom Properties
+   -------------------------------------------------------------------------- */
+:root {
+  /* Brand gradients (theme-agnostic) */
+  --gradient-primary: linear-gradient(135deg, #a855f7, #6366f1, #06b6d4);
+  --gradient-accent: linear-gradient(135deg, #7c3aed, #3b82f6, #06b6d4);
+  --gradient-subtle: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(99, 102, 241, 0.1), rgba(6, 182, 212, 0.1));
+
+  /* Page + text */
+  --bg-page: #f9fafb;
+  --text-primary: #111827;
+  --text-muted: #6b7280;
+
+  /* Glass / surfaces */
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --surface-bg: rgba(255, 255, 255, 0.7);
+  --surface-border: rgba(255, 255, 255, 0.2);
+  --surface-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+
+  /* Navigation pill */
+  --nav-bg: rgba(255, 255, 255, 0.8);
+  --nav-border: rgba(255, 255, 255, 0.2);
+
+  /* Form inputs */
+  --input-bg: #ffffff;
+  --input-border: #e5e7eb;
+  --placeholder: #9ca3af;
+
+  /* Modal surface */
+  --modal-bg: #ffffff;
+
+  --noise-opacity: 0.03;
+}
+
+/* Dark theme overrides — applied when <html> has the `dark` class. */
+.dark {
+  --bg-page: #0a0f1e;
+  --text-primary: #e5e7eb;
+  --text-muted: #94a3b8;
+
+  --glass-bg: rgba(148, 163, 184, 0.08);
+  --glass-border: rgba(148, 163, 184, 0.15);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  --surface-bg: rgba(30, 41, 59, 0.55);
+  --surface-border: rgba(148, 163, 184, 0.14);
+  --surface-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+
+  --nav-bg: rgba(17, 24, 39, 0.72);
+  --nav-border: rgba(148, 163, 184, 0.16);
+
+  --input-bg: rgba(148, 163, 184, 0.07);
+  --input-border: rgba(148, 163, 184, 0.2);
+  --placeholder: #64748b;
+
+  --modal-bg: #111827;
+
+  --noise-opacity: 0.04;
+}
+
+
+
+/* --------------------------------------------------------------------------
+   Responsive Base Styles
+   -------------------------------------------------------------------------- */
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  /* Reserve space for the scrollbar so locking scroll (modal open) doesn't
+     reclaim the gutter and shift the page/nav horizontally. */
+  scrollbar-gutter: stable;
+}
+
+body {
+  font-size: 16px;
+  min-width: 320px;
+  overflow-x: hidden;
+  position: relative;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+}
+
+main {
+  transition: padding-top 0.3s ease;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img,
+video,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Prevent image dragging and right-click saving */
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* --------------------------------------------------------------------------
+   Background Gradient Mesh (CSS only, no heavy JS)
+   -------------------------------------------------------------------------- */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.6;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 20%, rgba(168, 85, 247, 0.15), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(6, 182, 212, 0.12), transparent),
+    radial-gradient(ellipse 50% 60% at 50% 50%, rgba(99, 102, 241, 0.08), transparent);
+}
+
+
+
+/* Subtle noise texture overlay */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: var(--noise-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* --------------------------------------------------------------------------
+   Custom Scrollbar - Color shifts on scroll via JS (--scroll-hue variable)
+   -------------------------------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--scroll-color-start, #a855f7), var(--scroll-color-end, #06b6d4));
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--scroll-color-start, #c084fc), var(--scroll-color-end, #22d3ee));
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-color-start, #6366f1) transparent;
+}
+
+/* --------------------------------------------------------------------------
+   Theme Transitions
+   -------------------------------------------------------------------------- */
+body,
+nav,
+main,
+section,
+footer,
+.theme-transition {
+  transition: background-color 300ms ease-in-out,
+              color 300ms ease-in-out,
+              border-color 300ms ease-in-out;
+}
+
+/* --------------------------------------------------------------------------
+   Glassmorphism Utility
+   -------------------------------------------------------------------------- */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-card {
+  background: var(--surface-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--surface-shadow);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(99, 102, 241, 0.15);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   Gradient Text
+   -------------------------------------------------------------------------- */
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  padding-bottom: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   Gradient Border Effect
+   -------------------------------------------------------------------------- */
+.gradient-border {
+  position: relative;
+  border: none !important;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--gradient-primary);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gradient-border:hover::before {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Floating Navigation (Pill Style)
+   -------------------------------------------------------------------------- */
+.nav-floating {
+  position: fixed;
+  top: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  /* Compact pill: sized to its content at the top of the page. The bar stays
+     centered in both states and only its width changes on scroll, so there is
+     no position/justification "teleport". Width is tweened in JS (Web
+     Animations API) because intrinsic widths can't be CSS-transitioned. */
+  width: max-content;
+  max-width: calc(100vw - 1.5rem);
+  background: var(--nav-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--nav-border);
+  border-radius: 9999px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition:
+    background-color 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    border-radius 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    padding 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    backdrop-filter 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    -webkit-backdrop-filter 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Inner row: logo + menu sit flush while the bar is compact (no free space to
+   distribute) and glide apart symmetrically as the bar widens to full width. */
+.nav-floating > div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Expanded (docked) state: same centered model, just wider + transparent. The
+   widening is what spreads the logo/menu to the edges via space-between. */
+.nav-floating.nav-expanded {
+  width: calc(100vw - 3rem);
+  max-width: none;
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-radius: 0;
+  padding: 0.5rem 0;
+}
+
+/* Logo and menu gain their own glass pills as the bar docks. A transparent 1px
+   border is kept at rest so it can fade in without shifting layout, and only
+   visual properties (plus padding) transition, so there's no scale "bounce". */
+.nav-logo,
+.nav-menu {
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  transition:
+    background-color 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    padding 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    backdrop-filter 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    -webkit-backdrop-filter 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-floating.nav-expanded .nav-logo,
+.nav-floating.nav-expanded .nav-menu {
+  background: var(--nav-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-color: var(--nav-border);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  padding: 0.5rem 1rem;
+}
+
+/* Honor reduced-motion: snap between the two states with no movement. The JS
+   already skips the width tween; this disables the CSS property transitions. */
+@media (prefers-reduced-motion: reduce) {
+  .nav-floating,
+  .nav-floating > div,
+  .nav-logo,
+  .nav-menu {
+    transition: none;
+  }
+}
+
+
+
+/* --------------------------------------------------------------------------
+   Navigation Active Link State
+   -------------------------------------------------------------------------- */
+.nav-link {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.nav-link.nav-active {
+  font-weight: 600;
+}
+
+.nav-link.nav-active::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: var(--gradient-primary);
+  border-radius: 1px;
+}
+
+/* --------------------------------------------------------------------------
+   Navigation Active Link Pulse
+   -------------------------------------------------------------------------- */
+@keyframes nav-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.nav-link-pulse {
+  animation: nav-pulse 300ms ease-in-out;
+}
+
+/* --------------------------------------------------------------------------
+   Profile Image Gradient Ring
+   -------------------------------------------------------------------------- */
+.profile-ring {
+  position: relative;
+  display: inline-block;
+  padding: 4px;
+  border-radius: 9999px;
+  background: var(--gradient-primary);
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.3), 0 0 60px rgba(99, 102, 241, 0.15);
+  animation: ring-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes ring-glow {
+  0% {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3), 0 0 40px rgba(99, 102, 241, 0.1);
+  }
+  100% {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.5), 0 0 60px rgba(6, 182, 212, 0.2);
+  }
+}
+
+.profile-ring img {
+  border-radius: 9999px;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   Gradient Shimmer Animation (for subtitle)
+   -------------------------------------------------------------------------- */
+.shimmer-text {
+  background: linear-gradient(90deg, #a855f7, #6366f1, #06b6d4, #a855f7);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   CTA Button Styles
+   -------------------------------------------------------------------------- */
+.btn-gradient {
+  background: var(--gradient-primary);
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+}
+
+.btn-gradient::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-gradient:hover::after {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Floating Geometric Shapes (Hero Background)
+   -------------------------------------------------------------------------- */
+.hero-shapes {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+  animation: float 6s ease-in-out infinite;
+}
+
+.hero-shape:nth-child(1) {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #a855f7, transparent);
+  top: -50px;
+  right: -50px;
+  animation-delay: 0s;
+}
+
+.hero-shape:nth-child(2) {
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, #06b6d4, transparent);
+  bottom: -30px;
+  left: -30px;
+  animation-delay: 2s;
+}
+
+.hero-shape:nth-child(3) {
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, #6366f1, transparent);
+  top: 40%;
+  left: 60%;
+  animation-delay: 4s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.05);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Section Spacing
+   -------------------------------------------------------------------------- */
+.scroll-section {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  overflow: visible;
+}
+
+/* --------------------------------------------------------------------------
+   Skill Chip / Pill Style
+   -------------------------------------------------------------------------- */
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: default;
+}
+
+.skill-chip:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
+}
+
+/* --------------------------------------------------------------------------
+   Animated Gradient Progress Bar
+   -------------------------------------------------------------------------- */
+.progress-gradient {
+  background: var(--gradient-primary);
+  background-size: 200% 100%;
+  animation: progress-shimmer 2s ease-in-out infinite;
+  border-radius: 9999px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes progress-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Experience Timeline (Glowing Dots + Gradient Line)
+   -------------------------------------------------------------------------- */
+.timeline-line {
+  background: linear-gradient(180deg, #a855f7, #6366f1, #06b6d4);
+  width: 2px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.timeline-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--gradient-primary);
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.5), 0 0 20px rgba(99, 102, 241, 0.2);
+  position: absolute;
+  border: 2px solid white;
+}
+
+/* Hide timeline decorations on mobile */
+@media (max-width: 767px) {
+  .timeline-line {
+    display: none;
+  }
+  .timeline-dot {
+    display: none;
+  }
+}
+
+
+
+/* --------------------------------------------------------------------------
+   Project Grid - Equal Height Cards
+   -------------------------------------------------------------------------- */
+.grid > .project-card {
+  min-height: 280px;
+}
+
+/* --------------------------------------------------------------------------
+   Project Card Glow on Hover
+   -------------------------------------------------------------------------- */
+.project-card-modern {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card-modern::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: var(--gradient-primary);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-card-modern:hover::before {
+  opacity: 1;
+}
+
+.project-card-modern:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
+}
+
+
+
+/* --------------------------------------------------------------------------
+   Contact Section Split Layout
+   -------------------------------------------------------------------------- */
+.contact-gradient-panel {
+  background: var(--gradient-primary);
+  border-radius: 1rem;
+  padding: 2rem;
+  min-height: 380px;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-gradient-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Form Input Floating Label Effect
+   -------------------------------------------------------------------------- */
+.form-group-modern {
+  position: relative;
+}
+
+.form-group-modern input,
+.form-group-modern textarea {
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.form-group-modern input::placeholder,
+.form-group-modern textarea::placeholder {
+  color: var(--placeholder);
+}
+
+.form-group-modern input:focus,
+.form-group-modern textarea:focus {
+  outline: none;
+  border-color: transparent;
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.5), 0 0 20px rgba(99, 102, 241, 0.1);
+}
+
+/* --------------------------------------------------------------------------
+   Social Link Icon Circles
+   -------------------------------------------------------------------------- */
+.social-icon-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.social-icon-circle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+  border-color: rgba(139, 92, 246, 0.5);
+}
+
+/* --------------------------------------------------------------------------
+   Modal Animations
+   -------------------------------------------------------------------------- */
+.modal-backdrop {
+  opacity: 0;
+  transition: opacity 250ms ease-in-out;
+}
+
+.modal-backdrop.modal-open {
+  opacity: 1;
+}
+
+.modal-backdrop.modal-closing {
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}
+
+.modal-content {
+  opacity: 0;
+  transform: scale(0.95) translateY(10px);
+  transition: opacity 250ms ease-in-out,
+              transform 250ms ease-in-out;
+}
+
+.modal-backdrop.modal-open .modal-content {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.modal-backdrop.modal-closing .modal-content {
+  opacity: 0;
+  transform: scale(0.95) translateY(10px);
+  transition: opacity 200ms ease-in-out,
+              transform 200ms ease-in-out;
+}
+
+/* --------------------------------------------------------------------------
+   Loading Indicator
+   -------------------------------------------------------------------------- */
+.loading-spinner {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  border: 3px solid rgba(139, 92, 246, 0.2);
+  border-top-color: #a855f7;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+/* --------------------------------------------------------------------------
+   Focus Indicators
+   -------------------------------------------------------------------------- */
+:focus-visible {
+  outline: 2px solid #a855f7;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   Scroll Snap
+   -------------------------------------------------------------------------- */
+.scroll-container {
+  scroll-snap-type: y proximity;
+}
+
+.scroll-section {
+  scroll-snap-align: start;
+}
+
+/* --------------------------------------------------------------------------
+   Section Fade Transitions
+   -------------------------------------------------------------------------- */
+.section-fade-in {
+  animation: sectionFadeIn 300ms ease-in-out forwards;
+}
+
+.section-fade-out {
+  animation: sectionFadeOut 200ms ease-in-out forwards;
+}
+
+@keyframes sectionFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sectionFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Modal Responsive Styles
+   -------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  .modal-backdrop {
+    padding: 0;
+    align-items: stretch;
+  }
+
+  .modal-content.modal-responsive {
+    width: 100%;
+    max-width: 100%;
+    max-height: 100vh;
+    height: 100%;
+    border-radius: 0;
+    overflow-y: auto;
+  }
+
+  .nav-floating {
+    top: 0.75rem;
+    padding: 0.375rem 0.75rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Hover Glow Effect (generic)
+   -------------------------------------------------------------------------- */
+.hover-glow {
+  transition: all 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.3), 0 0 40px rgba(99, 102, 241, 0.1);
+}
+
+/* --------------------------------------------------------------------------
+   Tag/Chip Hover
+   -------------------------------------------------------------------------- */
+.tech-tag {
+  transition: all 0.2s ease;
+}
+
+.tech-tag:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+}
+
+/* --------------------------------------------------------------------------
+   Scroll Reveal Animation
+   Cards and elements fade in as they enter the viewport
+   and fade out as they leave
+   -------------------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal.faded-out {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+.reveal-delay-6 { transition-delay: 0.6s; }
+
+/* --------------------------------------------------------------------------
+   Stats Section
+   -------------------------------------------------------------------------- */
+.stat-card {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+
+/* --------------------------------------------------------------------------
+   Stagger Animation for Cards (initial load)
+   -------------------------------------------------------------------------- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease forwards;
+  opacity: 0;
+}
+
+.animate-delay-1 { animation-delay: 0.1s; }
+.animate-delay-2 { animation-delay: 0.2s; }
+.animate-delay-3 { animation-delay: 0.3s; }
+.animate-delay-4 { animation-delay: 0.4s; }
+.animate-delay-5 { animation-delay: 0.5s; }
+.animate-delay-6 { animation-delay: 0.6s; }
+
+/* ==========================================================================
+   THEME: Dark Mode
+   --------------------------------------------------------------------------
+   Surfaces and custom components are themed via the CSS variables defined in
+   :root / .dark above. The block below remaps the hardcoded Tailwind utility
+   colors that are generated inline by renderer.js / modal.js / index.html.
+
+   Specificity note: `.dark .text-gray-900` (0,2,0) beats the base utility
+   `.text-gray-900` (0,1,0), but loses to hover/group-hover variants
+   (e.g. `.group:hover .group-hover\:text-purple-600` is 0,3,0), so hover
+   states keep working without extra rules.
+   ========================================================================== */
+
+/* --- Theme toggle button icons (swap based on the active theme) --- */
+.theme-icon-sun { display: none; }
+.theme-icon-moon { display: block; }
+.dark .theme-icon-sun { display: block; }
+.dark .theme-icon-moon { display: none; }
+
+/* --- Text colors --- */
+.dark .text-gray-900 { color: #f8fafc; }
+.dark .text-gray-800 { color: #e2e8f0; }
+.dark .text-gray-700 { color: #cbd5e1; }
+.dark .text-gray-600 { color: #cbd5e1; }
+.dark .text-gray-500 { color: #94a3b8; }
+.dark .text-gray-400 { color: #64748b; }
+
+/* Purple accent reads a touch brighter on dark surfaces */
+.dark .text-purple-600 { color: #c084fc; }
+.dark .group:hover .group-hover\:text-purple-600 { color: #c084fc; }
+.dark .hover\:text-purple-600:hover { color: #c084fc; }
+
+/* --- Surfaces / backgrounds --- */
+.dark .bg-white { background-color: var(--modal-bg); }
+.dark .bg-gray-50 { background-color: rgba(148, 163, 184, 0.06); }
+.dark .bg-gray-100 { background-color: rgba(148, 163, 184, 0.10); }
+.dark .hover\:bg-gray-100:hover { background-color: rgba(148, 163, 184, 0.12); }
+.dark .hover\:bg-gray-200:hover { background-color: rgba(148, 163, 184, 0.18); }
+
+/* --- Borders --- */
+.dark .border-gray-200 { border-color: rgba(148, 163, 184, 0.16); }
+
+/* --- Modal badges / chips (light `-100/-800` pairs -> translucent on dark) --- */
+.dark .bg-blue-100 { background-color: rgba(59, 130, 246, 0.16); }
+.dark .text-blue-800 { color: #bfdbfe; }
+.dark .text-blue-600 { color: #93c5fd; }
+.dark .bg-green-100 { background-color: rgba(34, 197, 94, 0.16); }
+.dark .text-green-800 { color: #bbf7d0; }
+.dark .bg-yellow-100 { background-color: rgba(234, 179, 8, 0.16); }
+.dark .text-yellow-800 { color: #fde68a; }
+.dark .bg-red-100 { background-color: rgba(239, 68, 68, 0.16); }
+.dark .text-red-800 { color: #fecaca; }
+
+/* --- Navigation links --- */
+.dark .nav-link { color: #cbd5e1; }
+.dark .nav-link:hover {
+  color: #c084fc;
+  background-color: rgba(168, 85, 247, 0.14);
+}
+
+/* --- Form inputs (higher specificity so they win over the generic
+       .dark .bg-gray-50 / .border-gray-200 / .text-gray-900 remaps above) --- */
+.dark .form-group-modern input,
+.dark .form-group-modern textarea {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}

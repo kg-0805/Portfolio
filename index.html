@@ -1,203 +1,224 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="styled">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Kartik Gupta - Backend Developer specializing in scalable systems, cloud architecture, and high-performance APIs" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Kartik Gupta - Backend Developer specializing in scalable systems, cloud architecture, and high-performance APIs. 7+ years building production-grade solutions on AWS." />
+  <meta name="keywords" content="Kartik Gupta, Backend Developer, Cloud Architect, AWS, PHP, Laravel, Python, Node.js, API Development, Portfolio" />
+  <meta name="author" content="Kartik Gupta" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#a855f7" />
+  <link rel="canonical" href="https://kartikgupta.in/" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kartikgupta.in/" />
+  <meta property="og:title" content="Kartik Gupta | Backend Engineer & Cloud Architect" />
+  <meta property="og:description" content="Backend Developer specializing in scalable systems, cloud architecture, and high-performance APIs. Explore my projects and experience." />
+  <meta property="og:image" content="https://kartikgupta.in/assets/images/profile.jpg" />
+  <meta property="og:site_name" content="Kartik Gupta Portfolio" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://kartikgupta.in/" />
+  <meta name="twitter:title" content="Kartik Gupta | Backend Engineer & Cloud Architect" />
+  <meta name="twitter:description" content="Backend Developer specializing in scalable systems, cloud architecture, and high-performance APIs." />
+  <meta name="twitter:image" content="https://kartikgupta.in/assets/images/profile.jpg" />
+
+  <!-- Security Headers (applied via .htaccess HTTP headers on server) -->
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-  <meta http-equiv="X-Frame-Options" content="DENY" />
-  <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
-  <title>Kartik Gupta | Portfolio</title>
-  <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon" />
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <style>
-    .dark-mode {
-      --tw-bg-opacity: 1;
-      background-color: rgba(17, 24, 39, var(--tw-bg-opacity));
-      color: white;
-    }
-    .light-mode {
-      --tw-bg-opacity: 1;
-      background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
-      color: black;
-    }
-    .header, .footer {
-      transition: background-color 0.3s ease;
-    }
-    .light-mode .header, .light-mode .footer {
-      background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
-      color: black;
-    }
-    .dark-mode .header, .dark-mode .footer {
-      background-color: rgba(31, 41, 55, var(--tw-bg-opacity));
-      color: white;
-    }
-    a {
-      transition: color 0.3s;
-    }
-    .light-mode a {
-      color: #2563eb;
-    }
-    .dark-mode a {
-      color: #60a5fa;
-    }
-    .light-mode a:hover, .dark-mode a:hover {
-      text-decoration: underline;
-    }
-    .cta-button {
-      background-color: #2563eb; /* blue-600 */
-      color: white;
-    }
-    .cta-button:hover {
-      background-color: #1d4ed8; /* blue-700 */
-    }
-  </style>
-</head>
-<body id="root" class="light-mode text-gray-900 flex flex-col min-h-screen transition-colors duration-300">
 
-  <!-- Header -->
-  <header id="main-header" class="w-full sticky top-0 z-50 shadow transition-colors duration-300">
-  <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-4 px-4 py-3">
+  <title>Kartik Gupta | Backend Engineer & Cloud Architect</title>
+  <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="assets/images/profile.jpg" />
 
-    <!-- Logo and Name -->
-    <div class="flex items-center gap-3">
-      <img src="assets/images/logo.png" alt="Logo" class="h-10 w-10 rounded-full object-cover" />
-      <h1 class="text-xl font-bold whitespace-nowrap">Kartik Gupta</h1>
-    </div>
-
-    <!-- Navigation + Toggle -->
-    <div class="flex flex-wrap items-center justify-center sm:justify-end gap-4 w-full sm:w-auto">
-      <nav class="flex gap-4 text-base">
-        <a href="about/index.html" class="nav-link">About</a>
-        <a href="projects/index.html" class="nav-link">Projects</a>
-        <a href="contact/index.html" class="nav-link">Contact</a>
-      </nav>
-      <button onclick="toggleDarkMode()" id="toggleBtn" class="p-2 rounded-full transition-colors">
-        <i data-lucide="moon" id="theme-icon" class="w-5 h-5"></i>
-      </button>
-    </div>
-
-  </div>
-</header>
-
-<style>
-  #main-header {
-    background-color: white;
-    color: black;
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Kartik Gupta",
+    "url": "https://kartikgupta.in",
+    "image": "https://kartikgupta.in/assets/images/profile.jpg",
+    "jobTitle": "Backend Engineer & Cloud Architect",
+    "description": "Backend Developer specializing in scalable systems, cloud architecture, and high-performance APIs with 7+ years of experience.",
+    "knowsAbout": ["PHP", "Laravel", "Python", "Node.js", "AWS", "Docker", "Redis", "DynamoDB", "REST APIs", "Cloud Architecture"],
+    "sameAs": [
+      "https://github.com/kg-0805",
+      "https://linkedin.com/in/kg-0805"
+    ],
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Public Sector Platform"
+    }
   }
-  .dark-mode #main-header {
-    background-color: #1f2937; /* gray-800 */
-    color: white;
-  }
-  .nav-link {
-    color: #2563eb; /* blue-600 */
-    transition: color 0.3s;
-  }
-  .dark-mode .nav-link {
-    color: #60a5fa; /* blue-400 */
-  }
-  .dark-mode .nav-link:hover,
-  .nav-link:hover {
-    text-decoration: underline;
-  }
-  .dark-mode #toggleBtn {
-    background-color: #374151; /* gray-700 */
-    color: white;
-  }
-  #toggleBtn {
-    background-color: #e5e7eb; /* gray-200 */
-    color: black;
-  }
-  .no-underline {
-    text-decoration: none !important;
-  }
-  .no-underline:hover {
-    text-decoration: none !important;
-  }
-</style>
-
-
-  <!-- Main Content -->
-  <main class="flex-grow max-w-6xl mx-auto py-20 px-4">
-    <div class="text-center mb-10">
-      <img src="assets/images/profile.jpg" alt="Kartik Gupta" class="mx-auto h-36 w-36 rounded-full object-cover shadow" />
-    </div>
-    <h2 class="text-4xl font-bold mb-6">Welcome to My Portfolio</h2>
-    <p class="text-lg leading-relaxed mb-6">
-        I’m <strong>Kartik Gupta</strong>, a backend developer with hands-on experience in architecting and delivering scalable, secure, and high-performance systems. My core expertise lies in API development, cloud-native deployments, and optimizing backend infrastructure for production-critical applications.
-    </p>
-    <p class="text-lg leading-relaxed mb-6">
-        I have contributed to large-scale platforms, particularly in the public sector, where I worked on data-heavy modules, cloud infrastructure (AWS), and security-sensitive workflows. My technology stack includes PHP (Laravel Lumen), Python, Redis, DynamoDB, S3, and other AWS services, with a strong emphasis on performance, availability, and maintainability.
-    </p>
-    <p class="text-lg leading-relaxed mb-6">
-        This site showcases a curated selection of my work. You can explore my <a href="projects/index.html" class="underline text-blue-600 dark:text-blue-400">projects</a>, know more <a href="about/index.html" class="underline text-blue-600 dark:text-blue-400">about me</a>, or <a href="contact/index.html" class="underline text-blue-600 dark:text-blue-400">reach out</a> for opportunities or collaborations.
-    </p>
-    
-  </main>
-
-  <!-- Footer -->
-    <footer class="footer w-full text-center py-4 mt-auto border-t border-gray-200 dark:border-gray-700">
-    <div class="flex justify-center items-center gap-6 text-gray-600 dark:text-gray-400 mb-2">
-        <a href="https://github.com/kg-0805" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-        <i data-lucide="github" class="w-5 h-5 hover:text-black dark:hover:text-white transition-colors"></i>
-        </a>
-        <a href="https://linkedin.com/in/kg-0805" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-        <i data-lucide="linkedin" class="w-5 h-5 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"></i>
-        </a>
-        <a href="https://github.com/kg-0805/Portfolio" target="_blank" rel="noopener noreferrer" class="text-sm underline hover:text-blue-500 dark:hover:text-blue-400">
-        Source Code
-        </a>
-    </div>
-    <p class="text-sm text-gray-500 dark:text-gray-400">
-        &copy; <span id="year"></span> Kartik Gupta. All rights reserved.
-    </p>
-    </footer>
-
-
-
-  <!-- Scripts -->
+  </script>
+  <!-- Apply saved/system theme before paint to avoid a flash of the wrong theme -->
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-    lucide.createIcons();
-
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    const root = document.getElementById("root");
-    const btn = document.getElementById("toggleBtn");
-    const icon = document.getElementById("theme-icon");
-    
-    if (savedTheme === 'dark') {
-      root.classList.remove('light-mode');
-      root.classList.add('dark-mode');
-      btn.classList.remove('bg-gray-200', 'text-black');
-      btn.classList.add('bg-gray-700', 'text-white');
-      icon.setAttribute('data-lucide', 'sun');
-    } else {
-      btn.classList.add('bg-gray-200', 'text-black');
-    }
-    lucide.createIcons();
-
-    function toggleDarkMode() {
-      const isLight = root.classList.contains("light-mode");
-
-      root.classList.toggle("light-mode", !isLight);
-      root.classList.toggle("dark-mode", isLight);
-
-      btn.classList.toggle("bg-gray-200", !isLight);
-      btn.classList.toggle("text-black", !isLight);
-      btn.classList.toggle("bg-gray-700", isLight);
-      btn.classList.toggle("text-white", isLight);
-
-      icon.setAttribute("data-lucide", isLight ? "sun" : "moon");
-      lucide.createIcons();
-      
-      // Save theme preference
-      localStorage.setItem('theme', isLight ? 'dark' : 'light');
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (stored === 'dark' || (!stored && prefersDark)) {
+          document.documentElement.classList.add('dark');
+        }
+      } catch (e) { /* localStorage unavailable; default to light */ }
+    })();
+  </script>
+  <script src="js/tailwind.min.js"></script>
+  <script>
+    if (typeof tailwind !== 'undefined') {
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            maxWidth: {
+              'container': '1280px'
+            }
+          }
+        }
+      }
     }
   </script>
+  <script src="js/lucide.min.js"></script>
+  <link rel="stylesheet" href="css/styles.css" />
 
+  <!-- Reveal page once styles are loaded -->
+  <style>
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border-width: 0; }
+  </style>
+  <script>
+    // Ensure page is visible (no-op if already styled)
+    document.documentElement.classList.add('styled');
+  </script>
+
+  <!-- Embedded data for file:// protocol compatibility -->
+  <script>
+    window.__PORTFOLIO_DATA__ = {
+      projects: [{"id":"portfolio-website","title":"Portfolio Website","description":"A responsive portfolio website built with modern web technologies and deployed on AWS with automated CI/CD.","fullDescription":"A responsive portfolio website built with modern web technologies, featuring dark/light mode support, smooth navigation, and a clean design. Deployed on AWS using S3 for static hosting and CloudFront for global CDN distribution. The site uses GitHub Actions for automated CI/CD, ensuring seamless deployments on every push to the main branch.","icon":"cloud","technologies":["HTML5","Tailwind CSS","JavaScript","AWS S3","CloudFront","GitHub Actions"],"color":"blue","links":{"github":"https://github.com/kg-0805/Portfolio","demo":"https://kartikgupta.in"},"status":"public","featured":true,"order":1,"images":[],"metrics":{}},{"id":"scalable-api-platform","title":"Scalable API Platform","description":"High-performance REST API built with Laravel Lumen, serving millions of requests with Redis caching and DynamoDB.","fullDescription":"A high-performance REST API platform built with Laravel Lumen, designed to handle millions of requests in production environments. The system leverages Redis for caching frequently accessed data, DynamoDB for scalable NoSQL storage, and implements rate limiting, request validation, and comprehensive error handling. Built for public sector applications requiring high availability and security compliance.","icon":"server","technologies":["PHP","Laravel Lumen","Redis","DynamoDB","AWS"],"color":"green","links":{"github":"https://github.com/kg-0805"},"status":"private","featured":true,"order":2,"images":[],"metrics":{"performance":"< 100ms response","uptime":"99.9%"}},{"id":"data-processing-pipeline","title":"Data Processing Pipeline","description":"Automated data processing system handling large-scale data ingestion, transformation, and analytics for public sector applications.","fullDescription":"An automated data processing pipeline designed for large-scale data ingestion, transformation, and analytics in public sector applications. Built on AWS Lambda for serverless execution, S3 for data storage, and custom ETL workflows for data quality checks and transformations. The system processes millions of records with fault-tolerant execution, automatic retry mechanisms, and comprehensive logging for audit compliance.","icon":"database","technologies":["Python","AWS Lambda","S3","ETL","CloudWatch"],"color":"purple","links":{"github":"https://github.com/kg-0805"},"status":"confidential","featured":true,"order":3,"images":[],"metrics":{"performance":"2M records/hour"}},{"id":"security-framework","title":"Security Framework","description":"Comprehensive security framework implementing authentication, authorization, and audit logging for enterprise applications.","fullDescription":"A comprehensive security framework providing authentication, authorization, and audit logging for enterprise-grade applications. Implements JWT-based token authentication, OAuth 2.0 flows for third-party integrations, and role-based access control (RBAC) for fine-grained permissions. Includes session management, brute-force protection, and detailed audit trails for compliance requirements.","icon":"shield","technologies":["PHP","JWT","OAuth 2.0","RBAC","Redis"],"color":"red","links":{"github":"https://github.com/kg-0805"},"status":"private","featured":false,"order":4,"images":[],"metrics":{}},{"id":"monitoring-dashboard","title":"Monitoring Dashboard","description":"Real-time monitoring and alerting system for tracking application performance, system health, and business metrics.","fullDescription":"A real-time monitoring and alerting system built for tracking application performance, system health, and business metrics. Uses WebSocket connections for live data streaming, Redis for pub/sub messaging, and Chart.js for interactive data visualization. Features configurable alert thresholds, historical data analysis, and customizable dashboard layouts for different team roles.","icon":"activity","technologies":["Node.js","WebSocket","Redis","Chart.js"],"color":"indigo","links":{"github":"https://github.com/kg-0805"},"status":"private","featured":false,"order":5,"images":[],"metrics":{}},{"id":"cicd-pipeline","title":"CI/CD Pipeline","description":"Automated deployment pipeline with testing, security scanning, and multi-environment deployment for production applications.","fullDescription":"An automated CI/CD pipeline implementing continuous integration and deployment workflows with comprehensive testing, security scanning, and multi-environment deployment strategies. Built with GitHub Actions for orchestration, Docker for containerization, Terraform for infrastructure-as-code, and AWS for cloud deployment. Supports blue-green deployments, automated rollbacks, and environment-specific configurations.","icon":"git-branch","technologies":["GitHub Actions","Docker","AWS","Terraform"],"color":"gray","links":{"github":"https://github.com/kg-0805"},"status":"public","featured":false,"order":6,"images":[],"metrics":{}}],
+      skills: [{"id":"php","name":"PHP (Laravel, Lumen)","category":"backend","proficiency":"expert","icon":"code","description":"Backend development with Laravel and Lumen frameworks for scalable web applications and APIs.","yearsOfExperience":5},{"id":"python","name":"Python","category":"backend","proficiency":"advanced","icon":"code","description":"Backend development, automation, data processing, and scripting for infrastructure tasks.","yearsOfExperience":4},{"id":"nodejs","name":"Node.js","category":"backend","proficiency":"advanced","icon":"server","description":"REST APIs, real-time applications, and serverless functions.","yearsOfExperience":3},{"id":"restful-apis","name":"RESTful APIs","category":"backend","proficiency":"expert","icon":"globe","description":"Designing and building scalable, secure RESTful API architectures for production systems.","yearsOfExperience":5},{"id":"aws","name":"AWS","category":"cloud","proficiency":"expert","icon":"cloud","description":"Cloud infrastructure with S3, DynamoDB, Lambda, and CloudFront for production-critical systems.","yearsOfExperience":4},{"id":"docker","name":"Docker","category":"cloud","proficiency":"advanced","icon":"package","description":"Containerization, multi-stage builds, and Docker Compose workflows for consistent deployments.","yearsOfExperience":3},{"id":"cloudfront","name":"CloudFront","category":"cloud","proficiency":"advanced","icon":"zap","description":"CDN configuration and optimization for global content delivery and edge caching.","yearsOfExperience":3},{"id":"lambda","name":"AWS Lambda","category":"cloud","proficiency":"advanced","icon":"cpu","description":"Serverless compute for event-driven architectures and microservices.","yearsOfExperience":3},{"id":"dynamodb","name":"DynamoDB","category":"database","proficiency":"advanced","icon":"database","description":"NoSQL database design for high-throughput, low-latency data access patterns.","yearsOfExperience":3},{"id":"redis","name":"Redis","category":"database","proficiency":"advanced","icon":"hard-drive","description":"In-memory caching, session management, pub/sub messaging, and rate limiting.","yearsOfExperience":3},{"id":"s3","name":"AWS S3","category":"database","proficiency":"expert","icon":"database","description":"Object storage for data-intensive modules, file management, and static asset hosting.","yearsOfExperience":4},{"id":"git","name":"Git","category":"tools","proficiency":"expert","icon":"git-branch","description":"Version control, branching strategies, and collaborative development workflows.","yearsOfExperience":5},{"id":"cicd","name":"CI/CD Pipelines","category":"tools","proficiency":"advanced","icon":"refresh-cw","description":"Automated build, test, and deployment pipelines for continuous integration and delivery.","yearsOfExperience":3},{"id":"linux","name":"Linux","category":"tools","proficiency":"advanced","icon":"terminal","description":"System administration, shell scripting, and server management for production environments.","yearsOfExperience":4}],
+      experience: [{"id":"deputy-manager-digital-india","title":"Deputy Manager (Software Development)","company":"Digital India Corporation","startDate":"2021-11-29","endDate":"Present","description":"Core backend developer on Poshan Tracker, the Government of India's nationwide nutrition-governance platform (Ministry of Women & Child Development) serving millions of beneficiaries. I own the mobile app's backend APIs and lead its microservices, database, and health-system integration work.","achievements":["Own and build the backend APIs powering the Poshan Tracker mobile app, a nationwide MWCD platform serving millions of beneficiaries","Led the monolith-to-microservices migration, decomposing the platform into 10+ independently deployable services for faster, safer releases","Migrated core data stores to DynamoDB, sustaining millions of records with low-latency reads and writes at scale","Architected and shipped the ABDM (Ayushman Bharat Digital Mission) integration module, linking the platform to national digital health infrastructure","Restructured high-traffic modules to achieve sub-200ms API response times and ~40% lower server load","Sustained 99.9% uptime across mission-critical nutrition-tracking workflows","Delivered features end-to-end across PHP/Laravel, Node.js (Fastify), Redis, MariaDB, RabbitMQ, DynamoDB, Docker, and AWS"],"technologies":["PHP","Laravel","Redis","MariaDB","RabbitMQ","Docker","DynamoDB","AWS","Fastify"],"location":"Delhi, India"},{"id":"software-engineer-trainee-infogain","title":"Software Engineer Trainee","company":"Infogain","startDate":"2021-07-21","endDate":"2021-11-26","description":"Completed an intensive enterprise-Java engineering program, building a strong foundation in the Spring ecosystem, Hibernate ORM, and RabbitMQ-based asynchronous messaging.","achievements":["Completed a 4-month intensive program in core Java and the Spring framework, building backend services with clean, object-oriented code","Implemented Hibernate ORM persistence layers, mapping relational schemas to application entities","Built RabbitMQ-backed messaging for asynchronous, decoupled communication between services","Applied enterprise design patterns through hands-on project work and a capstone backend build"],"technologies":["Java","Spring","Hibernate","RabbitMQ"],"location":"Pune, India"},{"id":"web-developer-intern-quantazone","title":"Web Developer Intern","company":"Quantazone","startDate":"2020-02-24","endDate":"2020-05-23","description":"Kick-started my web career during a 3-month internship building custom, responsive WordPress sites and writing SEO-driven content.","achievements":["Built and launched custom, responsive WordPress sites using themes, plugins, and page builders to meet client briefs","Published SEO-optimized blog content to improve on-page discoverability and organic search ranking","Customized themes with HTML and CSS to extend layouts beyond default builder capabilities","Partnered with the team to turn designs into polished, client-ready pages on deadline"],"technologies":["HTML","CSS","WordPress","SEO"],"location":"Pune, India"}],
+      stats: [{"id":"years-experience","number":"5","label":"Years of Experience","icon":"calendar"},{"id":"production-systems","number":"6+","label":"Production Systems","icon":"server"},{"id":"api-requests","number":"5M+","label":"API Requests Handled","icon":"activity"},{"id":"uptime","number":"99.9%","label":"Uptime Delivered","icon":"check-circle"}]
+    };
+  </script>
+</head>
+<body id="root" class="flex flex-col min-h-screen theme-transition">
+
+  <!-- Skip to main content link for accessibility -->
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:bg-purple-600 focus:text-white focus:rounded-lg">
+    Skip to main content
+  </a>
+
+  <!-- Floating Pill Navigation -->
+  <nav role="navigation" aria-label="Main navigation" class="nav-floating">
+    <div class="flex items-center gap-1 sm:gap-2">
+
+      <!-- Logo Section -->
+      <a href="#home" data-section="home" aria-label="Kartik Gupta - Go to home" class="nav-logo flex items-center gap-2 px-2 py-1 rounded-full no-underline hover:no-underline text-gray-900 mr-2">
+        <img src="assets/images/logo.png" alt="Kartik Gupta logo" class="h-8 w-8 rounded-full object-cover ring-2 ring-purple-500/30" />
+        <span class="text-sm font-bold hidden sm:inline gradient-text">Kartik Gupta</span>
+      </a>
+
+      <!-- Navigation Links -->
+      <div class="nav-menu flex items-center gap-0.5 sm:gap-1">
+        <a href="#home"
+           data-section="home"
+           aria-current="page"
+           class="nav-link min-w-[44px] min-h-[44px] flex items-center justify-center px-3 py-2 rounded-full text-sm font-medium text-gray-700 hover:text-purple-600 hover:bg-purple-50 transition-all focus-visible:outline-2 focus-visible:outline-purple-500 focus-visible:outline-offset-2">
+          Home
+        </a>
+        <a href="#about"
+           data-section="about"
+           class="nav-link min-w-[44px] min-h-[44px] flex items-center justify-center px-3 py-2 rounded-full text-sm font-medium text-gray-700 hover:text-purple-600 hover:bg-purple-50 transition-all focus-visible:outline-2 focus-visible:outline-purple-500 focus-visible:outline-offset-2">
+          About
+        </a>
+        <a href="#projects"
+           data-section="projects"
+           class="nav-link min-w-[44px] min-h-[44px] flex items-center justify-center px-3 py-2 rounded-full text-sm font-medium text-gray-700 hover:text-purple-600 hover:bg-purple-50 transition-all focus-visible:outline-2 focus-visible:outline-purple-500 focus-visible:outline-offset-2">
+          Projects
+        </a>
+        <a href="#contact"
+           data-section="contact"
+           class="nav-link min-w-[44px] min-h-[44px] flex items-center justify-center px-3 py-2 rounded-full text-sm font-medium text-gray-700 hover:text-purple-600 hover:bg-purple-50 transition-all focus-visible:outline-2 focus-visible:outline-purple-500 focus-visible:outline-offset-2">
+          Contact
+        </a>
+
+        <!-- Theme toggle (light/dark). Icons are swapped via CSS based on the
+             `dark` class on <html>; no JS icon rebuild needed. -->
+        <button id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"
+           class="theme-toggle nav-link min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full text-gray-700 hover:text-purple-600 hover:bg-purple-50 transition-all focus-visible:outline-2 focus-visible:outline-purple-500 focus-visible:outline-offset-2">
+          <svg class="theme-icon-moon w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          <svg class="theme-icon-sun w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main id="main-content" role="main" class="flex-grow max-w-[1280px] w-full mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-8">
+
+    <!-- Loading Indicator (shown during initialization) -->
+    <div id="loading-indicator" class="loading-container" aria-live="polite" aria-label="Loading portfolio content">
+      <div class="text-center">
+        <div class="loading-spinner" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <p class="mt-4 text-gray-500">Loading portfolio...</p>
+      </div>
+    </div>
+
+    <!-- Section Containers -->
+    <section id="home" class="scroll-section" aria-label="Home"></section>
+    <section id="stats" class="scroll-section" aria-label="Stats"></section>
+    <section id="about" class="scroll-section" aria-label="About"></section>
+    <section id="projects" class="scroll-section" aria-label="Projects"></section>
+    <section id="contact" class="scroll-section" aria-label="Contact"></section>
+
+    <!-- ARIA Live Region for section change announcements -->
+    <div id="section-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+  </main>
+
+  <!-- Modal Container (populated dynamically by modal.js) -->
+  <div id="modal-container" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-label="Project details"></div>
+
+  <!-- Scripts loaded in dependency order -->
+  <script src="js/data-manager.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/modal.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- SEO: Fallback content for crawlers without JavaScript -->
+  <noscript>
+    <div style="max-width:1280px;margin:0 auto;padding:2rem;">
+      <h1>Kartik Gupta - Backend Engineer & Cloud Architect</h1>
+      <p>Backend Developer with 7+ years of experience specializing in scalable systems, cloud architecture, and high-performance APIs. Expert in PHP (Laravel, Lumen), Python, Node.js, and AWS cloud services.</p>
+      <h2>Skills</h2>
+      <p>PHP, Laravel, Lumen, Python, Node.js, RESTful APIs, AWS (S3, DynamoDB, Lambda, CloudFront), Docker, Redis, Git, CI/CD Pipelines, Linux</p>
+      <h2>Experience</h2>
+      <ul>
+        <li><strong>Backend Developer</strong> at Public Sector Platform (2022 - Present)</li>
+        <li><strong>Backend Engineer</strong> at Cloud Solutions Firm (2020 - 2022)</li>
+        <li><strong>Software Developer</strong> at Web Development Agency (2018 - 2020)</li>
+      </ul>
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:contact@kartikgupta.in">contact@kartikgupta.in</a></p>
+      <p>GitHub: <a href="https://github.com/kg-0805">github.com/kg-0805</a></p>
+      <p>LinkedIn: <a href="https://linkedin.com/in/kg-0805">linkedin.com/in/kg-0805</a></p>
+    </div>
+  </noscript>
+
+  <!-- Prevent right-click on images -->
+  <script>
+    document.addEventListener('contextmenu', function(e) {
+      if (e.target.tagName === 'IMG') { e.preventDefault(); }
+    });
+  </script>
 
 </body>
 </html>
