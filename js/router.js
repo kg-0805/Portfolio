@@ -3,6 +3,20 @@ const Router = (function() {
   const VALID_SECTIONS = ['home', 'about', 'projects', 'contact'];
   let state = { currentSection: 'home', previousSection: null };
 
+  // The address bar never exposes a section hash. This returns the bare path
+  // (plus any query string) so an existing #fragment can be stripped.
+  function cleanUrl() {
+    return window.location.pathname + window.location.search;
+  }
+
+  // Remove a #section fragment from the address bar without reloading or
+  // scrolling. No-op when the URL is already clean.
+  function clearHash() {
+    if (window.location.hash) {
+      history.replaceState(null, '', cleanUrl());
+    }
+  }
+
   function initialize() {
     // Attach click handlers to nav links
     document.querySelectorAll('.nav-link, a[data-section]').forEach(function(link) {
@@ -10,13 +24,15 @@ const Router = (function() {
     });
     // Scroll spy
     window.addEventListener('scroll', debouncedScrollHandler);
-    // Handle initial hash
+    // Handle initial hash: honor an inbound deep link by scrolling to it, then
+    // strip the fragment so the address bar stays clean.
     var hash = window.location.hash;
     if (hash && hash.length > 1) {
       var section = hash.substring(1).toLowerCase();
       if (VALID_SECTIONS.indexOf(section) !== -1) {
         setTimeout(function() { scrollToSection(section); }, 300);
       }
+      clearHash();
     }
     updateActiveNavLink('home');
   }
@@ -37,7 +53,8 @@ const Router = (function() {
   function navigateTo(sectionId) {
     state.previousSection = state.currentSection;
     state.currentSection = sectionId;
-    history.pushState(null, '', '#' + sectionId);
+    // No #section in the URL; just keep the address bar clean.
+    clearHash();
     updateActiveNavLink(sectionId);
     scrollToSection(sectionId);
     announceSection(sectionId);
@@ -127,7 +144,6 @@ const Router = (function() {
       state.previousSection = state.currentSection;
       state.currentSection = closest;
       updateActiveNavLink(closest);
-      history.replaceState(null, '', '#' + closest);
     }
   }
 

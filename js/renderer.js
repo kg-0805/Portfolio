@@ -216,7 +216,8 @@ const SectionRenderer = (function () {
 
   /**
    * Render the Stats section — key numbers at a glance.
-   * Reads stats from DataManager (JSON-driven) with hardcoded fallback.
+   * Reads stats only from the JSON data source (data/stats.json); renders
+   * nothing when no stats are available.
    */
   async function renderStats() {
     var section = document.getElementById('stats');
@@ -224,13 +225,7 @@ const SectionRenderer = (function () {
 
     section.innerHTML = '';
 
-    var container = document.createElement('div');
-    container.className = 'py-16 md:py-20 max-w-5xl mx-auto';
-
-    var grid = document.createElement('div');
-    grid.className = 'grid grid-cols-2 md:grid-cols-4 gap-6';
-
-    // Try to load stats from data source
+    // Load stats from the JSON-backed data source only — no predefined fallback.
     var stats = [];
     try {
       if (typeof DataManager !== 'undefined' && DataManager.fetchStats) {
@@ -240,19 +235,17 @@ const SectionRenderer = (function () {
       console.error('[SectionRenderer] Error loading stats: ' + e.message);
     }
 
-    // Fallback to embedded data or hardcoded defaults
+    // If there are no stats, leave the section empty rather than showing
+    // predefined placeholder numbers.
     if (!stats || stats.length === 0) {
-      if (window.__PORTFOLIO_DATA__ && window.__PORTFOLIO_DATA__.stats) {
-        stats = window.__PORTFOLIO_DATA__.stats;
-      } else {
-        stats = [
-          { number: '7+', label: 'Years of Experience', icon: 'calendar' },
-          { number: '10+', label: 'Production Systems', icon: 'server' },
-          { number: '5M+', label: 'API Requests Handled', icon: 'activity' },
-          { number: '99.9%', label: 'Uptime Delivered', icon: 'check-circle' }
-        ];
-      }
+      return;
     }
+
+    var container = document.createElement('div');
+    container.className = 'py-16 md:py-20 max-w-5xl mx-auto';
+
+    var grid = document.createElement('div');
+    grid.className = 'grid grid-cols-2 md:grid-cols-4 gap-6';
 
     for (var i = 0; i < stats.length; i++) {
       var card = document.createElement('div');
