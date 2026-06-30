@@ -2,7 +2,7 @@
  * renderer.js - Section Renderer
  * 
  * Dynamically generates and renders HTML for portfolio sections. Responsible for:
- * - Rendering Home section (introduction, featured projects)
+ * - Rendering Home section (introduction, call-to-action)
  * - Rendering About section (skills by category, experience timeline)
  * - Rendering Projects section (project cards grid)
  * - Rendering Contact section (contact info, form)
@@ -93,7 +93,7 @@ const SectionRenderer = (function () {
 
   /**
    * Render the Home section.
-   * Displays profile image, name, descriptive text, and featured projects.
+   * Displays profile image, name, descriptive text, and call-to-action buttons.
    */
   async function renderHome() {
     var section = document.getElementById('home');
@@ -169,46 +169,6 @@ const SectionRenderer = (function () {
 
     section.appendChild(heroContainer);
 
-    // Spacer
-    section.appendChild(document.createElement('div')).className = 'h-8';
-
-    // --- Featured Projects ---
-    try {
-      var projects = await DataManager.fetchProjects();
-      var featuredProjects = projects.filter(function (project) {
-        return project.featured === true;
-      });
-
-      if (featuredProjects.length > 0) {
-        var featuredSection = document.createElement('div');
-        featuredSection.className = 'mt-8 md:mt-12';
-
-        var featuredHeading = document.createElement('h2');
-        featuredHeading.className = 'text-2xl md:text-3xl font-bold text-gray-900 text-center mb-2';
-        featuredHeading.textContent = 'Featured Projects';
-        featuredSection.appendChild(featuredHeading);
-
-        var featuredSubtitle = document.createElement('p');
-        featuredSubtitle.className = 'text-gray-500 text-center mb-10';
-        featuredSubtitle.textContent = 'A selection of systems I\'ve designed and shipped';
-        featuredSection.appendChild(featuredSubtitle);
-
-        var grid = document.createElement('div');
-        grid.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6';
-
-        for (var i = 0; i < featuredProjects.length; i++) {
-          var card = createFeaturedProjectCard(featuredProjects[i]);
-          card.classList.add('animate-fade-in-up', 'animate-delay-' + (i + 1));
-          grid.appendChild(card);
-        }
-
-        featuredSection.appendChild(grid);
-        section.appendChild(featuredSection);
-      }
-    } catch (error) {
-      console.error('[SectionRenderer] Error loading featured projects: ' + error.message);
-    }
-
     if (typeof lucide !== 'undefined' && lucide.createIcons) {
       lucide.createIcons();
     }
@@ -266,86 +226,6 @@ const SectionRenderer = (function () {
 
     container.appendChild(grid);
     section.appendChild(container);
-  }
-
-  /**
-   * Create a featured project card element.
-   * @param {Object} project - The project data object
-   * @returns {HTMLElement} The card element
-   */
-  function createFeaturedProjectCard(project) {
-    var colors = getColorClasses(project.color);
-
-    var card = document.createElement('div');
-    card.className = 'project-card project-card-modern glass-card group cursor-pointer rounded-2xl p-6 flex flex-col';
-    card.setAttribute('role', 'button');
-    card.setAttribute('tabindex', '0');
-    card.setAttribute('aria-label', 'View details for ' + (project.title || 'project'));
-    card.setAttribute('data-project-id', project.id);
-
-    card.addEventListener('click', function () {
-      if (typeof ModalSystem !== 'undefined' && ModalSystem.openModal) {
-        ModalSystem.openModal(project.id);
-      }
-    });
-
-    card.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        if (typeof ModalSystem !== 'undefined' && ModalSystem.openModal) {
-          ModalSystem.openModal(project.id);
-        }
-      }
-    });
-
-    // Card header with icon
-    var cardHeader = document.createElement('div');
-    cardHeader.className = 'flex items-center gap-3 mb-4';
-
-    var iconWrapper = document.createElement('div');
-    iconWrapper.className = 'w-10 h-10 flex items-center justify-center rounded-xl ' + colors.bgLight + ' ' + colors.text;
-    var icon = createLucideIcon(project.icon);
-    icon.className = 'w-5 h-5';
-    iconWrapper.appendChild(icon);
-
-    var cardTitle = document.createElement('h3');
-    cardTitle.className = 'text-lg font-semibold text-gray-900 group-hover:text-purple-600 transition-colors';
-    cardTitle.textContent = project.title || '';
-
-    cardHeader.appendChild(iconWrapper);
-    cardHeader.appendChild(cardTitle);
-    card.appendChild(cardHeader);
-
-    // Description
-    var descEl = document.createElement('p');
-    descEl.className = 'text-sm text-gray-600 mb-4 flex-grow leading-relaxed';
-    descEl.textContent = truncateText(project.description || '', 150);
-    card.appendChild(descEl);
-
-    // Technologies
-    if (project.technologies && Array.isArray(project.technologies) && project.technologies.length > 0) {
-      var techContainer = document.createElement('div');
-      techContainer.className = 'flex flex-wrap gap-2 mt-auto';
-
-      var maxTags = Math.min(project.technologies.length, 5);
-      for (var j = 0; j < maxTags; j++) {
-        var tag = document.createElement('span');
-        tag.className = 'tech-tag inline-block px-2.5 py-1 text-xs font-medium rounded-full bg-purple-500/10 text-purple-600 border border-purple-500/20';
-        tag.textContent = project.technologies[j];
-        techContainer.appendChild(tag);
-      }
-
-      if (project.technologies.length > 5) {
-        var moreTag = document.createElement('span');
-        moreTag.className = 'inline-block px-2.5 py-1 text-xs rounded-full bg-gray-500/10 text-gray-500';
-        moreTag.textContent = '+' + (project.technologies.length - 5) + ' more';
-        techContainer.appendChild(moreTag);
-      }
-
-      card.appendChild(techContainer);
-    }
-
-    return card;
   }
 
   // --- About Section Renderers ---
@@ -783,7 +663,8 @@ const SectionRenderer = (function () {
       var statusColors = {
         'public': 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
         'private': 'bg-amber-500/10 text-amber-400 border-amber-500/20',
-        'confidential': 'bg-red-500/10 text-red-400 border-red-500/20'
+        'confidential': 'bg-red-500/10 text-red-400 border-red-500/20',
+        'professional': 'bg-blue-500/10 text-blue-400 border-blue-500/20'
       };
       statusBadge.className = 'inline-block px-2.5 py-0.5 text-xs font-medium rounded-full border mb-4 ' + (statusColors[project.status] || statusColors['private']);
       statusBadge.textContent = project.status.charAt(0).toUpperCase() + project.status.slice(1);

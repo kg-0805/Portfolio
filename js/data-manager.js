@@ -27,7 +27,7 @@ const DataManager = (function () {
   ];
 
   // Valid project statuses
-  const VALID_STATUSES = ['public', 'private', 'confidential'];
+  const VALID_STATUSES = ['public', 'private', 'confidential', 'professional'];
 
   /**
    * Check if a string is a valid URL with http or https protocol.
@@ -111,26 +111,33 @@ const DataManager = (function () {
 
       // Validate status: must be one of the valid statuses
       if (typeof project.status !== 'string' || VALID_STATUSES.indexOf(project.status) === -1) {
-        console.error('[DataManager] Project (' + identifier + '): status must be one of: "public", "private", "confidential"');
+        console.error('[DataManager] Project (' + identifier + '): status must be one of: ' + VALID_STATUSES.join(', '));
         isValid = false;
       }
 
-      // Validate links: object with at least one entry with valid http/https URL
-      if (!project.links || typeof project.links !== 'object' || Array.isArray(project.links)) {
-        console.error('[DataManager] Project (' + identifier + '): links must be an object with at least one valid URL entry');
-        isValid = false;
-      } else {
-        var linkKeys = Object.keys(project.links);
-        var hasValidUrl = false;
-        for (var j = 0; j < linkKeys.length; j++) {
-          if (isValidUrl(project.links[linkKeys[j]])) {
-            hasValidUrl = true;
-            break;
-          }
-        }
-        if (!hasValidUrl) {
-          console.error('[DataManager] Project (' + identifier + '): links must contain at least one entry with a valid http/https URL');
+      // Validate links: optional. If provided, it must be a plain object (not an
+      // array). An empty object is allowed (e.g. internal/professional projects
+      // with no public link). If it has entries, at least one must be a valid
+      // http/https URL.
+      if (project.links !== undefined && project.links !== null) {
+        if (typeof project.links !== 'object' || Array.isArray(project.links)) {
+          console.error('[DataManager] Project (' + identifier + '): links must be an object');
           isValid = false;
+        } else {
+          var linkKeys = Object.keys(project.links);
+          if (linkKeys.length > 0) {
+            var hasValidUrl = false;
+            for (var j = 0; j < linkKeys.length; j++) {
+              if (isValidUrl(project.links[linkKeys[j]])) {
+                hasValidUrl = true;
+                break;
+              }
+            }
+            if (!hasValidUrl) {
+              console.error('[DataManager] Project (' + identifier + '): links, when provided, must contain at least one valid http/https URL');
+              isValid = false;
+            }
+          }
         }
       }
 

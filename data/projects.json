@@ -1,5 +1,35 @@
 [
   {
+    "id": "poshan-tracker",
+    "title": "Poshan Tracker",
+    "description": "Professional Project • Contributed to the development and optimization of India's national nutrition platform by building scalable backend services and cloud-native integrations.",
+    "fullDescription": "Professional Project developed as part of my role at Digital India Corporation (MeitY). Contributed to the design, development, and maintenance of scalable backend services powering the Poshan Tracker ecosystem. Responsibilities included developing RESTful APIs, building high-performance microservices, integrating national digital health initiatives such as ABHA (M1, M2, M3, Bal ABHA) and U-WIN, implementing transactional workflows with AWS DynamoDB, optimizing database queries for millisecond-level response times, and integrating RabbitMQ for asynchronous processing. Worked extensively with Laravel, Fastify, Redis, AWS services, and Jenkins-based CI/CD pipelines while implementing security enhancements, cloud storage integrations, and large-scale beneficiary registration modules serving millions of users. This project strengthened expertise in distributed systems, cloud-native application development, performance optimization, and enterprise software engineering.",
+    "icon": "building",
+    "technologies": [
+      "PHP",
+      "Laravel",
+      "Laravel Lumen",
+      "Fastify",
+      "Node.js",
+      "AWS DynamoDB",
+      "Amazon S3",
+      "RabbitMQ",
+      "MariaDB",
+      "Redis",
+      "Docker",
+      "Jenkins",
+      "Git",
+      "REST API"
+    ],
+    "color": "blue",
+    "links": {},
+    "status": "professional",
+    "featured": true,
+    "order": 1,
+    "images": [],
+    "metrics": {}
+  },
+  {
     "id": "portfolio-website",
     "title": "Portfolio Website",
     "description": "A responsive single-page portfolio in vanilla JS and Tailwind CSS, with JSON-driven content, deployed on AWS with automated CI/CD.",
@@ -12,97 +42,117 @@
       "demo": "https://kartikgupta.in"
     },
     "status": "public",
-    "featured": true,
-    "order": 1,
+    "order": 2,
     "images": [],
     "metrics": {}
   },
   {
-    "id": "scalable-api-platform",
-    "title": "Scalable API Platform",
-    "description": "High-performance REST API built with Laravel Lumen, serving millions of requests with Redis caching and DynamoDB.",
-    "fullDescription": "A high-performance REST API platform built with Laravel Lumen, designed to handle millions of requests in production environments. The system leverages Redis for caching frequently accessed data, DynamoDB for scalable NoSQL storage, and implements rate limiting, request validation, and comprehensive error handling. Built for public sector applications requiring high availability and security compliance.",
-    "icon": "server",
-    "technologies": ["PHP", "Laravel Lumen", "Redis", "DynamoDB", "AWS"],
+    "id": "xirr-calculator",
+    "title": "XIRR Calculator",
+    "description": "A secure Spring Boot web application that calculates XIRR from Excel-based mutual fund transactions with user management and cloud deployment.",
+    "fullDescription": "A production-ready financial web application built with Spring Boot that calculates Extended Internal Rate of Return (XIRR) for irregular mutual fund cash flows using the Newton-Raphson and Bisection algorithms. The platform features role-based authentication with Spring Security, an administrative dashboard for user lifecycle management, configurable account expiry, password recovery via email verification, automated account provisioning, and in-memory rate limiting for enhanced security. Transaction workbooks are processed entirely in memory without persistent storage, while user data is securely stored in Neon PostgreSQL with BCrypt password hashing. The application is server-side rendered using Thymeleaf, integrates the Brevo API for transactional HTML emails, and is deployed on Render with Docker support, providing a scalable and secure cloud-native architecture.",
+    "icon": "calculator",
+    "technologies": [
+      "Java 21",
+      "Spring Boot 3.5",
+      "Spring Security",
+      "Spring Data JPA",
+      "Thymeleaf",
+      "PostgreSQL",
+      "Neon DB",
+      "Apache POI",
+      "Brevo API",
+      "BCrypt",
+      "Docker",
+      "Maven",
+      "Render",
+      "REST API"
+    ],
     "color": "green",
     "links": {
-      "github": "https://github.com/kg-0805"
+      "github": "https://github.com/kg-0805/xirr-calculator",
+      "demo": "https://xirr-calculator.kartikgupta.in"
     },
-    "status": "private",
-    "featured": true,
-    "order": 2,
-    "images": [],
-    "metrics": {
-      "performance": "< 100ms response",
-      "uptime": "99.9%"
-    }
-  },
-  {
-    "id": "data-processing-pipeline",
-    "title": "Data Processing Pipeline",
-    "description": "Automated data processing system handling large-scale data ingestion, transformation, and analytics for public sector applications.",
-    "fullDescription": "An automated data processing pipeline designed for large-scale data ingestion, transformation, and analytics in public sector applications. Built on AWS Lambda for serverless execution, S3 for data storage, and custom ETL workflows for data quality checks and transformations. The system processes millions of records with fault-tolerant execution, automatic retry mechanisms, and comprehensive logging for audit compliance.",
-    "icon": "database",
-    "technologies": ["Python", "AWS Lambda", "S3", "ETL", "CloudWatch"],
-    "color": "purple",
-    "links": {
-      "github": "https://github.com/kg-0805"
-    },
-    "status": "confidential",
-    "featured": true,
+    "status": "public",
     "order": 3,
     "images": [],
-    "metrics": {
-      "performance": "2M records/hour"
-    }
+    "metrics": {}
   },
   {
-    "id": "security-framework",
-    "title": "Security Framework",
-    "description": "Comprehensive security framework implementing authentication, authorization, and audit logging for enterprise applications.",
-    "fullDescription": "A comprehensive security framework providing authentication, authorization, and audit logging for enterprise-grade applications. Implements JWT-based token authentication, OAuth 2.0 flows for third-party integrations, and role-based access control (RBAC) for fine-grained permissions. Includes session management, brute-force protection, and detailed audit trails for compliance requirements.",
-    "icon": "shield",
-    "technologies": ["PHP", "JWT", "OAuth 2.0", "RBAC", "Redis"],
-    "color": "red",
+    "id": "digibot",
+    "title": "DigiBot",
+    "description": "An AI-powered document assistant that enables semantic search and conversational question answering over PDF documents using Retrieval-Augmented Generation (RAG).",
+    "fullDescription": "DigiBot is an intelligent document assistant that leverages Retrieval-Augmented Generation (RAG) to provide context-aware answers from uploaded PDF documents. The application extracts document content, generates semantic embeddings, and stores them in a vector database for efficient similarity search. User queries retrieve the most relevant document chunks, which are supplied to a Large Language Model to generate accurate, context-aware responses while minimizing hallucinations. The project features an interactive web interface, secure document processing, conversational chat history, and a scalable architecture for enterprise knowledge management, research assistance, and document-based question answering.",
+    "icon": "bot",
+    "technologies": [
+      "Python",
+      "FastAPI",
+      "LangChain",
+      "FAISS",
+      "Sentence Transformers",
+      "Hugging Face",
+      "LLM",
+      "RAG",
+      "PyPDF2",
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "color": "cyan",
     "links": {
-      "github": "https://github.com/kg-0805"
+      "github": "https://github.com/kg-0805/DigiBot"
     },
-    "status": "private",
-    "featured": false,
+    "status": "public",
     "order": 4,
     "images": [],
     "metrics": {}
   },
   {
-    "id": "monitoring-dashboard",
-    "title": "Monitoring Dashboard",
-    "description": "Real-time monitoring and alerting system for tracking application performance, system health, and business metrics.",
-    "fullDescription": "A real-time monitoring and alerting system built for tracking application performance, system health, and business metrics. Uses WebSocket connections for live data streaming, Redis for pub/sub messaging, and Chart.js for interactive data visualization. Features configurable alert thresholds, historical data analysis, and customizable dashboard layouts for different team roles.",
-    "icon": "activity",
-    "technologies": ["Node.js", "WebSocket", "Redis", "Chart.js"],
-    "color": "indigo",
+    "id": "nfc-application",
+    "title": "NFC Payment Application",
+    "description": "An Android application that enables secure NFC-based contactless payments using encryption, authentication, and real-time transaction processing.",
+    "fullDescription": "A secure Android application designed to demonstrate Near Field Communication (NFC) based contactless payments for e-commerce and digital transactions. The application implements encrypted communication, secure user authentication, and transaction validation to protect sensitive payment data during NFC interactions. It follows a modular architecture with dedicated components for authentication, payment processing, and NFC communication, providing a practical implementation of secure contactless payment workflows. Developed as part of postgraduate research, the project showcases mobile application development, NFC integration, payment security principles, and modern Android architecture.",
+    "icon": "smartphone",
+    "technologies": [
+      "Java",
+      "Android",
+      "Android Studio",
+      "NFC",
+      "SQLite",
+      "XML",
+      "AES Encryption",
+      "SHA-256",
+      "Payment Security"
+    ],
+    "color": "purple",
     "links": {
-      "github": "https://github.com/kg-0805"
+      "github": "https://github.com/kg-0805/NFC-Application"
     },
-    "status": "private",
-    "featured": false,
+    "status": "public",
     "order": 5,
     "images": [],
     "metrics": {}
   },
   {
-    "id": "cicd-pipeline",
-    "title": "CI/CD Pipeline",
-    "description": "Automated deployment pipeline with testing, security scanning, and multi-environment deployment for production applications.",
-    "fullDescription": "An automated CI/CD pipeline implementing continuous integration and deployment workflows with comprehensive testing, security scanning, and multi-environment deployment strategies. Built with GitHub Actions for orchestration, Docker for containerization, Terraform for infrastructure-as-code, and AWS for cloud deployment. Supports blue-green deployments, automated rollbacks, and environment-specific configurations.",
-    "icon": "git-branch",
-    "technologies": ["GitHub Actions", "Docker", "AWS", "Terraform"],
-    "color": "gray",
+    "id": "elite-creative-group",
+    "title": "Elite Creative Group",
+    "description": "A modern, responsive business website for a creative agency featuring engaging UI, smooth animations, and an optimized user experience.",
+    "fullDescription": "Elite Creative Group is a responsive business website designed for a creative agency to showcase its services, portfolio, and brand identity through a modern user interface. The application focuses on delivering an engaging user experience with responsive layouts, smooth animations, intuitive navigation, and visually appealing design elements. Built using modern frontend technologies, the project demonstrates best practices in responsive web development, performance optimization, and clean component-based organization, making it suitable for businesses seeking a professional online presence.",
+    "icon": "globe",
+    "technologies": [
+      "HTML5",
+      "CSS3",
+      "JavaScript",
+      "Bootstrap",
+      "Responsive Design",
+      "GitHub Pages"
+    ],
+    "color": "orange",
     "links": {
-      "github": "https://github.com/kg-0805"
+      "github": "https://github.com/kg-0805/Elite-Creative-Group",
+      "demo": "https://ecgindore.in/"
     },
     "status": "public",
-    "featured": false,
     "order": 6,
     "images": [],
     "metrics": {}
