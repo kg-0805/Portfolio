@@ -473,7 +473,7 @@ const SectionRenderer = (function () {
       var entry = validEntries[i];
 
       var entryEl = document.createElement('div');
-      entryEl.className = 'relative pb-10' + (i === validEntries.length - 1 ? ' pb-0' : '');
+      entryEl.className = 'timeline-entry relative pb-10' + (i === validEntries.length - 1 ? ' pb-0' : '');
 
       // Glowing timeline dot
       var dot = document.createElement('div');
@@ -739,7 +739,6 @@ const SectionRenderer = (function () {
     for (var i = 0; i < projects.length; i++) {
       var card = createProjectCard(projects[i], i);
       if (card) {
-        card.classList.add('animate-fade-in-up', 'animate-delay-' + Math.min(i + 1, 6));
         validCards.push(card);
       }
     }

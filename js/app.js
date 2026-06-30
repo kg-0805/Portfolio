@@ -66,40 +66,45 @@
   }
 
   function initScrollReveal() {
-    var revealElements = document.querySelectorAll('.project-card, .skill-card, .stat-card');
-    revealElements.forEach(function(el, i) {
-      el.classList.add('reveal');
-      el.classList.add('reveal-delay-' + ((i % 6) + 1));
+    // Cards fade in with a subtle stagger as they enter the viewport.
+    var staggered = document.querySelectorAll('.project-card, .skill-card, .stat-card');
+    staggered.forEach(function (el, i) {
+      el.classList.add('reveal', 'reveal-delay-' + ((i % 6) + 1));
     });
 
-    // Experience and contact cards get reveal but no stagger delay
-    var noDelayElements = document.querySelectorAll('.contact-gradient-panel');
-    noDelayElements.forEach(function(el) {
+    // Other content blocks fade without a stagger: the hero, every section
+    // heading, the About sub-section headings, timeline entries, and the
+    // contact panel + form. Keeping all reveal logic here (selector-driven)
+    // means that if this never runs, content simply stays visible — nothing
+    // gets stuck hidden.
+    var blocks = document.querySelectorAll(
+      '#home > div, main h2, #about h3, .timeline-entry, .contact-gradient-panel, #contact form'
+    );
+    blocks.forEach(function (el) {
       el.classList.add('reveal');
     });
 
-    // IntersectionObserver for fade-in AND fade-out
+    // Bidirectional fade: add `revealed` on enter and `faded-out` on leave, so
+    // content fades in as it scrolls into view and fades out as it leaves —
+    // whether scrolling down or up.
     if ('IntersectionObserver' in window) {
-      var observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
           if (entry.isIntersecting) {
             entry.target.classList.add('revealed');
             entry.target.classList.remove('faded-out');
-          } else {
-            // Fade out when leaving viewport (only if already revealed)
-            if (entry.target.classList.contains('revealed')) {
-              entry.target.classList.add('faded-out');
-              entry.target.classList.remove('revealed');
-            }
+          } else if (entry.target.classList.contains('revealed')) {
+            entry.target.classList.add('faded-out');
+            entry.target.classList.remove('revealed');
           }
         });
-      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-      document.querySelectorAll('.reveal').forEach(function(el) {
+      document.querySelectorAll('.reveal').forEach(function (el) {
         observer.observe(el);
       });
     } else {
-      document.querySelectorAll('.reveal').forEach(function(el) {
+      document.querySelectorAll('.reveal').forEach(function (el) {
         el.classList.add('revealed');
       });
     }
