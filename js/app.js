@@ -55,6 +55,9 @@
       // Initialize navigation scroll behavior
       initNavScrollBehavior();
 
+      // Initialize the mobile (hamburger) menu
+      initMobileMenu();
+
       console.log('[App] Portfolio loaded successfully');
     } catch (error) {
       console.error('[App] Error: ' + error.message);
@@ -137,6 +140,13 @@
     var widthAnim = null;
     var prefersReducedMotion = window.matchMedia &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // The pill only morphs into a docked header on desktop. On mobile it stays a
+    // compact centered pill (links collapse into a dropdown instead), so the
+    // morph is disabled below 640px.
+    var desktopMq = window.matchMedia('(min-width: 640px)');
+    function isDesktop() {
+      return desktopMq.matches;
+    }
 
     function getScrollTop() {
       return window.pageYOffset || document.documentElement.scrollTop || 0;
@@ -144,7 +154,7 @@
 
     // Apply the initial state without animating (covers reloads at a scrolled
     // position, where an opening tween would look out of place).
-    var expanded = getScrollTop() > scrollThreshold;
+    var expanded = isDesktop() && getScrollTop() > scrollThreshold;
     nav.classList.toggle('nav-expanded', expanded);
 
     // Toggle between the compact pill and the docked header. The width is the
@@ -180,7 +190,7 @@
     }
 
     function updateNavState() {
-      setExpanded(getScrollTop() > scrollThreshold);
+      setExpanded(isDesktop() && getScrollTop() > scrollThreshold);
       ticking = false;
     }
 
@@ -192,6 +202,89 @@
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Re-evaluate when crossing the mobile/desktop breakpoint (e.g. rotate or
+    // resize): collapse the pill on mobile, restore the scroll state on desktop.
+    var onBreakpointChange = function () {
+      setExpanded(isDesktop() && getScrollTop() > scrollThreshold);
+    };
+    if (desktopMq.addEventListener) {
+      desktopMq.addEventListener('change', onBreakpointChange);
+    } else if (desktopMq.addListener) {
+      desktopMq.addListener(onBreakpointChange);
+    }
+  }
+
+  // Mobile navigation: the nav links collapse into a dropdown behind a hamburger
+  // button. Desktop (>= 640px) is unaffected — the button is hidden via CSS and
+  // the links render inline as before.
+  function initMobileMenu() {
+    var toggle = document.getElementById('nav-toggle');
+    var menu = document.getElementById('nav-menu');
+    if (!toggle || !menu) return;
+
+    function isOpen() {
+      return menu.classList.contains('nav-menu-open');
+    }
+
+    function openMenu() {
+      menu.classList.add('nav-menu-open');
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', 'Close menu');
+    }
+
+    function closeMenu() {
+      menu.classList.remove('nav-menu-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open menu');
+    }
+
+    toggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      if (isOpen()) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    // Choosing a destination closes the menu; toggling the theme keeps it open.
+    menu.addEventListener('click', function (e) {
+      var link = e.target.closest('.nav-link');
+      if (link && link.id !== 'theme-toggle') {
+        closeMenu();
+      }
+    });
+
+    // Close on an outside tap/click.
+    document.addEventListener('click', function (e) {
+      if (isOpen() && !menu.contains(e.target) && !toggle.contains(e.target)) {
+        closeMenu();
+      }
+    });
+
+    // Close on Escape and return focus to the toggle.
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && isOpen()) {
+        closeMenu();
+        toggle.focus();
+      }
+    });
+
+    // Reset to a clean state when entering the desktop layout.
+    if (window.matchMedia) {
+      var desktop = window.matchMedia('(min-width: 640px)');
+      var onChange = function (e) {
+        if (e.matches) {
+          closeMenu();
+        }
+      };
+      if (desktop.addEventListener) {
+        desktop.addEventListener('change', onChange);
+      } else if (desktop.addListener) {
+        desktop.addListener(onChange);
+      }
+    }
   }
 
   if (document.readyState === 'loading') {
