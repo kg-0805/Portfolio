@@ -2,8 +2,8 @@
   {
     "id": "poshan-tracker",
     "title": "Poshan Tracker",
-    "description": "Professional Project • Contributed to the development and optimization of India's national nutrition platform by building scalable backend services and cloud-native integrations.",
-    "fullDescription": "Professional Project developed as part of my role at Digital India Corporation (MeitY). Contributed to the design, development, and maintenance of scalable backend services powering the Poshan Tracker ecosystem. Responsibilities included developing RESTful APIs, building high-performance microservices, integrating national digital health initiatives such as ABHA (M1, M2, M3, Bal ABHA) and U-WIN, implementing transactional workflows with AWS DynamoDB, optimizing database queries for millisecond-level response times, and integrating RabbitMQ for asynchronous processing. Worked extensively with Laravel, Fastify, Redis, AWS services, and Jenkins-based CI/CD pipelines while implementing security enhancements, cloud storage integrations, and large-scale beneficiary registration modules serving millions of users. This project strengthened expertise in distributed systems, cloud-native application development, performance optimization, and enterprise software engineering.",
+    "description": "Led backend modernization for a national public-health platform, improving reliability, scale, and response times for critical citizen services.",
+    "fullDescription": "Worked on Poshan Tracker, a mission-critical government platform that supports nutrition governance at national scale. I helped modernize and scale the backend so it could serve millions of beneficiaries with higher reliability and lower operational overhead. The work included shipping high-throughput APIs, moving core workflows toward modular services, and improving database and integration performance for time-sensitive public services. The outcome was a platform that could better support large-scale usage while remaining resilient under real-world demand.",
     "icon": "building",
     "technologies": [
       "PHP",
@@ -27,13 +27,31 @@
     "featured": true,
     "order": 1,
     "images": [],
-    "metrics": {}
+    "metrics": {},
+    "architectureNotes": [
+      {
+        "focus": "Scalability",
+        "detail": "Split critical workflows into independently deployable services so growth in public usage would not force the entire platform to move in lockstep."
+      },
+      {
+        "focus": "Data design",
+        "detail": "Leveraged DynamoDB for high-throughput operational records and Redis for hot reads so the platform could preserve low latency under heavy traffic."
+      },
+      {
+        "focus": "Reliability",
+        "detail": "Used asynchronous messaging and container-based deployment to reduce coupling and make failures easier to isolate and recover from."
+      },
+      {
+        "focus": "Operations",
+        "detail": "Focused on observability and deployment discipline so the platform remained supportable in production with clear service boundaries and healthier release cycles."
+      }
+    ]
   },
   {
     "id": "portfolio-website",
     "title": "Portfolio Website",
-    "description": "A responsive single-page portfolio in vanilla JS and Tailwind CSS, with JSON-driven content, deployed on AWS with automated CI/CD.",
-    "fullDescription": "A responsive single-page application (SPA) built with vanilla JavaScript (ES6+) and Tailwind CSS, featuring client-side routing, JSON-driven content, dynamic project modals, dark/light theme support, and smooth animations with self-hosted Lucide icons. The contact form is powered by the Web3Forms API, so no backend is required. Deployed on AWS using S3 for static hosting and CloudFront for global CDN distribution, with GitHub Actions handling CI/CD that syncs to S3 and invalidates the CloudFront cache on every push to main.",
+    "description": "Built a fast, searchable portfolio experience that presents my work clearly while keeping content easy to update through structured data.",
+    "fullDescription": "Created a responsive portfolio that combines strong visual storytelling with developer-friendly content management. By structuring the content in JSON and rendering it into static HTML, the site remains easy to maintain while still offering a polished experience for recruiters, crawlers, and visitors. The result is a reliable personal brand presence that performs well across devices and remains simple to evolve over time.",
     "icon": "cloud",
     "technologies": ["HTML5", "Tailwind CSS", "JavaScript (ES6+)", "Lucide Icons", "AWS S3", "CloudFront", "GitHub Actions", "Web3Forms"],
     "color": "blue",
@@ -44,13 +62,27 @@
     "status": "public",
     "order": 2,
     "images": [],
-    "metrics": {}
+    "metrics": {},
+    "architectureNotes": [
+      {
+        "focus": "Static-first delivery",
+        "detail": "Structured content as JSON and rendered it into static HTML so the site stays simple to maintain while remaining fast and predictable."
+      },
+      {
+        "focus": "Performance",
+        "detail": "Kept the experience lightweight and cache-friendly to ensure quick loads and strong perceived performance for visitors and crawlers."
+      },
+      {
+        "focus": "Maintainability",
+        "detail": "Separated content, templates, and styling so updates can be made safely without rewriting the front-end experience."
+      }
+    ]
   },
   {
     "id": "xirr-calculator",
     "title": "XIRR Calculator",
-    "description": "A secure Spring Boot web application that calculates XIRR from Excel-based mutual fund transactions with user management and cloud deployment.",
-    "fullDescription": "A production-ready financial web application built with Spring Boot that calculates Extended Internal Rate of Return (XIRR) for irregular mutual fund cash flows using the Newton-Raphson and Bisection algorithms. The platform features role-based authentication with Spring Security, an administrative dashboard for user lifecycle management, configurable account expiry, password recovery via email verification, automated account provisioning, and in-memory rate limiting for enhanced security. Transaction workbooks are processed entirely in memory without persistent storage, while user data is securely stored in Neon PostgreSQL with BCrypt password hashing. The application is server-side rendered using Thymeleaf, integrates the Brevo API for transactional HTML emails, and is deployed on Render with Docker support, providing a scalable and secure cloud-native architecture.",
+    "description": "Delivered a secure financial tool that helps users calculate complex investment returns with confidence and minimal friction.",
+    "fullDescription": "Built a production-ready web application for XIRR calculations from irregular mutual fund cash flows. The system combines reliable financial logic with secure user workflows, including authentication, account lifecycle management, and protected data handling. The goal was to make a technically complex calculation approachable and trustworthy for end users while keeping the service robust and deployable in the cloud.",
     "icon": "calculator",
     "technologies": [
       "Java 21",
@@ -76,13 +108,27 @@
     "status": "public",
     "order": 3,
     "images": [],
-    "metrics": {}
+    "metrics": {},
+    "architectureNotes": [
+      {
+        "focus": "Security",
+        "detail": "Designed the application around authenticated workflows, protected account management, and careful handling of sensitive financial data."
+      },
+      {
+        "focus": "User experience",
+        "detail": "Focused on making a complex financial calculation approachable without sacrificing correctness or trust in the output."
+      },
+      {
+        "focus": "Cloud deployment",
+        "detail": "Shipped the app with container-friendly deployment patterns so it could scale and evolve without tightly coupling it to a single environment."
+      }
+    ]
   },
   {
     "id": "digibot",
     "title": "DigiBot",
-    "description": "An AI-powered document assistant that enables semantic search and conversational question answering over PDF documents using Retrieval-Augmented Generation (RAG).",
-    "fullDescription": "DigiBot is an intelligent document assistant that leverages Retrieval-Augmented Generation (RAG) to provide context-aware answers from uploaded PDF documents. The application extracts document content, generates semantic embeddings, and stores them in a vector database for efficient similarity search. User queries retrieve the most relevant document chunks, which are supplied to a Large Language Model to generate accurate, context-aware responses while minimizing hallucinations. The project features an interactive web interface, secure document processing, conversational chat history, and a scalable architecture for enterprise knowledge management, research assistance, and document-based question answering.",
+    "description": "Created an AI assistant that turns document collections into a conversational knowledge layer for faster, more accurate information access.",
+    "fullDescription": "Built DigiBot to make large PDF-based knowledge sources easier to search and query. By combining retrieval-augmented generation with semantic search, the tool helps users find the most relevant context quickly and ask questions in natural language instead of manually reading through long documents. The project demonstrates how AI systems can improve information discoverability and reduce time spent navigating dense content.",
     "icon": "bot",
     "technologies": [
       "Python",
@@ -105,13 +151,27 @@
     "status": "public",
     "order": 4,
     "images": [],
-    "metrics": {}
+    "metrics": {},
+    "architectureNotes": [
+      {
+        "focus": "Search design",
+        "detail": "Combined retrieval-enhanced generation with semantic search so questions could be answered from document context instead of shallow keyword matching."
+      },
+      {
+        "focus": "Context handling",
+        "detail": "Structured the system around retrieving the most relevant chunks of information so responses stayed grounded and easier to trust."
+      },
+      {
+        "focus": "Extensibility",
+        "detail": "Kept the assistant modular so it could support more document types and richer workflows as the use case evolved."
+      }
+    ]
   },
   {
     "id": "nfc-application",
     "title": "NFC Payment Application",
-    "description": "An Android application that enables secure NFC-based contactless payments using encryption, authentication, and real-time transaction processing.",
-    "fullDescription": "A secure Android application designed to demonstrate Near Field Communication (NFC) based contactless payments for e-commerce and digital transactions. The application implements encrypted communication, secure user authentication, and transaction validation to protect sensitive payment data during NFC interactions. It follows a modular architecture with dedicated components for authentication, payment processing, and NFC communication, providing a practical implementation of secure contactless payment workflows. Developed as part of postgraduate research, the project showcases mobile application development, NFC integration, payment security principles, and modern Android architecture.",
+    "description": "Explored secure mobile payments through NFC, focusing on trust, authentication, and safe user transactions in a real-world interaction model.",
+    "fullDescription": "Developed a research-oriented Android application that demonstrates how contactless payment interactions can be built with strong security controls. The project focused on encrypted communication, user authentication, and transaction validation so the experience stayed practical while reflecting real security concerns in mobile payments. It showcases a strong foundation in secure application design and mobile engineering.",
     "icon": "smartphone",
     "technologies": [
       "Java",
@@ -131,13 +191,23 @@
     "status": "public",
     "order": 5,
     "images": [],
-    "metrics": {}
+    "metrics": {},
+    "architectureNotes": [
+      {
+        "focus": "Security model",
+        "detail": "Built the experience around encrypted communication, strong authentication, and transaction validation to reflect real payment security concerns."
+      },
+      {
+        "focus": "Mobile architecture",
+        "detail": "Used a modular structure to separate payment logic, authentication, and NFC communication so the design stayed understandable and maintainable."
+      }
+    ]
   },
   {
     "id": "elite-creative-group",
     "title": "Elite Creative Group",
-    "description": "A modern, responsive business website for a creative agency featuring engaging UI, smooth animations, and an optimized user experience.",
-    "fullDescription": "Elite Creative Group is a responsive business website designed for a creative agency to showcase its services, portfolio, and brand identity through a modern user interface. The application focuses on delivering an engaging user experience with responsive layouts, smooth animations, intuitive navigation, and visually appealing design elements. Built using modern frontend technologies, the project demonstrates best practices in responsive web development, performance optimization, and clean component-based organization, making it suitable for businesses seeking a professional online presence.",
+    "description": "Delivered a polished digital presence for a creative agency, improving how the brand presented its work and services online.",
+    "fullDescription": "Built a responsive business website that helped a creative agency communicate its identity more effectively. The project focused on a modern experience with clear navigation, engaging visuals, and a strong presentation of services and portfolio work. The result was a more professional online presence that made the brand easier to understand and more compelling to prospective clients.",
     "icon": "globe",
     "technologies": [
       "HTML5",
@@ -155,6 +225,16 @@
     "status": "public",
     "order": 6,
     "images": [],
-    "metrics": {}
+    "metrics": {},
+    "architectureNotes": [
+      {
+        "focus": "UX architecture",
+        "detail": "Designed the experience around clear navigation, stronger content hierarchy, and a more persuasive presentation of services and work."
+      },
+      {
+        "focus": "Delivery",
+        "detail": "Kept the implementation simple and maintainable while still creating a polished, modern experience for a client-facing brand."
+      }
+    ]
   }
 ]

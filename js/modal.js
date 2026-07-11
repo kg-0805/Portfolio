@@ -252,6 +252,29 @@ const ModalSystem = (function () {
     descSection.appendChild(descText);
     body.appendChild(descSection);
 
+    // Architecture notes (only if project has them)
+    if (projectData.architectureNotes && Array.isArray(projectData.architectureNotes) && projectData.architectureNotes.length > 0) {
+      var architectureSection = document.createElement('div');
+      var architectureLabel = document.createElement('h3');
+      architectureLabel.className = 'text-lg font-semibold text-gray-900 mb-2';
+      architectureLabel.textContent = 'Architecture Notes';
+      architectureSection.appendChild(architectureLabel);
+
+      var architectureList = document.createElement('ul');
+      architectureList.className = 'space-y-3';
+
+      for (var archIndex = 0; archIndex < projectData.architectureNotes.length; archIndex++) {
+        var note = projectData.architectureNotes[archIndex];
+        var noteItem = document.createElement('li');
+        noteItem.className = 'text-gray-700 leading-relaxed';
+        noteItem.innerHTML = '<span class="font-semibold text-gray-900">' + escapeText(note.focus || '') + ':</span> ' + escapeText(note.detail || '');
+        architectureList.appendChild(noteItem);
+      }
+
+      architectureSection.appendChild(architectureList);
+      body.appendChild(architectureSection);
+    }
+
     // Technologies
     if (projectData.technologies && Array.isArray(projectData.technologies) && projectData.technologies.length > 0) {
       var techSection = document.createElement('div');

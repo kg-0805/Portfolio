@@ -6,6 +6,21 @@
     if (el) el.style.display = 'none';
   }
 
+  function completePageLoad() {
+    window.setTimeout(function () {
+      document.body.classList.remove('page-loading');
+      document.body.classList.add('page-ready');
+    }, 350);
+  }
+
+  function startPageLoadTransition() {
+    if (document.readyState === 'complete') {
+      completePageLoad();
+    } else {
+      window.addEventListener('load', completePageLoad, { once: true });
+    }
+  }
+
   function waitForLucide() {
     return new Promise(function(resolve) {
       if (typeof lucide !== 'undefined' && lucide.createIcons) { resolve(); return; }
@@ -293,8 +308,12 @@
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeApp);
+    document.addEventListener('DOMContentLoaded', function () {
+      initializeApp();
+      startPageLoadTransition();
+    });
   } else {
     initializeApp();
+    startPageLoadTransition();
   }
 })();

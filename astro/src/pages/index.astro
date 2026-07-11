@@ -1,0 +1,68 @@
+---
+import fs from 'fs';
+import path from 'path';
+import Layout from '../layouts/Layout.astro';
+
+const dataDir = path.resolve(process.cwd(), '..', 'data');
+
+function readJson(fileName: string) {
+  return JSON.parse(fs.readFileSync(path.join(dataDir, fileName), 'utf8'));
+}
+
+const profile = readJson('profile.json');
+const stats = readJson('stats.json');
+const skills = readJson('skills.json');
+const experience = readJson('experience.json');
+const projects = readJson('projects.json');
+
+const groupedSkills = skills.reduce((acc, skill) => {
+  acc[skill.category] = acc[skill.category] || [];
+  acc[skill.category].push(skill);
+  return acc;
+}, {});
+---
+
+<Layout title={`${profile.name} | ${profile.title}`} description={profile.description}>
+  <main class="page-shell">
+    <section class="hero-card">
+      <h1>{profile.name}</h1>
+      <p class="eyebrow">{profile.title}</p>
+      <p>{profile.description}</p>
+    </section>
+
+    <section class="stats-grid">
+      {stats.map((item) => (
+        <article class="card">
+          <strong>{item.number}</strong>
+          <span>{item.label}</span>
+        </article>
+      ))}
+    </section>
+
+    <section class="content-block">
+      <h2>Skills & Expertise</h2>
+      <div class="skill-grid">
+        {Object.entries(groupedSkills).map(([category, items]) => (
+          <div class="card">
+            <h3>{category}</h3>
+            <ul>
+              {items.map((skill) => <li>{skill.name}</li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="content-block">
+      <h2>Projects</h2>
+      <div class="project-grid">
+        {projects.map((project) => (
+          <article class="card project-card">
+            <h3>{project.title}</h3>
+            <p>{project.description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+</Layout>

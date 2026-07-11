@@ -1,0 +1,12 @@
+{
+  "name": "Kartik Gupta",
+  "title": "Backend Engineer & Cloud Architect",
+  "description": "I engineer robust backend systems that power products at scale. From high-throughput APIs to cloud-native infrastructure on AWS, I turn complex problems into dependable production solutions.",
+  "ctaPrimary": "Explore My Work",
+  "ctaSecondary": "Say Hello",
+  "contact": {
+    "email": "contact@kartikgupta.in",
+    "linkedin": "https://linkedin.com/in/kg-0805",
+    "github": "https://github.com/kg-0805"
+  }
+}
