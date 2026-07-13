@@ -137,6 +137,46 @@
     sections.forEach(function (s) { observer.observe(s); });
   }
 
+  /* ------------------------------------------------ Hash-free navigation
+     In-page anchors (nav bar, logo, hero buttons) scroll smoothly but never
+     leave a #section fragment in the address bar. */
+  function initCleanNav() {
+    function cleanUrl() { return window.location.pathname + window.location.search; }
+    function stripHash() {
+      if (window.location.hash) {
+        try { history.replaceState(null, '', cleanUrl()); } catch (e) {}
+      }
+    }
+    function scrollToId(id) {
+      var el = document.getElementById(id);
+      if (!el) return false;
+      el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      return true;
+    }
+
+    document.addEventListener('click', function (e) {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      var id = a.getAttribute('href').slice(1);
+      if (!id || !scrollToId(id)) return;
+      e.preventDefault();
+      stripHash();
+    });
+
+    // Honour an inbound deep link (e.g. shared /#projects), then clean the URL.
+    function handleDeepLink() {
+      var id = (window.location.hash || '').slice(1);
+      if (!id) return;
+      stripHash();                                              // clean the URL now
+      window.requestAnimationFrame(function () { scrollToId(id); });  // let the scroll settle
+    }
+    handleDeepLink();
+    // Backstop: a fragment that appears after load (back button, or environments
+    // that set the hash late) is scrolled to and then stripped.
+    window.addEventListener('hashchange', handleDeepLink);
+  }
+
   /* ------------------------------------------------------- Scroll reveal */
   function initReveal() {
     if (reduceMotion) return;
@@ -229,6 +269,7 @@
     initMobileMenu();
     initNavScroll();
     initScrollSpy();
+    initCleanNav();
     initReveal();
     initContactForm();
   }
