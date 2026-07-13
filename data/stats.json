@@ -1,26 +1,26 @@
 [
   {
-    "id": "latency",
-    "number": "<200ms",
-    "label": "API response, P95",
-    "detail": "after restructuring high-traffic modules"
+    "id": "experience",
+    "number": "5+",
+    "label": "Years building backends",
+    "detail": "across PHP, Node.js, Java & Python"
   },
   {
-    "id": "uptime",
-    "number": "99.9%",
-    "label": "Uptime sustained",
-    "detail": "on mission-critical nutrition workflows"
-  },
-  {
-    "id": "microservices",
+    "id": "services",
     "number": "10+",
-    "label": "Microservices shipped",
-    "detail": "from a monolith-to-services migration"
+    "label": "APIs & services shipped",
+    "detail": "from a monolith-to-microservices split"
   },
   {
     "id": "scale",
     "number": "Millions",
-    "label": "Beneficiaries served",
+    "label": "Users served",
     "detail": "on a nationwide government platform"
+  },
+  {
+    "id": "performance",
+    "number": "<200ms",
+    "label": "API response after tuning",
+    "detail": "on optimized high-traffic modules"
   }
 ]
