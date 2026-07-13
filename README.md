@@ -4,7 +4,7 @@
 
 # Kartik Gupta — Portfolio
 
-### Backend Engineer & Cloud Architect
+### Backend Engineer
 
 A fast, static, dependency-free portfolio. Content lives in JSON and is rendered to plain HTML at build time — so the page ships as pre-rendered markup with **no framework, no client-side rendering, and no runtime CSS/JS tooling**. A single small script adds progressive enhancement (theme, nav, reveal).
 

@@ -6,10 +6,10 @@
     "detail": "across PHP, Node.js, Java & Python"
   },
   {
-    "id": "services",
-    "number": "10+",
-    "label": "APIs & services shipped",
-    "detail": "from a monolith-to-microservices split"
+    "id": "apis",
+    "number": "300+",
+    "label": "APIs built",
+    "detail": "across 10+ backend services"
   },
   {
     "id": "scale",
