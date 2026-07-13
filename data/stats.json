@@ -1,26 +1,26 @@
 [
   {
-    "id": "years-experience",
-    "number": "5",
-    "label": "Years of Experience",
-    "icon": "calendar"
-  },
-  {
-    "id": "production-systems",
-    "number": "6+",
-    "label": "Production Systems",
-    "icon": "server"
-  },
-  {
-    "id": "api-requests",
-    "number": "5M+",
-    "label": "API Requests Handled",
-    "icon": "activity"
+    "id": "latency",
+    "number": "<200ms",
+    "label": "API response, P95",
+    "detail": "after restructuring high-traffic modules"
   },
   {
     "id": "uptime",
     "number": "99.9%",
-    "label": "Uptime Delivered",
-    "icon": "check-circle"
+    "label": "Uptime sustained",
+    "detail": "on mission-critical nutrition workflows"
+  },
+  {
+    "id": "microservices",
+    "number": "10+",
+    "label": "Microservices shipped",
+    "detail": "from a monolith-to-services migration"
+  },
+  {
+    "id": "scale",
+    "number": "Millions",
+    "label": "Beneficiaries served",
+    "detail": "on a nationwide government platform"
   }
 ]

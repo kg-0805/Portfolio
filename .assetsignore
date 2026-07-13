@@ -1,0 +1,25 @@
+# Keep build inputs, dev experiments, and tooling out of the deployed asset bundle.
+# Only the static site (index.html, error.html, css/, js/, assets/, and SEO files)
+# should be uploaded. See: Cloudflare Workers static assets `.assetsignore`.
+
+node_modules
+astro
+next-app
+.git
+.github
+.kiro
+.vscode
+
+# Build inputs (compiled into index.html at build time — not needed at runtime)
+scripts
+data
+index.template.html
+
+# Repo/dev metadata
+README.md
+LICENSE
+package.json
+package-lock.json
+wrangler.jsonc
+.gitignore
+.assetsignore

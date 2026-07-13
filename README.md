@@ -6,7 +6,7 @@
 
 ### Backend Engineer & Cloud Architect
 
-A fast, dependency-free single-page portfolio built with vanilla JavaScript and Tailwind CSS — JSON-driven content, a glassmorphism UI, dark/light theming, and smooth, intentional motion.
+A fast, static, dependency-free portfolio. Content lives in JSON and is rendered to plain HTML at build time — so the page ships as pre-rendered markup with **no framework, no client-side rendering, and no runtime CSS/JS tooling**. A single small script adds progressive enhancement (theme, nav, reveal).
 
 <br />
 
@@ -46,9 +46,13 @@ A fast, dependency-free single-page portfolio built with vanilla JavaScript and 
 
 ## Overview
 
-This is a hand-built, framework-free portfolio SPA. There is **no build step and no runtime dependency on a third-party CDN** — Tailwind and Lucide are self-hosted, and all content is rendered client-side from JSON. The result is a site that loads fast, deploys as plain static files, and stays trivially easy to maintain.
+This is a hand-built, framework-free portfolio. Content is authored as JSON and compiled into a single static `index.html` by a tiny Node script — there is **no client-side rendering and no third-party runtime**. The browser downloads pre-rendered HTML, two small stylesheets, and one ~7.5KB progressive-enhancement script. Icons are inline SVG; utility CSS is a small hand-authored file (no Tailwind runtime).
 
-> Update a JSON file, refresh the page — the UI re-renders itself. No HTML edits, no rebuild.
+> Edit a JSON file, run `npm run render`, and the static HTML is regenerated. The content exists in HTML before any JavaScript runs — good for crawlers, reader mode, and no-JS visitors.
+
+### Why it's built this way
+
+The earlier version shipped the Tailwind **browser runtime** (~407KB) and the full **Lucide** icon library (~356KB) as blocking scripts, then re-rendered every section on the client — throwing away HTML it had already pre-rendered. This version compiles everything ahead of time: the JS payload went from **~885KB to ~7.5KB**, the critical path is pure HTML/CSS, and the CSP no longer needs `unsafe-eval`.
 
 ---
 
@@ -56,26 +60,26 @@ This is a hand-built, framework-free portfolio SPA. There is **no build step and
 
 | | |
 |---|---|
-| ⚡ **SPA, zero reloads** | Hash-based routing with scroll-spy keeps the nav in sync as you move through sections. |
-| 📦 **JSON-driven content** | Projects, skills, experience, and stats all come from `data/*.json`. |
+| ⚡ **Static-first** | Content is pre-rendered to HTML at build time — meaningful markup before any JS runs. |
+| 📦 **JSON-driven content** | Hero, stats, projects, skills, experience, and philosophy all come from `data/*.json`. |
+| 🪶 **Tiny runtime** | One ~7.5KB `defer` script for theme, mobile nav, scroll-spy, and reveal. No framework, no CDN. |
 | 🌗 **Dark / light theme** | One-tap toggle with `localStorage` persistence, OS-preference fallback, and no flash on load. |
-| 🎴 **Project modals** | Accessible detail dialogs with focus trapping, background scroll-lock, and Escape / backdrop close. |
-| 🧭 **Morphing pill nav** | A floating pill that smoothly widens into a docked header as you scroll. |
-| ✨ **Motion, done right** | Scroll-reveal, a color-shifting scrollbar, and `prefers-reduced-motion` support. |
-| 🪟 **Glassmorphism UI** | Layered blur, gradient mesh background, and subtle noise texture. |
-| 📨 **Working contact form** | Submissions via the Web3Forms API — no backend required. |
-| ♿ **Accessible** | ARIA roles, keyboard navigation, visible focus states, and screen-reader live regions. |
+| 📐 **Case-study proof** | Real metrics, achievements, and architecture notes surfaced directly in HTML — not hidden behind JS. |
+| 🔎 **Native disclosures** | Per-project "Architecture & decisions" via `<details>` — accessible and JS-free. |
+| ✨ **Motion, done right** | Scroll-reveal, a color-shifting scrollbar, and full `prefers-reduced-motion` support. |
+| 🪟 **Glassmorphism UI** | Layered blur, gradient mesh background, and subtle noise texture — all CSS. |
+| ♿ **Accessible** | Semantic landmarks, keyboard navigation, visible focus states, and a skip link. |
 | 🔎 **SEO-ready** | Open Graph, Twitter Cards, JSON-LD structured data, sitemap, and `robots.txt`. |
 
 ---
 
 ## Tech Stack
 
-- **Markup & styling** — HTML5, Tailwind CSS 3.x (self-hosted build), custom CSS for glassmorphism, theming variables, and animations
-- **Scripting** — Vanilla JavaScript (ES6+), organized into small single-responsibility modules
-- **Icons** — Lucide (self-hosted)
+- **Markup & styling** — HTML5, a small hand-authored utility stylesheet (`css/utilities.css`) plus a component stylesheet (`css/styles.css`) for glassmorphism, CSS-variable theming, and animations. No Tailwind runtime.
+- **Build** — One Node ESM script (`scripts/render-content.mjs`) compiles `index.template.html` + `data/*.json` → `index.html`
+- **Scripting** — One ~7.5KB vanilla-JS file (`js/main.js`), `defer`-loaded, for progressive enhancement only
+- **Icons** — Inline SVG (no icon library)
 - **Content** — Static JSON files (`/data`)
-- **Contact** — Web3Forms API
 - **Hosting** — Static assets deployed to Cloudflare (configured via `wrangler.jsonc`)
 
 ---
@@ -84,24 +88,22 @@ This is a hand-built, framework-free portfolio SPA. There is **no build step and
 
 ```text
 Portfolio/
-├── index.html              # SPA entry point + embedded data fallback (for file://)
-├── error.html              # Custom error page
+├── index.template.html     # Page shell with __TOKENS__ for each section
+├── index.html              # Generated — do not edit by hand (run `npm run render`)
+├── error.html              # Custom, self-contained 404 page (theme-aware)
 ├── css/
-│   └── styles.css          # Theme variables, glassmorphism, nav, animations
+│   ├── utilities.css       # Small static layout helpers (replaces Tailwind runtime)
+│   └── styles.css          # Theme variables, glassmorphism, components, animations
 ├── js/
-│   ├── app.js              # Bootstraps the app and wires everything together
-│   ├── router.js           # Hash routing + scroll-spy
-│   ├── renderer.js         # Builds Home, About, Projects, and Contact sections
-│   ├── modal.js            # Project detail modal (focus trap, scroll lock)
-│   ├── theme.js            # Dark/light theme manager
-│   ├── data-manager.js     # Fetch, validate, and cache JSON content
-│   ├── tailwind.min.js     # Self-hosted Tailwind build
-│   └── lucide.min.js       # Self-hosted Lucide icons
+│   └── main.js             # Progressive enhancement: theme, mobile nav, scroll-spy, reveal
+├── scripts/
+│   └── render-content.mjs  # Build: template + data/*.json → index.html
 ├── data/
-│   ├── projects.json       # Project cards + modal details
-│   ├── skills.json         # Skills grouped by category
-│   ├── experience.json     # Work history timeline
-│   └── stats.json          # Headline metrics
+│   ├── profile.json        # Name, tagline, "currently", philosophy, contact
+│   ├── stats.json          # Headline metrics band
+│   ├── projects.json       # Project cards, links, architecture notes
+│   ├── skills.json         # Skills grouped by category, with proficiency
+│   └── experience.json     # Work history + quantified achievements
 ├── assets/
 │   └── images/             # Profile photo, logo, favicon
 ├── .well-known/
@@ -116,26 +118,31 @@ Portfolio/
 
 ## How It Works
 
-The app is intentionally small and modular — each file owns one concern:
+Rendering happens once, at build time — not in the browser:
 
-- **`data-manager.js`** fetches each `data/*.json` file, validates it against a schema, and caches the result. If a fetch fails (for example when the page is opened directly via `file://`), it falls back to a snapshot embedded in `index.html`, so the site still works offline.
-- **`renderer.js`** turns that validated data into DOM — hero, stats, skills, experience timeline, project grid, and contact form — using safe text APIs to avoid XSS.
-- **`router.js`** handles in-page navigation and highlights the active section as you scroll.
-- **`modal.js`** opens project details in an accessible dialog and locks the background from scrolling.
-- **`theme.js`** applies and persists the color theme, keeping the toggle, `<meta name="theme-color">`, and `<html>` class in sync.
-- **`app.js`** ties initialization together once the DOM and icons are ready.
+- **`scripts/render-content.mjs`** reads `data/*.json`, escapes all values, and fills the `__TOKENS__` in `index.template.html` to produce a fully static `index.html`. Real metrics, achievements, and per-project architecture notes are baked straight into the markup.
+- **`js/main.js`** runs after load (`defer`) and only *enhances* that static HTML: theme toggle (persisted, with `<meta name="theme-color">` sync), the mobile menu, IntersectionObserver scroll-spy, and scroll-reveal. If it never runs, the page is still complete and readable.
+- Project deep-dives use native `<details>` elements — no modal JS, and the content is present for crawlers.
 
 ```text
-data/*.json ──▶ data-manager (fetch → validate → cache) ──▶ renderer ──▶ DOM
-                         │
-                         └─ falls back to embedded snapshot (file://)
+data/*.json ─┐
+             ├─▶ render-content.mjs ─▶ index.html (static, pre-rendered)
+index.template.html ─┘                        │
+                                               └─▶ main.js enhances in place
 ```
 
 ---
 
 ## Getting Started
 
-No build, no install — it's static files. Serve the folder with any static server:
+The output is static files. The only "build" is regenerating `index.html` from JSON, which needs Node (no dependencies to install):
+
+```bash
+# Regenerate index.html after editing anything in data/ or the template
+npm run render      # == node scripts/render-content.mjs
+```
+
+Then serve the folder with any static server:
 
 ```bash
 # Python 3
@@ -149,8 +156,6 @@ npx wrangler dev
 ```
 
 Then open **http://localhost:8000** (or the port your tool prints).
-
-> Opening `index.html` straight from disk works too, thanks to the embedded data fallback — but a local server is recommended so the live `data/*.json` files are loaded.
 
 ---
 
@@ -168,24 +173,26 @@ npx wrangler deploy
 
 ## Updating Content
 
-All content lives in `/data` — edit the JSON and reload:
+All content lives in `/data` — edit the JSON, then run `npm run render`:
 
 | File | Controls |
 |------|----------|
-| `data/projects.json` | Project cards and their modal details |
+| `data/profile.json` | Name, title, tagline, "currently" line, engineering philosophy, contact |
+| `data/stats.json` | Headline metrics band |
+| `data/projects.json` | Project cards, links, and "Architecture & decisions" notes |
 | `data/skills.json` | Skills, categories, and proficiency |
-| `data/experience.json` | Work-history timeline |
-| `data/stats.json` | Headline metrics on the home page |
+| `data/experience.json` | Work-history timeline and quantified achievements |
 
-> **Heads-up:** `index.html` keeps an inline snapshot of this data as a `file://` fallback. When served over HTTP the live JSON is used, so your edits show immediately. If you rely on `file://`, refresh that inline snapshot after editing the JSON.
+> **Heads-up:** `index.html` is generated. Never edit it by hand — change the JSON (or `index.template.html`) and re-run `npm run render`, or your edits will be overwritten on the next build.
 
 ---
 
 ## Accessibility & SEO
 
-- Semantic landmarks, ARIA labels, and an aria-live region for section changes
-- Full keyboard support, visible focus styles, and modal focus trapping
-- Honors `prefers-reduced-motion`
+- Semantic landmarks, ARIA labels, a skip link, and an aria-live region for section changes
+- Full keyboard support, visible focus styles, and native `<details>` disclosures
+- Honors `prefers-reduced-motion` (disables reveal, float, and scrollbar animation)
+- Content is real HTML before JS runs — usable in reader mode, by crawlers, and with JS disabled
 - Open Graph + Twitter Card metadata, JSON-LD `Person` schema, `sitemap.xml`, and `robots.txt`
 
 ---

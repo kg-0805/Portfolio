@@ -1,9 +1,34 @@
 {
   "name": "Kartik Gupta",
   "title": "Backend Engineer & Cloud Architect",
-  "description": "I engineer robust backend systems that power products at scale. From high-throughput APIs to cloud-native infrastructure on AWS, I turn complex problems into dependable production solutions.",
-  "ctaPrimary": "Explore My Work",
-  "ctaSecondary": "Say Hello",
+  "tagline": "I build backend systems that stay boring in production — predictable, observable, and fast under real load.",
+  "description": "I engineer robust backend systems that power products at national scale. From high-throughput APIs to cloud-native infrastructure on AWS, I turn complex problems into dependable production services.",
+  "currently": {
+    "role": "Senior Backend Developer",
+    "company": "Digital India Corporation",
+    "detail": "Owning the backend of Poshan Tracker — the Government of India's nationwide nutrition-governance platform serving millions of beneficiaries."
+  },
+  "availability": "Open to new backend & platform engineering roles",
+  "ctaPrimary": "See the work",
+  "ctaSecondary": "Get in touch",
+  "philosophy": [
+    {
+      "title": "Reliability over cleverness",
+      "detail": "A service that wakes someone at 3 AM isn't finished. I optimize for predictable, observable systems and clear failure modes before I optimize for elegance."
+    },
+    {
+      "title": "Measure, then optimize",
+      "detail": "I chase real bottlenecks, not guesses. Profiling and metrics come before rewrites — that discipline is how high-traffic modules reached sub-200ms responses and ~40% lower server load."
+    },
+    {
+      "title": "Ship in safe increments",
+      "detail": "Monolith to 10+ services, data-store migrations, national health-system integrations — decomposed into small, reversible steps so releases stay calm and recoverable."
+    },
+    {
+      "title": "Design for the next engineer",
+      "detail": "If a system can't be understood and debugged by someone who didn't write it, it isn't production-ready. Clear service boundaries beat clever abstractions."
+    }
+  ],
   "contact": {
     "email": "contact@kartikgupta.in",
     "linkedin": "https://linkedin.com/in/kg-0805",

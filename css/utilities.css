@@ -1,0 +1,36 @@
+/* ==========================================================================
+   utilities.css — the small, static set of layout helpers used by the page
+   shell and navigation. This replaces the 407KB Tailwind browser runtime that
+   used to compile utilities on every page load. Everything visual lives in
+   component classes in styles.css.
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-grow { flex-grow: 1; }
+.items-center { align-items: center; }
+.min-h-screen { min-height: 100vh; }
+.w-full { width: 100%; }
+
+.gap-1 { gap: 0.25rem; }
+.gap-2 { gap: 0.5rem; }
+.px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+.py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+.mr-2 { margin-right: 0.5rem; }
+
+.text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+.font-bold { font-weight: 700; }
+.no-underline { text-decoration: none; }
+
+/* Screen-reader-only, with a visible-on-focus escape hatch for the skip link. */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

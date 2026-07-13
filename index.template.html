@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Kartik Gupta — Backend Engineer & Cloud Architect. I build high-throughput APIs and cloud-native systems on AWS, currently powering Poshan Tracker, a nationwide government platform serving millions." />
+  <meta name="keywords" content="Kartik Gupta, Backend Engineer, Cloud Architect, AWS, PHP, Laravel, Node.js, Fastify, DynamoDB, Microservices, API Development, Portfolio" />
+  <meta name="author" content="Kartik Gupta" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#a855f7" />
+  <link rel="canonical" href="https://kartikgupta.in/" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kartikgupta.in/" />
+  <meta property="og:title" content="Kartik Gupta | Backend Engineer & Cloud Architect" />
+  <meta property="og:description" content="Backend Engineer building high-throughput APIs and cloud-native systems on AWS. Currently powering a nationwide government platform serving millions." />
+  <meta property="og:image" content="https://kartikgupta.in/assets/images/profile.jpg" />
+  <meta property="og:site_name" content="Kartik Gupta Portfolio" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://kartikgupta.in/" />
+  <meta name="twitter:title" content="Kartik Gupta | Backend Engineer & Cloud Architect" />
+  <meta name="twitter:description" content="Backend Engineer building high-throughput APIs and cloud-native systems on AWS." />
+  <meta name="twitter:image" content="https://kartikgupta.in/assets/images/profile.jpg" />
+
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+
+  <title>Kartik Gupta | Backend Engineer & Cloud Architect</title>
+  <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="assets/images/profile.jpg" />
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Kartik Gupta",
+    "url": "https://kartikgupta.in",
+    "image": "https://kartikgupta.in/assets/images/profile.jpg",
+    "jobTitle": "Backend Engineer & Cloud Architect",
+    "description": "Backend Engineer building high-throughput APIs and cloud-native systems on AWS.",
+    "knowsAbout": ["PHP", "Laravel", "Node.js", "Fastify", "Python", "AWS", "Docker", "Redis", "DynamoDB", "MariaDB", "RabbitMQ", "REST APIs", "Microservices", "Cloud Architecture"],
+    "sameAs": [
+      "https://github.com/kg-0805",
+      "https://linkedin.com/in/kg-0805"
+    ],
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Digital India Corporation"
+    }
+  }
+  </script>
+
+  <!-- Apply saved/system theme before first paint to avoid a flash of the wrong theme. -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (stored === 'dark' || (!stored && prefersDark)) {
+          document.documentElement.classList.add('dark');
+        }
+      } catch (e) { /* localStorage unavailable; default to light */ }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="css/utilities.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="js/main.js" defer></script>
+</head>
+<body class="flex flex-col min-h-screen theme-transition">
+
+  <!-- Skip to main content link for accessibility -->
+  <a href="#home" class="skip-link">Skip to main content</a>
+
+  <!-- Floating Pill Navigation -->
+  <nav aria-label="Main navigation" class="nav-floating">
+    <div class="flex items-center gap-2">
+      <a href="#home" data-section="home" aria-label="Kartik Gupta — go to top" class="nav-logo flex items-center gap-2 px-2 py-1 no-underline mr-2">
+        <img src="assets/images/logo.png" alt="" width="32" height="32" class="nav-logo-img" />
+        <span class="text-sm font-bold gradient-text nav-logo-name">Kartik Gupta</span>
+      </a>
+
+      <div id="nav-menu" class="nav-menu flex items-center gap-1">
+        <a href="#home" data-section="home" aria-current="page" class="nav-link nav-active">Home</a>
+        <a href="#projects" data-section="projects" class="nav-link">Work</a>
+        <a href="#experience" data-section="experience" class="nav-link">Experience</a>
+        <a href="#contact" data-section="contact" class="nav-link">Contact</a>
+
+        <button id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" class="theme-toggle nav-link">
+          <svg class="theme-icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          <svg class="theme-icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        </button>
+      </div>
+
+      <button id="nav-toggle" type="button" aria-label="Open menu" aria-controls="nav-menu" aria-expanded="false" class="nav-hamburger">
+        <svg class="nav-icon-menu" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+        <svg class="nav-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <main id="main-content" class="flex-grow w-full page-shell">
+    <section id="home" class="scroll-section" aria-label="Introduction">
+__HERO__
+__METRICS__
+    </section>
+
+    <section id="projects" class="scroll-section" aria-label="Selected work">
+__FEATURED__
+__PROJECTS__
+    </section>
+
+    <section id="experience" class="scroll-section" aria-label="Experience">
+__EXPERIENCE__
+    </section>
+
+    <section id="expertise" class="scroll-section" aria-label="Skills and approach">
+__SKILLS__
+__PHILOSOPHY__
+    </section>
+
+    <section id="contact" class="scroll-section" aria-label="Contact">
+__CONTACT__
+    </section>
+
+    <div id="section-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-name gradient-text">Kartik Gupta</p>
+      <p class="footer-tag">Backend Engineer &amp; Cloud Architect</p>
+      <p class="footer-meta">Built as a static, JSON-driven site. No framework, no client-side rendering, no tracking.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

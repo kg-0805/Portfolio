@@ -1,18 +1,20 @@
 import fs from 'fs';
 import path from 'path';
+import crypto from 'crypto';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 
-const profile = JSON.parse(fs.readFileSync(path.join(rootDir, 'data/profile.json'), 'utf8'));
-const stats = JSON.parse(fs.readFileSync(path.join(rootDir, 'data/stats.json'), 'utf8'));
-const skills = JSON.parse(fs.readFileSync(path.join(rootDir, 'data/skills.json'), 'utf8'));
-const experience = JSON.parse(fs.readFileSync(path.join(rootDir, 'data/experience.json'), 'utf8'));
-const projects = JSON.parse(fs.readFileSync(path.join(rootDir, 'data/projects.json'), 'utf8'));
+const read = (p) => JSON.parse(fs.readFileSync(path.join(rootDir, p), 'utf8'));
+const profile = read('data/profile.json');
+const stats = read('data/stats.json');
+const skills = read('data/skills.json');
+const experience = read('data/experience.json');
+const projects = read('data/projects.json');
 
-function escapeHtml(value) {
+function esc(value) {
   return String(value)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
@@ -21,36 +23,93 @@ function escapeHtml(value) {
     .replace(/'/g, '&#39;');
 }
 
-function renderHome() {
+/* Inline SVG icons (replaces the 356KB Lucide runtime). */
+const icon = {
+  mapPin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
+  dot: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="5"/></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>',
+  arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>',
+  external: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>',
+  github: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.42c.57.1.78-.25.78-.55v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.78 2.73 1.27 3.4.97.1-.76.4-1.27.74-1.56-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.2-3.1-.13-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.5 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.75.81 1.2 1.84 1.2 3.1 0 4.43-2.71 5.4-5.28 5.69.41.36.78 1.06.78 2.14v3.17c0 .3.2.66.79.55A11.5 11.5 0 0 0 12 .5Z"/></svg>',
+  linkedin: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.55V9h3.57v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/></svg>',
+  mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>'
+};
+
+function repoLinks(links = {}) {
+  const out = [];
+  if (links.github) {
+    out.push(`<a href="${esc(links.github)}" target="_blank" rel="noopener noreferrer" class="proj-link">${icon.github}<span>Source</span></a>`);
+  }
+  if (links.demo) {
+    out.push(`<a href="${esc(links.demo)}" target="_blank" rel="noopener noreferrer" class="proj-link">${icon.external}<span>Live</span></a>`);
+  }
+  return out.length ? `<div class="proj-links">${out.join('')}</div>` : '';
+}
+
+function techTags(list = [], limit) {
+  const items = typeof limit === 'number' ? list.slice(0, limit) : list;
+  return items.map((t) => `<span class="tech-tag">${esc(t)}</span>`).join('');
+}
+
+function archDetails(notes = []) {
+  if (!notes.length) return '';
   return `
-    <div class="relative flex flex-col items-center text-center py-16 md:py-24">
+    <details class="arch">
+      <summary><span>Architecture &amp; decisions</span><span class="arch-chevron" aria-hidden="true">${icon.arrow}</span></summary>
+      <ul class="arch-list">
+        ${notes.map((n) => `<li><span class="arch-focus">${esc(n.focus)}</span><span class="arch-detail">${esc(n.detail)}</span></li>`).join('')}
+      </ul>
+    </details>`;
+}
+
+/* ---------------------------------------------------------------- Hero */
+function renderHero() {
+  const c = profile.currently;
+  return `
+    <div class="hero">
       <div class="hero-shapes" aria-hidden="true">
         <div class="hero-shape"></div>
         <div class="hero-shape"></div>
         <div class="hero-shape"></div>
       </div>
-      <div class="profile-ring mb-8 relative z-10">
-        <img src="assets/images/profile.jpg" alt="${escapeHtml(profile.name)} profile photo" class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover" />
+
+      <div class="hero-photo">
+        <img src="assets/images/profile.jpg" alt="${esc(profile.name)}" width="112" height="112" />
       </div>
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 relative z-10 gradient-text">${escapeHtml(profile.name)}</h1>
-      <p class="text-xl md:text-2xl font-semibold mb-6 relative z-10 shimmer-text">${escapeHtml(profile.title)}</p>
-      <p class="text-base md:text-lg text-gray-600 max-w-2xl leading-relaxed relative z-10 mb-8">${escapeHtml(profile.description)}</p>
-      <div class="flex flex-wrap gap-4 justify-center relative z-10">
-        <a href="#projects" class="btn-gradient inline-flex items-center gap-2 text-sm no-underline">${escapeHtml(profile.ctaPrimary)}</a>
-        <a href="#contact" class="inline-flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-xl border border-purple-500/30 text-purple-600 hover:bg-purple-500/10 hover:border-purple-500/50 transition-all no-underline">${escapeHtml(profile.ctaSecondary)}</a>
+
+      <p class="hero-eyebrow">
+        <span class="status-dot" aria-hidden="true"></span>
+        ${esc(profile.availability)}
+      </p>
+      <h1 class="hero-title gradient-text">${esc(profile.name)}</h1>
+      <p class="hero-subtitle shimmer-text">${esc(profile.title)}</p>
+      <p class="hero-tagline">${esc(profile.tagline)}</p>
+
+      <div class="hero-cta">
+        <a href="#projects" class="btn-gradient">${esc(profile.ctaPrimary)} ${icon.arrow}</a>
+        <a href="#contact" class="btn-outline">${esc(profile.ctaSecondary)}</a>
+      </div>
+
+      <div class="hero-now glass-card">
+        <span class="hero-now-badge">Currently</span>
+        <p class="hero-now-text">
+          <strong>${esc(c.role)}</strong> at <strong>${esc(c.company)}</strong> — ${esc(c.detail)}
+        </p>
       </div>
     </div>
   `;
 }
 
-function renderStats() {
+/* ------------------------------------------------------------- Metrics */
+function renderMetrics() {
   return `
-    <div class="py-16 md:py-20 max-w-5xl mx-auto">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-        ${stats.map((item) => `
-          <div class="stat-card glass-card rounded-2xl p-6 text-center">
-            <div class="stat-number">${escapeHtml(item.number)}</div>
-            <div class="stat-label">${escapeHtml(item.label)}</div>
+    <div class="metrics">
+      <div class="metrics-grid">
+        ${stats.map((s) => `
+          <div class="metric-card glass-card">
+            <div class="metric-number">${esc(s.number)}</div>
+            <div class="metric-label">${esc(s.label)}</div>
+            ${s.detail ? `<div class="metric-detail">${esc(s.detail)}</div>` : ''}
           </div>
         `).join('')}
       </div>
@@ -58,121 +117,260 @@ function renderStats() {
   `;
 }
 
-function renderSkills() {
-  const grouped = { backend: [], cloud: [], database: [], tools: [] };
-  skills.forEach((skill) => {
-    if (grouped[skill.category]) {
-      grouped[skill.category].push(skill);
-    }
-  });
+/* ------------------------------------------------------------ Featured */
+function renderFeatured() {
+  const featured = projects.find((p) => p.featured) || projects[0];
+  // Pull the quantified achievements from the matching experience entry so the
+  // headline case study leads with impact, not just a tech list.
+  const exp = experience.find((e) => /digital india/i.test(e.company));
+  const wins = (exp?.achievements || []).slice(0, 5);
 
   return `
-    <div class="mb-16">
-      <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-2">Skills & Expertise</h3>
-      <p class="text-gray-500 mb-8">The tools and platforms I rely on to deliver production systems.</p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        ${Object.entries(grouped).filter(([, items]) => items.length).map(([category, items]) => `
-          <div class="glass-card rounded-2xl p-5">
-            <h4 class="text-sm font-semibold text-gray-900 mb-2">${escapeHtml(category.charAt(0).toUpperCase() + category.slice(1))}</h4>
-            <ul class="text-sm text-gray-600 space-y-1">
-              ${items.map((skill) => `<li>${escapeHtml(skill.name)}</li>`).join('')}
-            </ul>
-          </div>
-        `).join('')}
-      </div>
+    <div class="section-head">
+      <p class="section-kicker">Selected work</p>
+      <h2 class="section-title gradient-text">Featured case study</h2>
+      <p class="section-sub">The system I spend most of my time making faster and more reliable.</p>
     </div>
-  `;
-}
 
-function renderExperience() {
-  return `
-    <div>
-      <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-6">Experience</h3>
-      <div class="space-y-4">
-        ${experience.map((entry) => `
-          <article class="glass-card rounded-2xl p-6">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-              <div>
-                <h4 class="text-lg font-semibold text-gray-900">${escapeHtml(entry.title)}</h4>
-                <p class="text-purple-600 font-medium">${escapeHtml(entry.company)}</p>
-              </div>
-              <span class="text-sm text-gray-500">${escapeHtml(entry.startDate.split('-')[0])}${entry.endDate === 'Present' ? ' — Present' : ` — ${entry.endDate.split('-')[0]}`}</span>
-            </div>
-            <p class="mt-3 text-sm text-gray-600 leading-relaxed">${escapeHtml(entry.description)}</p>
-          </article>
-        `).join('')}
-      </div>
-    </div>
-  `;
-}
-
-function renderProjects() {
-  const ordered = [...projects].sort((a, b) => (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER));
-  return `
-    <div class="py-12 md:py-16 max-w-6xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-2 gradient-text">Projects</h2>
-      <p class="text-gray-500 text-center mb-10">Systems I&apos;ve architected, built, and shipped to production</p>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        ${ordered.slice(0, 6).map((project) => `
-          <article class="project-card glass-card rounded-2xl p-6">
-            <h3 class="text-lg font-semibold text-gray-900 mb-2">${escapeHtml(project.title)}</h3>
-            <p class="text-sm text-gray-600 mb-4">${escapeHtml(project.description)}</p>
-            <div class="flex flex-wrap gap-2">
-              ${project.technologies.slice(0, 3).map((tech) => `<span class="tech-tag inline-block px-2.5 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-700 border border-gray-200">${escapeHtml(tech)}</span>`).join('')}
-            </div>
-          </article>
-        `).join('')}
-      </div>
-    </div>
-  `;
-}
-
-function renderContact() {
-  return `
-    <div class="py-12 md:py-16 max-w-5xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-2 gradient-text">Get In Touch</h2>
-      <p class="text-gray-500 text-center mb-10">Have a project in mind? I&apos;d love to hear about it.</p>
-      <div class="glass-card rounded-3xl p-8 md:p-10">
-        <div class="grid md:grid-cols-2 gap-8 items-center">
-          <div>
-            <h3 class="text-2xl font-bold text-gray-900 mb-3">Let&apos;s build something reliable</h3>
-            <p class="text-gray-600 leading-relaxed">Whether it is a new API, a cloud migration, or scaling an existing platform, I enjoy turning complex engineering requirements into production-ready systems.</p>
-          </div>
-          <div class="space-y-4">
-            <a href="mailto:${escapeHtml(profile.contact.email)}" class="flex items-center gap-3 rounded-2xl border border-purple-500/20 bg-purple-500/5 px-4 py-3 text-gray-700 hover:bg-purple-500/10 transition-all no-underline">
-              <span class="text-purple-600">✉</span>
-              <span>${escapeHtml(profile.contact.email)}</span>
-            </a>
-            <a href="${escapeHtml(profile.contact.linkedin)}" class="flex items-center gap-3 rounded-2xl border border-purple-500/20 bg-purple-500/5 px-4 py-3 text-gray-700 hover:bg-purple-500/10 transition-all no-underline">
-              <span class="text-purple-600">in</span>
-              <span>${escapeHtml(profile.contact.linkedin.replace('https://', ''))}</span>
-            </a>
-            <a href="${escapeHtml(profile.contact.github)}" class="flex items-center gap-3 rounded-2xl border border-purple-500/20 bg-purple-500/5 px-4 py-3 text-gray-700 hover:bg-purple-500/10 transition-all no-underline">
-              <span class="text-purple-600">⌘</span>
-              <span>${escapeHtml(profile.contact.github.replace('https://', ''))}</span>
-            </a>
-          </div>
+    <article class="featured glass-card">
+      <div class="featured-body">
+        <div class="featured-lead">
+          <span class="badge badge-live">Production · National scale</span>
+          <h3 class="featured-title">${esc(featured.title)}</h3>
+          <p class="featured-desc">${esc(featured.fullDescription)}</p>
+          <div class="tech-row">${techTags(featured.technologies, 8)}</div>
         </div>
+
+        ${wins.length ? `
+        <div class="featured-wins">
+          <p class="wins-heading">Impact</p>
+          <ul class="wins-list">
+            ${wins.map((w) => `<li><span class="wins-check">${icon.check}</span><span>${esc(w)}</span></li>`).join('')}
+          </ul>
+        </div>` : ''}
+      </div>
+
+      ${featured.architectureNotes?.length ? `
+      <div class="featured-arch">
+        <p class="wins-heading">How it holds up under load</p>
+        <div class="arch-grid">
+          ${featured.architectureNotes.map((n) => `
+            <div class="arch-card">
+              <p class="arch-focus">${esc(n.focus)}</p>
+              <p class="arch-detail">${esc(n.detail)}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>` : ''}
+    </article>
+  `;
+}
+
+/* ------------------------------------------------------------ Projects */
+function renderProjects() {
+  const featured = projects.find((p) => p.featured) || projects[0];
+  const ordered = [...projects]
+    .filter((p) => p.id !== featured.id)
+    .sort((a, b) => (a.order ?? 1e9) - (b.order ?? 1e9));
+
+  return `
+    <div class="section-head section-head-sub">
+      <h3 class="section-subtitle">More things I've built &amp; shipped</h3>
+    </div>
+    <div class="projects-grid">
+      ${ordered.map((p) => `
+        <article class="project-card glass-card">
+          <div class="project-card-top">
+            <h3 class="project-title">${esc(p.title)}</h3>
+            ${repoLinks(p.links)}
+          </div>
+          <div class="project-body">
+            <p class="project-desc">${esc(p.description)}</p>
+            <div class="tech-row">${techTags(p.technologies, 5)}</div>
+          </div>
+          ${archDetails(p.architectureNotes)}
+        </article>
+      `).join('')}
+    </div>
+  `;
+}
+
+/* ---------------------------------------------------------- Experience */
+function renderExperience() {
+  const yearOf = (d) => (d === 'Present' ? 'Present' : String(d).split('-')[0]);
+  return `
+    <div class="section-head">
+      <p class="section-kicker">Track record</p>
+      <h2 class="section-title gradient-text">Experience</h2>
+      <p class="section-sub">Where I've built backends, and what came out of it.</p>
+    </div>
+
+    <div class="timeline">
+      ${experience.map((e) => `
+        <article class="timeline-item glass-card">
+          <div class="timeline-node" aria-hidden="true"></div>
+          <div class="timeline-head">
+            <div>
+              <h3 class="timeline-role">${esc(e.title)}</h3>
+              <p class="timeline-company">${esc(e.company)}</p>
+            </div>
+            <span class="timeline-dates">${esc(yearOf(e.startDate))} — ${esc(yearOf(e.endDate))}</span>
+          </div>
+          <p class="timeline-desc">${esc(e.description)}</p>
+          ${(e.achievements || []).length ? `
+          <ul class="timeline-achievements">
+            ${e.achievements.map((a) => `<li><span class="ach-check">${icon.check}</span><span>${esc(a)}</span></li>`).join('')}
+          </ul>` : ''}
+          <div class="tech-row tech-row-muted">${techTags(e.technologies)}</div>
+        </article>
+      `).join('')}
+    </div>
+  `;
+}
+
+/* -------------------------------------------------------------- Skills */
+function renderSkills() {
+  const labels = { backend: 'Backend', cloud: 'Cloud & Infra', database: 'Data', tools: 'Tooling' };
+  const order = ['backend', 'cloud', 'database', 'tools'];
+  const grouped = {};
+  skills.forEach((s) => { (grouped[s.category] ||= []).push(s); });
+
+  return `
+    <div class="section-head">
+      <p class="section-kicker">Toolbox</p>
+      <h2 class="section-title gradient-text">Skills &amp; expertise</h2>
+      <p class="section-sub">The stack I reach for to ship dependable production systems.</p>
+    </div>
+
+    <div class="skills-grid">
+      ${order.filter((cat) => grouped[cat]?.length).map((cat) => `
+        <div class="skill-group glass-card">
+          <h3 class="skill-group-title">${esc(labels[cat] || cat)}</h3>
+          <ul class="skill-list">
+            ${grouped[cat].map((s) => `<li>${esc(s.name)}</li>`).join('')}
+          </ul>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+/* ---------------------------------------------------------- Philosophy */
+function renderPhilosophy() {
+  const list = profile.philosophy || [];
+  if (!list.length) return '';
+  return `
+    <div class="section-head section-head-spaced">
+      <p class="section-kicker">How I work</p>
+      <h2 class="section-title gradient-text">Engineering approach</h2>
+      <p class="section-sub">The principles behind the systems above.</p>
+    </div>
+
+    <div class="philosophy-grid">
+      ${list.map((p, i) => `
+        <div class="philosophy-card glass-card">
+          <span class="philosophy-num">0${i + 1}</span>
+          <h3 class="philosophy-title">${esc(p.title)}</h3>
+          <p class="philosophy-detail">${esc(p.detail)}</p>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+/* ------------------------------------------------------------- Contact */
+function renderContact() {
+  const c = profile.contact;
+  const host = (u) => esc(String(u).replace(/^https?:\/\//, ''));
+  return `
+    <div class="section-head">
+      <p class="section-kicker">Contact</p>
+      <h2 class="section-title gradient-text">Let's build something reliable</h2>
+      <p class="section-sub">Whether it's a new API, a cloud migration, or scaling a platform that's starting to creak — I'm happy to talk it through.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-side">
+        <p class="contact-side-heading">Reach me directly</p>
+        <div class="contact-links">
+          <a href="mailto:${esc(c.email)}" class="contact-link">
+            <span class="contact-icon">${icon.mail}</span>
+            <span class="contact-link-body"><span class="contact-link-label">Email</span><span class="contact-link-value">${esc(c.email)}</span></span>
+            <span class="contact-arrow" aria-hidden="true">${icon.arrow}</span>
+          </a>
+          <a href="${esc(c.linkedin)}" target="_blank" rel="noopener noreferrer" class="contact-link">
+            <span class="contact-icon">${icon.linkedin}</span>
+            <span class="contact-link-body"><span class="contact-link-label">LinkedIn</span><span class="contact-link-value">${host(c.linkedin)}</span></span>
+            <span class="contact-arrow" aria-hidden="true">${icon.arrow}</span>
+          </a>
+          <a href="${esc(c.github)}" target="_blank" rel="noopener noreferrer" class="contact-link">
+            <span class="contact-icon">${icon.github}</span>
+            <span class="contact-link-body"><span class="contact-link-label">GitHub</span><span class="contact-link-value">${host(c.github)}</span></span>
+            <span class="contact-arrow" aria-hidden="true">${icon.arrow}</span>
+          </a>
+        </div>
+        <p class="contact-availability">
+          <span class="status-dot" aria-hidden="true"></span>${esc(profile.availability)}
+        </p>
+      </div>
+
+      <div class="contact-form-wrap glass-card">
+        <h3 class="contact-form-title">Send a message</h3>
+        <form id="contact-form" class="contact-form" novalidate>
+          <div class="field field-half">
+            <label for="cf-name">Name</label>
+            <input type="text" id="cf-name" name="name" placeholder="Your name" autocomplete="name" required />
+          </div>
+          <div class="field field-half">
+            <label for="cf-email">Email</label>
+            <input type="email" id="cf-email" name="email" placeholder="you@example.com" autocomplete="email" required />
+          </div>
+          <div class="field">
+            <label for="cf-subject">Subject</label>
+            <input type="text" id="cf-subject" name="subject" placeholder="What's this about?" required />
+          </div>
+          <div class="field">
+            <label for="cf-message">Message</label>
+            <textarea id="cf-message" name="message" rows="5" placeholder="Tell me a bit about what you're building…" required></textarea>
+          </div>
+          <button type="submit" class="btn-gradient contact-submit">Send message ${icon.arrow}</button>
+          <p id="contact-status" class="contact-status" role="status" aria-live="polite"></p>
+        </form>
       </div>
     </div>
   `;
 }
 
-const indexPath = path.join(rootDir, 'index.html');
-let html = fs.readFileSync(indexPath, 'utf8');
+const templatePath = path.join(rootDir, 'index.template.html');
+const outPath = path.join(rootDir, 'index.html');
+let html = fs.readFileSync(templatePath, 'utf8');
 
 const replacements = {
-  '__HOME__': renderHome(),
-  '__STATS__': renderStats(),
-  '__SKILLS__': renderSkills(),
-  '__EXPERIENCE__': renderExperience(),
-  '__PROJECTS__': renderProjects(),
-  '__CONTACT__': renderContact(),
+  __HERO__: renderHero(),
+  __METRICS__: renderMetrics(),
+  __FEATURED__: renderFeatured(),
+  __PROJECTS__: renderProjects(),
+  __EXPERIENCE__: renderExperience(),
+  __SKILLS__: renderSkills(),
+  __PHILOSOPHY__: renderPhilosophy(),
+  __CONTACT__: renderContact(),
 };
 
 for (const [token, value] of Object.entries(replacements)) {
   html = html.replaceAll(token, value);
 }
 
-fs.writeFileSync(indexPath, html);
-console.log('Rendered content from JSON data into index.html');
+// Content-hash the CSS/JS URLs so a redeploy busts the browser cache. Assets are
+// served with a 1-year cache (see .htaccess); versioning the URL is what lets an
+// update actually reach returning visitors without shipping stale styles.
+function versioned(rel) {
+  const hash = crypto.createHash('md5').update(fs.readFileSync(path.join(rootDir, rel))).digest('hex').slice(0, 8);
+  return `${rel}?v=${hash}`;
+}
+for (const rel of ['css/utilities.css', 'css/styles.css', 'js/main.js']) {
+  html = html.replace(`href="${rel}"`, `href="${versioned(rel)}"`)
+             .replace(`src="${rel}"`, `src="${versioned(rel)}"`);
+}
+
+fs.writeFileSync(outPath, html);
+console.log('Rendered index.html from template + data/*.json');
