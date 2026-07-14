@@ -32,6 +32,9 @@
 
   --nav-bg: rgba(255, 255, 255, 0.74);
   --nav-border: rgba(20, 21, 26, 0.09);
+  /* Near-opaque — the mobile dropdown panel needs solid legibility, unlike
+     the thin persistent pill where translucency reads fine. */
+  --nav-menu-bg: rgba(255, 255, 255, 0.97);
 
   --noise-opacity: 0.022;
 
@@ -71,6 +74,7 @@
 
   --nav-bg: rgba(17, 24, 39, 0.72);
   --nav-border: rgba(148, 163, 184, 0.18);
+  --nav-menu-bg: rgba(15, 19, 31, 0.97);
 
   --noise-opacity: 0.04;
 }
@@ -291,7 +295,7 @@ body::after {
     max-width: calc(100vw - 2rem);
     padding: 0.5rem;
     border-radius: var(--r-lg);
-    background: var(--nav-bg);
+    background: var(--nav-menu-bg);
     border: 1px solid var(--nav-border);
     box-shadow: 0 16px 36px rgba(20, 21, 26, 0.18);
     backdrop-filter: blur(16px);

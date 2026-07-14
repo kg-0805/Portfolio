@@ -83,6 +83,9 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && isOpen()) { close(); toggle.focus(); }
     });
+    // Otherwise the open dropdown floats over the page as it scrolls underneath
+    // and only closes once the user happens to tap something.
+    window.addEventListener('scroll', function () { if (isOpen()) close(); }, { passive: true });
     if (window.matchMedia) {
       var desktop = window.matchMedia('(min-width: 640px)');
       var onChange = function (e) { if (e.matches) close(); };
