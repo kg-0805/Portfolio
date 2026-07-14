@@ -117,6 +117,19 @@ p,
   -webkit-hyphens: auto;
 }
 
+/* Centered copy (hero tagline, footer) stays centered, not justified —
+   justify would left-align single-line text and misalign wrapped lines
+   inside these center-composed blocks. */
+.hero-tagline,
+.footer-name,
+.footer-tag,
+.footer-meta {
+  text-align: center;
+  text-align-last: center;
+  hyphens: manual;
+  -webkit-hyphens: manual;
+}
+
 .theme-transition,
 .glass-card,
 .nav-floating,
