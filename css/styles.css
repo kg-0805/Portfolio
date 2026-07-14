@@ -102,6 +102,21 @@ img, svg { max-width: 100%; height: auto; display: block; }
 img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; }
 strong { color: var(--text); font-weight: 650; }
 
+/* Justify body copy so multi-line paragraphs sit flush on both edges instead
+   of the ragged-right look. text-align-last keeps the final line from
+   stretching, and hyphens softens the word-spacing that plain justify
+   produces at these column widths. Headings, nav, buttons, and short chips
+   are single-line by design, so they're intentionally left untouched. */
+p,
+.arch-detail,
+.wins-list li,
+.timeline-achievements li {
+  text-align: justify;
+  text-align-last: left;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
 .theme-transition,
 .glass-card,
 .nav-floating,
