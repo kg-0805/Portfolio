@@ -1,14 +1,5 @@
 [
   {
-    "id": "php",
-    "name": "PHP (Laravel, Lumen)",
-    "category": "backend",
-    "proficiency": "expert",
-    "icon": "code",
-    "description": "Backend development with Laravel and Lumen frameworks for scalable, production-grade APIs and services.",
-    "yearsOfExperience": 4
-  },
-  {
     "id": "python",
     "name": "Python",
     "category": "backend",
@@ -43,24 +34,6 @@
     "icon": "layers",
     "description": "Java ORM for mapping relational schemas to application entities and managing data persistence.",
     "yearsOfExperience": 1
-  },
-  {
-    "id": "nodejs",
-    "name": "Node.js",
-    "category": "backend",
-    "proficiency": "advanced",
-    "icon": "server",
-    "description": "REST APIs, real-time applications, and serverless functions, including high-performance services built with Fastify.",
-    "yearsOfExperience": 3
-  },
-  {
-    "id": "fastify",
-    "name": "Fastify",
-    "category": "backend",
-    "proficiency": "advanced",
-    "icon": "rocket",
-    "description": "Low-overhead Node.js framework for building fast, schema-validated REST APIs and microservices.",
-    "yearsOfExperience": 3
   },
   {
     "id": "restful-apis",

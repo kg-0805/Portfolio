@@ -2,24 +2,20 @@
   {
     "id": "poshan-tracker",
     "title": "Poshan Tracker",
-    "description": "Led backend modernization for a national public-health platform, improving reliability, scale, and response times for critical citizen services.",
-    "fullDescription": "Worked on Poshan Tracker, a mission-critical government platform that supports nutrition governance at national scale. I helped modernize and scale the backend so it could serve millions of beneficiaries with higher reliability and lower operational overhead. The work included shipping high-throughput APIs, moving core workflows toward modular services, and improving database and integration performance for time-sensitive public services. The outcome was a platform that could better support large-scale usage while remaining resilient under real-world demand.",
+    "description": "Own and build the backend of the Government of India's nationwide nutrition platform — 300+ REST APIs across 10+ microservices serving millions of beneficiaries.",
+    "fullDescription": "Poshan Tracker is the Government of India's nationwide nutrition-governance platform (Ministry of Women & Child Development), serving millions of beneficiaries and a recipient of the Prime Minister's Award for Excellence in Public Administration 2024. I build and own its backend — 300+ REST APIs across 10+ independently deployable services — and led the monolith-to-microservices migration, the move to DynamoDB for high-throughput records, and the ABDM/ABHA national health-system integration. Performance work on hot paths brought API responses under 200ms with ~40% lower server load, on a stack kept current and reliable with Jenkins CI/CD, SonarQube quality gates, and Dockerized services on AWS.",
     "icon": "building",
     "technologies": [
-      "PHP",
-      "Laravel",
-      "Laravel Lumen",
-      "Fastify",
-      "Node.js",
+      "Java",
+      "Spring Boot",
       "AWS DynamoDB",
-      "Amazon S3",
-      "RabbitMQ",
-      "MariaDB",
       "Redis",
+      "MariaDB",
+      "RabbitMQ",
       "Docker",
       "Jenkins",
-      "Git",
-      "REST API"
+      "SonarQube",
+      "Amazon S3"
     ],
     "color": "blue",
     "links": {},
@@ -30,20 +26,20 @@
     "metrics": {},
     "architectureNotes": [
       {
-        "focus": "Scalability",
-        "detail": "Split critical workflows into independently deployable services so growth in public usage would not force the entire platform to move in lockstep."
+        "focus": "Microservices migration",
+        "detail": "Decomposed a monolith into 10+ independently deployable services so releases stay fast and low-risk as public usage grows — 300+ REST APIs in production."
       },
       {
-        "focus": "Data design",
-        "detail": "Leveraged DynamoDB for high-throughput operational records and Redis for hot reads so the platform could preserve low latency under heavy traffic."
+        "focus": "Data at scale",
+        "detail": "Moved core stores to DynamoDB for millions of low-latency records, with Redis caching on hot paths to hold sub-200ms responses and ~40% lower server load under heavy traffic."
       },
       {
-        "focus": "Reliability",
-        "detail": "Used asynchronous messaging and container-based deployment to reduce coupling and make failures easier to isolate and recover from."
+        "focus": "National integrations",
+        "detail": "Shipped the ABDM/ABHA modules (M1, M2, M3, Bal ABHA) and connected the platform to APISETU, UPSC, DigiLocker, and NAD."
       },
       {
-        "focus": "Operations",
-        "detail": "Focused on observability and deployment discipline so the platform remained supportable in production with clear service boundaries and healthier release cycles."
+        "focus": "Delivery & reliability",
+        "detail": "Jenkins CI/CD, SonarQube quality gates, and Dockerized services on EC2/ECS sustaining 99.9% uptime on mission-critical workflows."
       }
     ]
   },
@@ -81,24 +77,20 @@
   {
     "id": "xirr-calculator",
     "title": "XIRR Calculator",
-    "description": "Delivered a secure financial tool that helps users calculate complex investment returns with confidence and minimal friction.",
-    "fullDescription": "Built a production-ready web application for XIRR calculations from irregular mutual fund cash flows. The system combines reliable financial logic with secure user workflows, including authentication, account lifecycle management, and protected data handling. The goal was to make a technically complex calculation approachable and trustworthy for end users while keeping the service robust and deployable in the cloud.",
+    "description": "Secure financial tool that computes XIRR returns from uploaded Excel workbooks — Newton-Raphson and bisection solvers, in-memory processing, and no persistence of financial data.",
+    "fullDescription": "A production-grade web app that computes XIRR returns from irregular cash flows in uploaded Excel transaction workbooks. It parses the workbooks with Apache POI and solves for the rate using Newton-Raphson with a bisection fallback for reliable convergence, processing everything in memory and never persisting the financial data. The application is hardened for real use: Spring Security role-based access control, BCrypt password hashing, email-verified password reset, rate limiting, and an admin user-management panel, backed by PostgreSQL (Neon) and shipped as a Dockerized deployment on Render.",
     "icon": "calculator",
     "technologies": [
       "Java 21",
       "Spring Boot 3.5",
       "Spring Security",
       "Spring Data JPA",
-      "Thymeleaf",
-      "PostgreSQL",
-      "Neon DB",
       "Apache POI",
-      "Brevo API",
+      "PostgreSQL",
+      "Neon",
       "BCrypt",
       "Docker",
-      "Maven",
-      "Render",
-      "REST API"
+      "Render"
     ],
     "color": "green",
     "links": {
@@ -111,38 +103,40 @@
     "metrics": {},
     "architectureNotes": [
       {
-        "focus": "Security",
-        "detail": "Designed the application around authenticated workflows, protected account management, and careful handling of sensitive financial data."
+        "focus": "Numerical correctness",
+        "detail": "Computes XIRR from irregular Excel cash flows (parsed with Apache POI) using Newton-Raphson with a bisection fallback so the solver converges reliably across edge cases."
       },
       {
-        "focus": "User experience",
-        "detail": "Focused on making a complex financial calculation approachable without sacrificing correctness or trust in the output."
+        "focus": "Data privacy",
+        "detail": "Processes uploaded financial workbooks entirely in memory and never persists them, keeping the sensitive-data footprint minimal."
       },
       {
-        "focus": "Cloud deployment",
-        "detail": "Shipped the app with container-friendly deployment patterns so it could scale and evolve without tightly coupling it to a single environment."
+        "focus": "Security hardening",
+        "detail": "Spring Security role-based access, BCrypt password hashing, email-verified password reset, rate limiting, and an admin user-management panel."
+      },
+      {
+        "focus": "Deployment",
+        "detail": "PostgreSQL on Neon with a Dockerized deployment on Render."
       }
     ]
   },
   {
     "id": "digibot",
     "title": "DigiBot",
-    "description": "Created an AI assistant that turns document collections into a conversational knowledge layer for faster, more accurate information access.",
-    "fullDescription": "Built DigiBot to make large PDF-based knowledge sources easier to search and query. By combining retrieval-augmented generation with semantic search, the tool helps users find the most relevant context quickly and ask questions in natural language instead of manually reading through long documents. The project demonstrates how AI systems can improve information discoverability and reduce time spent navigating dense content.",
+    "description": "Built a local-first RAG chatbot that answers DigiLocker questions from an indexed knowledge base, running entirely offline with no cloud LLM calls.",
+    "fullDescription": "DigiBot answers questions about DigiLocker document issuers and FAQs entirely from a local knowledge base. On first run it embeds the FAQ and issuer records with Sentence Transformers and indexes them in FAISS; each query retrieves the closest matches, filters out anything past a distance threshold, and feeds the surviving context to a local Mistral 7B model served by Ollama — no API keys, no cloud LLM. Responses stream back with the source titles they were drawn from, and the model is instructed to reply 'OUT OF SCOPE' rather than guess when the retrieved context doesn't cover the question.",
     "icon": "bot",
     "technologies": [
       "Python",
-      "FastAPI",
-      "LangChain",
+      "Flask",
       "FAISS",
       "Sentence Transformers",
-      "Hugging Face",
-      "LLM",
+      "Ollama",
+      "Mistral 7B",
       "RAG",
-      "PyPDF2",
-      "HTML",
-      "CSS",
-      "JavaScript"
+      "Tailwind CSS",
+      "JavaScript",
+      "HTML"
     ],
     "color": "cyan",
     "links": {
@@ -154,16 +148,16 @@
     "metrics": {},
     "architectureNotes": [
       {
-        "focus": "Search design",
-        "detail": "Combined retrieval-enhanced generation with semantic search so questions could be answered from document context instead of shallow keyword matching."
+        "focus": "Local-first inference",
+        "detail": "Runs Mistral 7B via Ollama entirely on-device, so the assistant works fully offline with no API keys and no cloud dependency."
       },
       {
-        "focus": "Context handling",
-        "detail": "Structured the system around retrieving the most relevant chunks of information so responses stayed grounded and easier to trust."
+        "focus": "Hallucination control",
+        "detail": "Retrieved matches are filtered by an L2 distance threshold before reaching the model, and the system prompt requires an 'OUT OF SCOPE' reply when the context doesn't cover the question."
       },
       {
-        "focus": "Extensibility",
-        "detail": "Kept the assistant modular so it could support more document types and richer workflows as the use case evolved."
+        "focus": "Cached retrieval",
+        "detail": "The FAISS index and source documents are built once from the DigiLocker FAQ and issuer data, then cached to disk and reloaded instantly on later runs."
       }
     ]
   },

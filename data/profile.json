@@ -4,9 +4,9 @@
   "tagline": "I build backend systems that stay boring in production — predictable, observable, and fast under real load.",
   "description": "I engineer robust backend systems that power products at national scale. From high-throughput APIs to cloud-native infrastructure on AWS, I turn complex problems into dependable production services.",
   "currently": {
-    "role": "Senior Backend Developer",
-    "company": "Digital India Corporation",
-    "detail": "Owning the backend of Poshan Tracker — the Government of India's nationwide nutrition-governance platform serving millions of beneficiaries."
+    "role": "Senior Backend Engineer",
+    "company": "Digital India Corporation (MeitY)",
+    "detail": "Building and owning the backend of Poshan Tracker — 300+ REST APIs across 10+ microservices for the Government of India's nationwide nutrition platform serving millions."
   },
   "availability": "Open to new backend & platform engineering roles",
   "ctaPrimary": "See the work",

@@ -1,53 +1,36 @@
 [
   {
-    "id": "deputy-manager-digital-india",
-    "title": "Senior Backend Developer",
-    "company": "Digital India Corporation",
+    "id": "senior-backend-engineer-digital-india",
+    "title": "Senior Backend Engineer",
+    "company": "Digital India Corporation (MeitY)",
     "startDate": "2021-11-29",
     "endDate": "Present",
-    "description": "Core backend developer on Poshan Tracker, the Government of India's nationwide nutrition-governance platform (Ministry of Women & Child Development) serving millions of beneficiaries. I own the mobile app's backend APIs and lead its microservices, database, and health-system integration work.",
+    "description": "Build and own the backend APIs of Poshan Tracker — the Government of India's nationwide nutrition-governance platform (Ministry of Women & Child Development), serving millions of beneficiaries and a recipient of the Prime Minister's Award for Excellence in Public Administration 2024. I lead its APIs, microservices, data stores, and national health-system integrations.",
     "achievements": [
-      "Own and build the backend APIs powering the Poshan Tracker mobile app, a nationwide MWCD platform serving millions of beneficiaries",
-      "Led the monolith-to-microservices migration, decomposing the platform into 10+ independently deployable services for faster, safer releases",
-      "Migrated core data stores to DynamoDB, sustaining millions of records with low-latency reads and writes at scale",
-      "Architected and shipped the ABDM (Ayushman Bharat Digital Mission) integration module, linking the platform to national digital health infrastructure",
-      "Restructured high-traffic modules to achieve sub-200ms API response times and ~40% lower server load",
-      "Sustained 99.9% uptime across mission-critical nutrition-tracking workflows",
-      "Delivered features end-to-end across PHP/Laravel, Node.js (Fastify), Redis, MariaDB, RabbitMQ, DynamoDB, Docker, and AWS"
+      "Build and own the backend APIs of the Poshan Tracker mobile app — a Ministry of Women & Child Development platform — delivering 300+ REST APIs across 10+ backend services that support millions of beneficiaries nationwide",
+      "Spearheaded the monolith-to-microservices migration, decomposing the platform into 10+ independently deployable services for faster, safer releases",
+      "Restructured high-traffic modules to sub-200ms API response times and ~40% lower server load through query optimization, Redis caching, and backend refactoring",
+      "Migrated core data stores to AWS DynamoDB, sustaining millions of records with low-latency reads and writes under heavy production traffic",
+      "Architected and shipped the ABDM (Ayushman Bharat Digital Mission) integration — full ABHA modules (M1, M2, M3, Bal ABHA) — plus cross-system integrations with APISETU, UPSC, DigiLocker, and NAD",
+      "Built CI/CD pipelines with Jenkins, automated code-quality gates via SonarQube, and containerized services with Docker on Amazon EC2 and ECS; sustained 99.9% uptime on mission-critical workflows",
+      "Established an AI-augmented development workflow with Amazon Kiro — authored reusable prompt libraries and agent hooks now adopted across the backend team to standardize code generation and review",
+      "Revamped registration and beneficiary-management modules, cutting infrastructure cost by 30%; mentor junior developers and review code for quality and standards"
     ],
-    "technologies": ["PHP", "Laravel", "Redis", "MariaDB", "RabbitMQ", "Docker", "DynamoDB", "AWS", "S3", "Fastify"],
-    "location": "Delhi, India"
+    "technologies": ["Java", "Spring Boot", "DynamoDB", "Redis", "MariaDB", "RabbitMQ", "Docker", "Jenkins", "SonarQube", "AWS"],
+    "location": "New Delhi, India"
   },
   {
     "id": "software-engineer-trainee-infogain",
     "title": "Software Engineer Trainee",
-    "company": "Infogain",
+    "company": "Infogain Solutions Pvt. Ltd.",
     "startDate": "2021-07-21",
     "endDate": "2021-11-26",
-    "description": "Completed an intensive enterprise-Java engineering program, building a strong foundation in the Spring ecosystem, Hibernate ORM, and RabbitMQ-based asynchronous messaging.",
+    "description": "Completed an intensive enterprise-Java program covering Spring Boot, Hibernate ORM, and RabbitMQ-based asynchronous, message-driven architecture.",
     "achievements": [
-      "Completed a 4-month intensive program in core Java and the Spring framework, building backend services with clean, object-oriented code",
-      "Implemented Hibernate ORM persistence layers, mapping relational schemas to application entities",
-      "Built RabbitMQ-backed messaging for asynchronous, decoupled communication between services",
-      "Applied enterprise design patterns through hands-on project work and a capstone backend build"
+      "Completed an intensive enterprise-Java program covering Spring Boot, Hibernate ORM, and RabbitMQ-based asynchronous, message-driven architecture",
+      "Built backend REST services applying enterprise design patterns through hands-on project work and a capstone build"
     ],
-    "technologies": ["Java", "Spring", "Hibernate", "RabbitMQ"],
-    "location": "Pune, India"
-  },
-  {
-    "id": "web-developer-intern-quantazone",
-    "title": "Web Developer Intern",
-    "company": "Quantazone",
-    "startDate": "2020-02-24",
-    "endDate": "2020-05-23",
-    "description": "Kick-started my web career during a 3-month internship building custom, responsive WordPress sites and writing SEO-driven content.",
-    "achievements": [
-      "Built and launched custom, responsive WordPress sites using themes, plugins, and page builders to meet client briefs",
-      "Published SEO-optimized blog content to improve on-page discoverability and organic search ranking",
-      "Customized themes with HTML and CSS to extend layouts beyond default builder capabilities",
-      "Partnered with the team to turn designs into polished, client-ready pages on deadline"
-    ],
-    "technologies": ["HTML", "CSS", "WordPress", "SEO"],
+    "technologies": ["Java", "Spring Boot", "Hibernate", "RabbitMQ"],
     "location": "Pune, India"
   }
 ]
